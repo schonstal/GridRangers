@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wall.png-77deeb51cf0509b36fd11f8c6dbd1557.stex"
+path="res://.import/Grid.png-73f72c7693a4418195b7211e48167b81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Wall/Wall.png"
-dest_files=[ "res://.import/Wall.png-77deeb51cf0509b36fd11f8c6dbd1557.stex" ]
+source_file="res://Tiles/Grid.png"
+dest_files=[ "res://.import/Grid.png-73f72c7693a4418195b7211e48167b81.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Tiles/Tile.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Tiles/Wall/Wall.png" type="Texture" id=2]
+[ext_resource path="res://Tiles/Coin/coin.png" type="Texture" id=2]
 
-[node name="WallTile" instance=ExtResource( 1 )]
-type = "Wall"
+[node name="CoinTile" instance=ExtResource( 1 )]
+type = "Coin"
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 1, 1 )
