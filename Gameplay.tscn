@@ -1,15 +1,75 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
+[ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tiles/Wall/WallTile.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tiles/Player/PlayerTile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tiles/Ranger/RangerTile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tiles/Cop/CopTile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Tiles/Coin/CoinTile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Shaders/FilmGrain.shader" type="Shader" id=7]
+[ext_resource path="res://Shaders/ChromaticAb.shader" type="Shader" id=8]
+[ext_resource path="res://Shaders/vignette.png" type="Texture" id=9]
+[ext_resource path="res://Shaders/FilmGrain.gd" type="Script" id=10]
+[ext_resource path="res://Tiles/Grid.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 8 )
+shader_param/amount = 0.25
+shader_param/offset_texture = ExtResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+shader_param/screen_size = Vector2( 1920, 1080 )
+shader_param/enabled = true
+shader_param/grain_amount = 0.05
+shader_param/colored = false
+shader_param/color_amount = 0.6
+shader_param/grain_size = 1.6
+shader_param/lum_amount = 1.0
+shader_param/time = 0.0
 
 [node name="Gameplay" type="Node2D"]
 
 [node name="Grid" type="Node2D" parent="."]
-position = Vector2( 128, 128 )
+position = Vector2( 0, 32 )
 script = ExtResource( 1 )
-width = 12
-height = 12
-tile_scenes = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
+width = 8
+height = 8
+tile_scenes = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ) ]
+
+[node name="Background" type="Sprite" parent="Grid"]
+texture = ExtResource( 11 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1920, 1080 )
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+rect = Rect2( 0, 0, 1920, 1080 )
+
+[node name="ChromaticAb" type="ColorRect" parent="BackBufferCopy"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
+rect = Rect2( 0, 0, 1920, 1080 )
+
+[node name="FilmGrain" type="ColorRect" parent="BackBufferCopy2"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0.764706, 0.0784314, 0.0784314, 1 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
