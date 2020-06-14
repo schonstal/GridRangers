@@ -8,5 +8,4 @@ type = "Cop"
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0, -18 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
