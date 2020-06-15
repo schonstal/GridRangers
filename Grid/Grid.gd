@@ -9,6 +9,8 @@ var tiles = []
 var tile_size = 128
 
 var selected_tile = null
+var swap_intent = null
+var dragging = false
 
 onready var background = $Background
 
@@ -41,8 +43,7 @@ func spawn_tile(x,y):
   instance.scale.x = 0.8
   instance.scale.y = 0.8
 
-  instance.grid_position.x = x
-  instance.grid_position.y = y
+  instance.set_grid_position(Vector2(x, y))
 
   call_deferred("add_child", instance)
 
@@ -65,9 +66,8 @@ func match_type(type, x, y):
       if type == first.type && first.type == second.type:
         return true
 
-func mouse_to_grid():
-  var mouse_position = get_viewport().get_mouse_position()
-  var local_position = mouse_position - global_position
+func pixel_to_grid(pixel_position):
+  var local_position = pixel_position - global_position
 
   if local_position.x < 0 || local_position.y < 0:
     return null
@@ -80,6 +80,10 @@ func mouse_to_grid():
   grid_position.y = int(grid_position.y)
 
   return grid_position
+
+func mouse_to_grid():
+  var mouse_position = get_viewport().get_mouse_position()
+  return pixel_to_grid(mouse_position)
 
 func grab_tile(grid_position):
   selected_tile = tiles[grid_position.x][grid_position.y]
@@ -107,28 +111,52 @@ func swap_tile(grid_position):
 
   other.position.x = tile_size * selected_tile.grid_position.x + tile_size / 2
   other.position.y = tile_size * selected_tile.grid_position.y + tile_size / 2
-  other.grid_position.x = selected_tile.grid_position.x
-  other.grid_position.y = selected_tile.grid_position.y
+  other.set_grid_position(selected_tile.grid_position)
 
-  selected_tile.grid_position.x = grid_position.x
-  selected_tile.grid_position.y = grid_position.y
+  selected_tile.set_grid_position(grid_position)
 
   selected_tile = null
 
+func grid_to_pixel(grid_position):
+  return Vector2(
+      tile_size * grid_position.x + tile_size / 2,
+      tile_size * grid_position.y + tile_size / 2
+    )
+
 func legal_swap(start, end):
-  var difference = start - end; 
+  if start == null || end == null:
+    return false
+
+  var difference = start - end
   return abs(difference.x) + abs(difference.y) == 1
 
 func _input(event):
   if event is InputEventMouseButton:
     var location = mouse_to_grid()
     if location == null:
-      print("outside grid")
+      swap_intent = null
+      dragging = false
+      if selected_tile != null:
+        swap_tile(selected_tile.grid_position)
       return
 
-    if event.button_index == BUTTON_LEFT && event.pressed:
-      grab_tile(mouse_to_grid())
-      print("clicked on ", mouse_to_grid())
-    elif event.button_index == BUTTON_LEFT and !event.pressed:
-      print("released at ", mouse_to_grid())
-      swap_tile(mouse_to_grid())
+    if event.button_index == BUTTON_LEFT && event.pressed && !dragging:
+      grab_tile(location)
+      dragging = true
+    elif event.button_index == BUTTON_LEFT and !event.pressed && dragging:
+      swap_tile(swap_intent)
+      dragging = false
+      swap_intent = null
+
+  if event is InputEventMouseMotion:
+    if dragging && selected_tile != null:
+      var location = pixel_to_grid(selected_tile.global_position)
+
+      if swap_intent != location:
+        if swap_intent != null && location != swap_intent:
+          tiles[swap_intent.x][swap_intent.y].move_to(grid_to_pixel(tiles[swap_intent.x][swap_intent.y].grid_position))
+        if legal_swap(selected_tile.grid_position, location) && location != selected_tile.grid_position:
+          swap_intent = location
+          tiles[swap_intent.x][swap_intent.y].move_to(grid_to_pixel(selected_tile.grid_position))
+        else:
+          swap_intent = null

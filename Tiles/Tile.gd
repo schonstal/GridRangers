@@ -9,8 +9,14 @@ var drag_offset = Vector2()
 
 var origin_position = Vector2()
 
+var max_move = Vector2(128, 128)
+var min_move = Vector2(128, 128)
+
+onready var move_tween = $MoveTween
+
 func _ready():
   connect("input_event", self, "_on_Tile_input_event")
+  move_tween.connect("tween_completed", self, "_on_MoveTween_tween_completed")
 
 func _process(delta):
   if dragging:
@@ -25,11 +31,11 @@ func drag():
     ) + drag_offset
 
   if abs(origin_position.x - new_position.x) > abs(origin_position.y - new_position.y):
-    global_position.x = max(min(new_position.x, origin_position.x + 128), origin_position.x - 128)
+    global_position.x = max(min(new_position.x, origin_position.x + max_move.x), origin_position.x - min_move.x)
     global_position.y = origin_position.y
   else:
     global_position.x = origin_position.x
-    global_position.y = max(min(new_position.y, origin_position.y + 128), origin_position.y - 128)
+    global_position.y = max(min(new_position.y, origin_position.y + max_move.y), origin_position.y - min_move.y)
 
 func start_drag():
   dragging = true
@@ -38,3 +44,41 @@ func start_drag():
 
 func stop_drag():
   dragging = false
+
+func set_grid_position(new_position):
+  grid_position = new_position
+
+  if new_position.y == 0:
+    min_move.y = 0
+  else:
+    min_move.y = 128
+
+  if new_position.y == 7:
+    max_move.y = 0
+  else:
+    max_move.y = 128
+
+  if new_position.x == 0:
+    min_move.x = 0
+  else:
+    min_move.x = 128
+
+  if new_position.x == 7:
+    max_move.x = 0
+  else:
+    max_move.x = 128
+
+func move_to(new_position):
+  move_tween.interpolate_property(
+      self,
+      "position",
+      position,
+      new_position,
+      0.3,
+      Tween.TRANS_QUART,
+      Tween.EASE_OUT
+    )
+  move_tween.start()
+
+func _on_MoveTween_tween_completed():
+  pass
