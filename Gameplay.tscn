@@ -50,6 +50,10 @@ region_rect = Rect2( 0, 0, 1920, 1080 )
 wait_time = 0.5
 one_shot = true
 
+[node name="CollapseTimer" type="Timer" parent="Grid"]
+wait_time = 0.3
+one_shot = true
+
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 

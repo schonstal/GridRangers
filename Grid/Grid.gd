@@ -12,9 +12,11 @@ var selected_tile = null
 var swap_intent = null
 var dragging = false
 var matching = false
+var combo = 0
 
 onready var background = $Background
 onready var match_timer = $MatchTimer
+onready var collapse_timer = $CollapseTimer
 
 func _ready():
   randomize()
@@ -23,6 +25,7 @@ func _ready():
   position.x = 1920 / 2 - width * tile_size / 2
 
   match_timer.connect("timeout", self, "_on_MatchTimer_timeout")
+  collapse_timer.connect("timeout", self, "_on_CollapseTimer_timeout")
 
 func spawn_tiles():
   for x in width:
@@ -55,19 +58,18 @@ func spawn_tile(x, y):
   return instance
 
 func execute_match():
-  var matches = 0
   for x in width:
     for y in height:
       if tiles[x][y] != null && tiles[x][y].matched:
         tiles[x][y] = null
-        matches += 1
+        combo += 1
 
-  EventBus.emit_signal("blur_chromatic", log(matches - 1), 2.0)
+  EventBus.emit_signal("blur_chromatic", log(combo - 1), 2.0)
   match_timer.start()
   matching = true
 
 func collapse_board():
-  matching = false
+  collapse_timer.start()
   for x in width:
     var tiles_shifted = 0
     for y in range(height - 1, -1, -1):
@@ -166,8 +168,13 @@ func swap_tile(grid_position):
 
   selected_tile = null
 
+  check_matches()
+
+func check_matches():
   if evaluate_matches() > 0:
     execute_match()
+  else:
+    end_turn()
 
 func evaluate_matches():
   var matches = 0
@@ -228,3 +235,11 @@ func _input(event):
 
 func _on_MatchTimer_timeout():
   collapse_board()
+
+func _on_CollapseTimer_timeout():
+  check_matches()
+
+func end_turn():
+    combo = 0
+    matching = false
+    EventBus.emit_signal("turn_complete")
