@@ -24,9 +24,10 @@ func spawn_tiles():
   for x in width:
     tiles.append([])
     for y in height:
-      tiles[x].append(spawn_tile(x, y))
+      tiles[x].append(null)
+      spawn_tile(x, y)
 
-func spawn_tile(x,y):
+func spawn_tile(x, y):
   var shuffled = tile_scenes.duplicate()
   shuffled.shuffle()
 
@@ -35,7 +36,9 @@ func spawn_tile(x,y):
   while shuffled.size() > 0:
     var scene = shuffled.pop_front()
     instance = scene.instance()
-    if !match_type(instance.type, x, y):
+    instance.set_grid_position(Vector2(x, y))
+    tiles[x][y] = instance
+    if !match(x, y, false):
       break
 
   instance.position.x = tile_size * x + tile_size / 2
@@ -43,28 +46,35 @@ func spawn_tile(x,y):
   instance.scale.x = 0.8
   instance.scale.y = 0.8
 
-  instance.set_grid_position(Vector2(x, y))
-
   call_deferred("add_child", instance)
 
   return instance
 
-func match_type(type, x, y):
+func match(x, y, mark):
+  var tile = tiles[x][y]
+  var matched = false
+
   if x > 1:
     var first = tiles[x - 1][y]
     var second = tiles[x - 2][y]
-
-    if first != null && second != null:
-      if type == first.type && first.type == second.type:
-        return true
+    matched = check_match(tile, first, second, mark)
 
   if y > 1:
     var first = tiles[x][y - 1]
     var second = tiles[x][y - 2]
+    matched = check_match(tile, first, second, mark) || matched
 
-    if first != null && second != null:
-      if type == first.type && first.type == second.type:
-        return true
+  return matched
+
+func check_match(a, b, c, mark):
+  if a != null && b != null && c != null && a.type == b.type && b.type == c.type:
+    if mark:
+      a.match()
+      b.match()
+      c.match()
+    return true
+
+  return false
 
 func pixel_to_grid(pixel_position):
   var local_position = pixel_position - global_position
@@ -116,6 +126,11 @@ func swap_tile(grid_position):
   selected_tile.set_grid_position(grid_position)
 
   selected_tile = null
+
+  for x in width:
+    print("what")
+    for y in height:
+      self.match(x, y, true)
 
 func grid_to_pixel(grid_position):
   return Vector2(
