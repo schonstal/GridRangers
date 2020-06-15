@@ -17,3 +17,5 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="MoveTween" type="Tween" parent="."]
+
+[node name="FadeTween" type="Tween" parent="."]

@@ -61,6 +61,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BlurTween" type="Tween" parent="BackBufferCopy/ChromaticAb"]
+
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 

@@ -127,10 +127,19 @@ func swap_tile(grid_position):
 
   selected_tile = null
 
+  var count = evaluate_matches()
+
+  if count > 0:
+    EventBus.emit_signal("blur_chromatic", log(count * 2.0), 2.0)
+
+func evaluate_matches():
+  var matches = 0
   for x in width:
-    print("what")
     for y in height:
-      self.match(x, y, true)
+      if self.match(x, y, true):
+        matches += 1
+
+  return matches
 
 func grid_to_pixel(grid_position):
   return Vector2(
