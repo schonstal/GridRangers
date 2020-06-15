@@ -11,14 +11,18 @@ var tile_size = 128
 var selected_tile = null
 var swap_intent = null
 var dragging = false
+var matching = false
 
 onready var background = $Background
+onready var match_timer = $MatchTimer
 
 func _ready():
   randomize()
   spawn_tiles()
   background.region_rect = Rect2(0, 0, width * 128, height * 128)
   position.x = 1920 / 2 - width * tile_size / 2
+
+  match_timer.connect("timeout", self, "_on_MatchTimer_timeout")
 
 func spawn_tiles():
   for x in width:
@@ -41,14 +45,38 @@ func spawn_tile(x, y):
     if !match(x, y, false):
       break
 
-  instance.position.x = tile_size * x + tile_size / 2
-  instance.position.y = tile_size * y + tile_size / 2
+  instance.position = grid_to_pixel(instance.grid_position)
   instance.scale.x = 0.8
   instance.scale.y = 0.8
 
   call_deferred("add_child", instance)
 
   return instance
+
+func execute_match():
+  var matches = 0
+  for x in width:
+    for y in height:
+      if tiles[x][y] != null && tiles[x][y].matched:
+        tiles[x][y] = null
+        matches += 1
+
+  EventBus.emit_signal("blur_chromatic", log(matches - 1), 2.0)
+  match_timer.start()
+  matching = true
+
+func collapse_board():
+  matching = false
+  for x in width:
+    for y in range(height - 1, -1, -1):
+      if tiles[x][y] == null:
+        for i in range(y - 1, -1, -1):
+          if tiles[x][i] != null:
+            tiles[x][i].set_grid_position(Vector2(x, y))
+            tiles[x][i].move_to(grid_to_pixel(tiles[x][i].grid_position))
+            tiles[x][y] = tiles[x][i]
+            tiles[x][i] = null
+            break
 
 func match(x, y, mark):
   var tile = tiles[x][y]
@@ -127,10 +155,8 @@ func swap_tile(grid_position):
 
   selected_tile = null
 
-  var count = evaluate_matches()
-
-  if count > 0:
-    EventBus.emit_signal("blur_chromatic", log(count * 2.0), 2.0)
+  if evaluate_matches() > 0:
+    execute_match()
 
 func evaluate_matches():
   var matches = 0
@@ -155,6 +181,9 @@ func legal_swap(start, end):
   return abs(difference.x) + abs(difference.y) == 1
 
 func _input(event):
+  if matching:
+    return
+
   if event is InputEventMouseButton:
     var location = mouse_to_grid()
 
@@ -185,3 +214,6 @@ func _input(event):
           tiles[swap_intent.x][swap_intent.y].move_to(grid_to_pixel(selected_tile.grid_position))
         else:
           swap_intent = null
+
+func _on_MatchTimer_timeout():
+  collapse_board()

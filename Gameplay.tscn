@@ -46,6 +46,10 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 1920, 1080 )
 
+[node name="MatchTimer" type="Timer" parent="Grid"]
+wait_time = 0.5
+one_shot = true
+
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 

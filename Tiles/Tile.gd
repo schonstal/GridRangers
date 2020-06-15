@@ -102,4 +102,4 @@ func _on_MoveTween_tween_completed(_a, _b):
   pass
 
 func _on_FadeTween_tween_completed(_a, _b):
-  pass
+  queue_free()
