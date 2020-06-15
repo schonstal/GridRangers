@@ -49,7 +49,8 @@ func spawn_tile(x, y):
   instance.scale.x = 0.8
   instance.scale.y = 0.8
 
-  call_deferred("add_child", instance)
+  #call_deferred("add_child", instance)
+  add_child(instance)
 
   return instance
 
@@ -68,6 +69,7 @@ func execute_match():
 func collapse_board():
   matching = false
   for x in width:
+    var tiles_shifted = 0
     for y in range(height - 1, -1, -1):
       if tiles[x][y] == null:
         for i in range(y - 1, -1, -1):
@@ -76,7 +78,16 @@ func collapse_board():
             tiles[x][i].move_to(grid_to_pixel(tiles[x][i].grid_position))
             tiles[x][y] = tiles[x][i]
             tiles[x][i] = null
+            tiles_shifted += 1
             break
+
+    var empty_spaces = height - tiles_shifted - 1
+    for y in range(0, height):
+      if tiles[x][y] == null:
+        tiles[x][y] = spawn_tile(x, y)
+        tiles[x][y].position = grid_to_pixel(Vector2(x, -empty_spaces))
+        tiles[x][y].move_to(grid_to_pixel(Vector2(x, y)))
+        empty_spaces -= 1
 
 func match(x, y, mark):
   var tile = tiles[x][y]
