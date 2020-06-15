@@ -133,14 +133,15 @@ func legal_swap(start, end):
 func _input(event):
   if event is InputEventMouseButton:
     var location = mouse_to_grid()
-    if location == null:
-      swap_intent = null
-      dragging = false
-      if selected_tile != null:
-        swap_tile(selected_tile.grid_position)
-      return
 
     if event.button_index == BUTTON_LEFT && event.pressed && !dragging:
+      if location == null:
+        swap_intent = null
+        dragging = false
+        if selected_tile != null:
+          swap_tile(selected_tile.grid_position)
+        return
+
       grab_tile(location)
       dragging = true
     elif event.button_index == BUTTON_LEFT and !event.pressed && dragging:
