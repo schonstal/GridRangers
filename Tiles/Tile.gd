@@ -14,6 +14,8 @@ var min_move = Vector2(128, 128)
 
 var matched = false
 
+signal matched
+
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
 
@@ -73,6 +75,7 @@ func set_grid_position(new_position):
     max_move.x = 128
 
 func match():
+  emit_signal("matched")
   matched = true
   modulate = Color(10, 10, 10, 1)
   fade_tween.interpolate_property(

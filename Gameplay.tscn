@@ -3,7 +3,6 @@
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tiles/Wall/WallTile.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Tiles/Ranger/RangerTile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Tiles/Cop/CopTile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tiles/Coin/CoinTile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Shaders/FilmGrain.shader" type="Shader" id=7]
@@ -13,6 +12,7 @@
 [ext_resource path="res://Tiles/Grid.png" type="Texture" id=11]
 [ext_resource path="res://Shaders/ChromaticAb.gd" type="Script" id=12]
 [ext_resource path="res://Gameplay.gd" type="Script" id=13]
+[ext_resource path="res://Tiles/Cola/Cola.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 8 )
@@ -38,7 +38,7 @@ position = Vector2( 0, 32 )
 script = ExtResource( 1 )
 width = 8
 height = 8
-tile_scenes = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ) ]
+tile_scenes = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 2 ) ]
 
 [node name="Background" type="Sprite" parent="Grid"]
 texture = ExtResource( 11 )
