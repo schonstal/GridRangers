@@ -60,7 +60,7 @@ func set_grid_position(new_position):
   else:
     min_move.y = 128
 
-  if new_position.y == 7:
+  if new_position.y == Game.scene.grid.height - 1:
     max_move.y = 0
   else:
     max_move.y = 128
@@ -70,7 +70,7 @@ func set_grid_position(new_position):
   else:
     min_move.x = 128
 
-  if new_position.x == 7:
+  if new_position.x == Game.scene.grid.width - 1:
     max_move.x = 0
   else:
     max_move.x = 128

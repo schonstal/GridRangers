@@ -26,15 +26,18 @@ onready var collapse_timer = $CollapseTimer
 func _ready():
   randomize()
 
-  create_empty_grid()
-  spawn_rangers()
-  spawn_tiles()
-
   background.region_rect = Rect2(0, 0, width * 128, height * 128)
   position.x = 1920 / 2 - width * tile_size / 2
 
   match_timer.connect("timeout", self, "_on_MatchTimer_timeout")
   collapse_timer.connect("timeout", self, "_on_CollapseTimer_timeout")
+
+  call_deferred("populate_grid")
+
+func populate_grid():
+  create_empty_grid()
+  spawn_rangers()
+  spawn_tiles()
 
 func create_empty_grid():
   for x in width:
