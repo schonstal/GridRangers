@@ -4,6 +4,11 @@ export var width = 24
 export var height = 24
 
 export(Array,Resource) var tile_scenes = []
+var rangers = [
+  preload("res://Tiles/Rangers/RedRanger.tscn"),
+  preload("res://Tiles/Rangers/BlueRanger.tscn"),
+  preload("res://Tiles/Rangers/YellowRanger.tscn")
+]
 
 var tiles = []
 var tile_size = 128
@@ -20,19 +25,37 @@ onready var collapse_timer = $CollapseTimer
 
 func _ready():
   randomize()
+
+  create_empty_grid()
+  spawn_rangers()
   spawn_tiles()
+
   background.region_rect = Rect2(0, 0, width * 128, height * 128)
   position.x = 1920 / 2 - width * tile_size / 2
 
   match_timer.connect("timeout", self, "_on_MatchTimer_timeout")
   collapse_timer.connect("timeout", self, "_on_CollapseTimer_timeout")
 
-func spawn_tiles():
+func create_empty_grid():
   for x in width:
     tiles.append([])
     for y in height:
       tiles[x].append(null)
-      spawn_tile(x, y)
+
+func spawn_rangers():
+  for i in 3:
+    var instance = rangers[i].instance()
+    instance.set_grid_position(Vector2(2 * i + 1, height - 1))
+    tiles[instance.grid_position.x][instance.grid_position.y] = instance
+    instance.position = grid_to_pixel(instance.grid_position)
+    instance.scale = Vector2(0.8, 0.8)
+    add_child(instance)
+
+func spawn_tiles():
+  for x in width:
+    for y in height:
+      if tiles[x][y] == null:
+        spawn_tile(x, y)
 
 func spawn_tile(x, y):
   var shuffled = tile_scenes.duplicate()

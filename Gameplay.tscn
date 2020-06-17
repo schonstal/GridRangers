@@ -154,7 +154,7 @@ script = ExtResource( 13 )
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2( 0, 32 )
 script = ExtResource( 1 )
-width = 8
+width = 7
 height = 8
 tile_scenes = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 2 ) ]
 
