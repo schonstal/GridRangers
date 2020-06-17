@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Tiles/Wall/WallTile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/PlayerPhase.png" type="Texture" id=4]
 [ext_resource path="res://Tiles/Cop/CopTile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tiles/Coin/CoinTile.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Shaders/FilmGrain.shader" type="Shader" id=7]
@@ -13,13 +14,130 @@
 [ext_resource path="res://Shaders/ChromaticAb.gd" type="Script" id=12]
 [ext_resource path="res://Gameplay.gd" type="Script" id=13]
 [ext_resource path="res://Tiles/Cola/Cola.tscn" type="PackedScene" id=14]
+[ext_resource path="res://UI/EnemyPhase.png" type="Texture" id=15]
+[ext_resource path="res://Shaders/VHS.gd" type="Script" id=16]
+[ext_resource path="res://Shaders/VHS.shader" type="Shader" id=17]
+[ext_resource path="res://UI/PhaseTransition.gd" type="Script" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 17 )
+shader_param/time = 0.0
+shader_param/strength = 0.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "ChangePhase"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("VHS:material:shader_param/strength")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3, 0.4, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 4, 1, 4 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 2.82843 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "EnemyPhase"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("VHS:material:shader_param/strength")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.3, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 4, 1, 4 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 2.82843 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("EnemyPhase:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "PlayerPhase"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("VHS:material:shader_param/strength")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 4, 1, 4 ),
+"update": 0,
+"values": [ 0.0, 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 2.82843 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerPhase:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 8 )
 shader_param/amount = 0.25
 shader_param/offset_texture = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
 shader_param/screen_size = Vector2( 1920, 1080 )
 shader_param/enabled = true
@@ -54,11 +172,43 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+[node name="PhaseTransition" type="BackBufferCopy" parent="."]
+visible = false
+rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 18 )
+
+[node name="VHS" type="ColorRect" parent="PhaseTransition"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.00012207
+color = Color( 0.764706, 0.0784314, 0.0784314, 1 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerPhase" type="Sprite" parent="PhaseTransition"]
+visible = false
+position = Vector2( 960, 540 )
+texture = ExtResource( 4 )
+
+[node name="EnemyPhase" type="Sprite" parent="PhaseTransition"]
+visible = false
+position = Vector2( 960, 540 )
+texture = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PhaseTransition"]
+anims/ChangePhase = SubResource( 4 )
+anims/EnemyPhase = SubResource( 5 )
+anims/PlayerPhase = SubResource( 6 )
+
+[node name="Chromatic" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 
-[node name="ChromaticAb" type="ColorRect" parent="BackBufferCopy"]
-material = SubResource( 1 )
+[node name="ChromaticAb" type="ColorRect" parent="Chromatic"]
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.00012207
@@ -69,13 +219,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BlurTween" type="Tween" parent="BackBufferCopy/ChromaticAb"]
+[node name="BlurTween" type="Tween" parent="Chromatic/ChromaticAb"]
 
-[node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
+[node name="FilmGrain" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 
-[node name="FilmGrain" type="ColorRect" parent="BackBufferCopy2"]
-material = SubResource( 2 )
+[node name="FilmGrain" type="ColorRect" parent="FilmGrain"]
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.00012207

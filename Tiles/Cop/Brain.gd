@@ -7,7 +7,7 @@ var sleeping = true
 
 func _ready():
   animation.connect("animation_finished", self, "_on_Animation_finished")
-  EventBus.connect("enemy_phase", self, "_on_enemy_phase")
+  EventBus.connect("begin_phase", self, "_on_begin_phase")
   tile.connect("matched", self, "_on_matched")
 
 func _on_matched():
@@ -17,7 +17,10 @@ func _on_Animation_finished(name):
   if name == "WakeUp":
     animation.play("Idle")
 
-func _on_enemy_phase():
+func _on_begin_phase(phase):
+  if phase != Game.PHASE_ENEMY:
+    return
+
   if !sleeping:
     return
 

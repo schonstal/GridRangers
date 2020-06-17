@@ -199,7 +199,7 @@ func legal_swap(start, end):
   return abs(difference.x) + abs(difference.y) == 1
 
 func _input(event):
-  if matching:
+  if matching || !Game.scene.player_control:
     return
 
   if event is InputEventMouseButton:

@@ -1,6 +1,7 @@
 extends Area2D
 
 export var type = "Default"
+export var traversable = true
 
 var grid_position = Vector2()
 
