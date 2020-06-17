@@ -4,6 +4,7 @@ export var type = "Default"
 export var traversable = true
 
 var grid_position = Vector2()
+var previous_grid_position = Vector2()
 
 var dragging = false
 var drag_offset = Vector2()
@@ -16,6 +17,7 @@ var min_move = Vector2(128, 128)
 var matched = false
 
 signal matched
+signal swapped
 
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
@@ -53,6 +55,7 @@ func stop_drag():
   dragging = false
 
 func set_grid_position(new_position):
+  previous_grid_position = grid_position
   grid_position = new_position
 
   if new_position.y == 0:

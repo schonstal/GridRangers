@@ -192,6 +192,9 @@ func swap_tile(grid_position):
 
   selected_tile.set_grid_position(grid_position)
 
+  other.emit_signal("swapped")
+  selected_tile.emit_signal("swapped")
+
   selected_tile = null
 
   check_matches()
