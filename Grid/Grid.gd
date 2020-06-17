@@ -131,6 +131,11 @@ func match(x, y, mark):
     var second = tiles[x][y - 2]
     matched = check_match(tile, first, second, mark) || matched
 
+  if tiles[x][y].dead:
+    combo += 1
+    tiles[x][y].match()
+    return true
+
   return matched
 
 func check_match(a, b, c, mark):
@@ -226,6 +231,9 @@ func legal_swap(start, end):
 
   var difference = start - end
   return abs(difference.x) + abs(difference.y) == 1
+
+func get_tile(position):
+  return tiles[position.x][position.y]
 
 func _input(event):
   if matching || !Game.scene.player_control:

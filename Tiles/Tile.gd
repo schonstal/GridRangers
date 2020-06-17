@@ -2,6 +2,8 @@ extends Area2D
 
 export var type = "Default"
 export var traversable = true
+export var enemy = false
+export var health = 1
 
 var grid_position = Vector2()
 var previous_grid_position = Vector2()
@@ -16,8 +18,11 @@ var min_move = Vector2(128, 128)
 
 var matched = false
 
+var dead setget ,get_dead
+
 signal matched
 signal swapped
+signal act
 
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
@@ -53,6 +58,12 @@ func start_drag():
 
 func stop_drag():
   dragging = false
+
+func hurt(damage):
+  health -= damage
+
+func get_dead():
+  return health < 1
 
 func set_grid_position(new_position):
   previous_grid_position = grid_position
