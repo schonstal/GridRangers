@@ -161,6 +161,18 @@ func pixel_to_grid(pixel_position):
 
   return grid_position
 
+func auto_swap(start, end):
+  if !legal_swap(start, end):
+    EventBus.emit_signal("turn_complete")
+    return
+
+  tiles[start.x][start.y].move_to(grid_to_pixel(tiles[end.x][end.y].grid_position))
+  tiles[end.x][end.y].move_to(grid_to_pixel(tiles[start.x][start.y].grid_position))
+
+  yield(tiles[end.x][end.y], "moved")
+
+  swap_tiles(tiles[start.x][start.y], tiles[end.x][end.y])
+
 func attempt_swap(grid_position):
   if selected_tile == null:
     return

@@ -16,7 +16,7 @@ func execute_turn():
     sleeping = false
     animation.play("WakeUp")
   else:
-    print("attacking")
+    Game.scene.grid.auto_swap(tile.grid_position, tile.grid_position + Vector2(-1, 0))
 
 func _on_matched():
   animation.play("Die")

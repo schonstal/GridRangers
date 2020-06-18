@@ -23,7 +23,7 @@ var dead setget ,get_dead
 
 signal matched
 signal swapped
-signal act
+signal moved
 
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
@@ -118,7 +118,7 @@ func move_to(new_position):
   move_tween.start()
 
 func _on_MoveTween_tween_completed(_a, _b):
-  pass
+  emit_signal("moved")
 
 func _on_FadeTween_tween_completed(_a, _b):
   queue_free()
