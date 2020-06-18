@@ -30,7 +30,16 @@ func _ready():
   call_deferred("populate_grid")
 
 func get_tile(position):
+  if outside_bounds(position):
+    return null
+
   return tiles[position.x][position.y]
+
+func outside_bounds(position):
+  return position.x < 0 ||\
+         position.y < 0 ||\
+         position.x >= width ||\
+         position.y >= height
 
 func populate_grid():
   create_empty_grid()

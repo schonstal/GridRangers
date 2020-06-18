@@ -49,5 +49,13 @@ func _on_begin_phase(new_phase):
 
 func _on_player_died(player):
   var index = players.find(player)
+
+  # Player is still in array
   if index > -1:
     players.remove(index)
+
+  # Object was already deleted
+  for i in players.size():
+    if !is_instance_valid(players[i]):
+      players.remove(index)
+

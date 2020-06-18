@@ -42,17 +42,11 @@ func connect_walkable_cells(points_array):
     for point_relative in points_relative:
       var point_relative_index = calculate_point_index(point_relative)
 
-      if outside_map_bounds(point_relative):
+      if grid.outside_bounds(point_relative):
         continue
       if !astar.has_point(point_relative_index):
         continue
       astar.connect_points(point_index, point_relative_index, false)
-
-func outside_map_bounds(point):
-  return point.x < 0 ||\
-         point.y < 0 ||\
-         point.x >= grid.width ||\
-         point.y >= grid.height
 
 func calculate_point_index(point):
   return point.x + grid.width * point.y

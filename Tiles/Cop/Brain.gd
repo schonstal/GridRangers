@@ -20,25 +20,37 @@ func execute_turn():
     Game.scene.pathfinder.generate_map()
     var paths = []
 
+    var points_relative = PoolVector2Array([
+      Vector2(tile.grid_position.x + 1, tile.grid_position.y),
+      Vector2(tile.grid_position.x - 1, tile.grid_position.y),
+      Vector2(tile.grid_position.x, tile.grid_position.y + 1),
+      Vector2(tile.grid_position.x, tile.grid_position.y - 1)])
+
     for player in Game.scene.players:
       if !is_instance_valid(player):
         continue
-      var path = Game.scene.pathfinder.find_path(tile.grid_position, player.grid_position)
-      if path != null:
-        paths.append(path)
+
+      for start in points_relative:
+        var tile = Game.scene.grid.get_tile(start)
+        if tile == null || tile.enemy:
+          continue
+        var end = player.grid_position
+        var path = Game.scene.pathfinder.find_path(start, end)
+        if path != null:
+          paths.append(path)
 
     var shortest_path = null
     var length = 100
     for path in paths:
       var size = path.size()
-      if size > 1 && size < length:
+      if size > 0 && size < length:
         shortest_path = path
         length = size
 
-    if shortest_path == null || shortest_path.size() < 2:
+    if shortest_path == null || shortest_path.size() < 1:
       EventBus.emit_signal("turn_complete")
     else:
-      var to_swap = shortest_path[1]
+      var to_swap = shortest_path[0]
       Game.scene.grid.auto_swap(tile.grid_position, to_swap)
 
 func _on_swapped():
