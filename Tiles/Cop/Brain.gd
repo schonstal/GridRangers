@@ -59,6 +59,7 @@ func _on_swapped():
     var other_tile = Game.scene.grid.get_tile(tile.previous_grid_position)
     if other_tile.player:
       other_tile.hurt(1)
+      animation.play("Attack")
 
 func _on_matched():
   animation.play("Die")
@@ -67,4 +68,7 @@ func _on_matched():
 func _on_Animation_finished(name):
   if name == "WakeUp":
     EventBus.emit_signal("turn_complete")
+    animation.play("Idle")
+
+  if name == "Attack":
     animation.play("Idle")
