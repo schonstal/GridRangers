@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -20,13 +20,15 @@
 [ext_resource path="res://UI/PhaseTransition.gd" type="Script" id=18]
 [ext_resource path="res://AIDirector.gd" type="Script" id=19]
 [ext_resource path="res://Pathfinder.gd" type="Script" id=20]
+[ext_resource path="res://UI/Screen/GameBackground.png" type="Texture" id=21]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
 shader_param/time = 0.0
 shader_param/strength = 0.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "ChangePhase"
 length = 1.8
 tracks/0/type = "value"
@@ -54,7 +56,7 @@ tracks/1/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "EnemyPhase"
 length = 1.4
 tracks/0/type = "value"
@@ -94,7 +96,7 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "PlayerPhase"
 length = 1.4
 tracks/0/type = "value"
@@ -134,12 +136,12 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 8 )
 shader_param/amount = 0.25
 shader_param/offset_texture = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 7 )
 shader_param/screen_size = Vector2( 1920, 1080 )
 shader_param/enabled = true
@@ -153,11 +155,19 @@ shader_param/time = 0.0
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 13 )
 
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Background"]
+texture = ExtResource( 21 )
+centered = false
+
+[node name="HUD" parent="." instance=ExtResource( 22 )]
+
 [node name="AIDirector" type="Node" parent="."]
 script = ExtResource( 19 )
 
 [node name="Grid" type="Node2D" parent="."]
-position = Vector2( 0, 32 )
+position = Vector2( 0, 40 )
 script = ExtResource( 1 )
 width = 7
 height = 8
@@ -208,15 +218,15 @@ position = Vector2( 960, 540 )
 texture = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PhaseTransition"]
-anims/ChangePhase = SubResource( 4 )
-anims/EnemyPhase = SubResource( 5 )
-anims/PlayerPhase = SubResource( 6 )
+anims/ChangePhase = SubResource( 2 )
+anims/EnemyPhase = SubResource( 3 )
+anims/PlayerPhase = SubResource( 4 )
 
 [node name="Chromatic" type="BackBufferCopy" parent="."]
 rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="ChromaticAb" type="ColorRect" parent="Chromatic"]
-material = SubResource( 2 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.00012207
@@ -233,7 +243,7 @@ __meta__ = {
 rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="FilmGrain" type="ColorRect" parent="FilmGrain"]
-material = SubResource( 3 )
+material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.00012207

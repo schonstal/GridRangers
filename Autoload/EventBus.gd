@@ -9,4 +9,5 @@ signal action_complete()
 signal enemy_spawned(enemy)
 signal enemy_died(enemy)
 signal player_died(player)
+signal coin_collected
 

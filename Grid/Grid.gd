@@ -55,7 +55,7 @@ func create_empty_grid():
 func spawn_rangers():
   for i in 3:
     var instance = rangers[i].instance()
-    instance.set_grid_position(Vector2(2 * i + 1, height - 1))
+    instance.set_grid_position(Vector2(2 * i + 1, height - 2))
     tiles[instance.grid_position.x][instance.grid_position.y] = instance
     instance.position = grid_to_pixel(instance.grid_position)
     instance.scale = Vector2(0.8, 0.8)

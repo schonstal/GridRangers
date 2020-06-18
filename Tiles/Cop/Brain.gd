@@ -34,6 +34,7 @@ func execute_turn():
         var tile = Game.scene.grid.get_tile(start)
         if tile == null || tile.enemy:
           continue
+        print(Game.scene.players)
         var end = player.grid_position
         var path = Game.scene.pathfinder.find_path(start, end)
         if path != null:
