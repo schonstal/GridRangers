@@ -3,4 +3,4 @@ extends Sprite
 onready var label = $Label
 
 func _process(delta):
-  label.text = "%d MB" % Game.scene.coins
+  label.text = "%d" % Game.scene.coins

@@ -14,6 +14,7 @@ var kills = 0
 var kill_target = 12
 var coins = 0
 var energy = 0
+var cola = 0
 
 var phase = Game.PHASE_PLAYER
 
@@ -27,6 +28,7 @@ func _ready():
   EventBus.connect("player_died", self, "_on_player_died")
   EventBus.connect("enemy_died", self, "_on_enemy_died")
   EventBus.connect("coin_collected", self, "_on_coin_collected")
+  EventBus.connect("cola_collected", self, "_on_cola_collected")
 
 func disable_input():
   player_control = false
@@ -54,8 +56,14 @@ func _on_begin_phase(new_phase):
     enable_input()
     player_moves = max_player_moves
 
+func _on_cola_collected():
+  cola += 75
+  if cola >= 100:
+    cola -= 100
+    player_moves += 1
+
 func _on_coin_collected():
-  coins += 650
+  coins += 1
 
 func _on_enemy_died(enemy):
   kills += 1
