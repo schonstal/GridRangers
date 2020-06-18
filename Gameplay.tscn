@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Shaders/VHS.gd" type="Script" id=16]
 [ext_resource path="res://Shaders/VHS.shader" type="Shader" id=17]
 [ext_resource path="res://UI/PhaseTransition.gd" type="Script" id=18]
+[ext_resource path="res://AIDirector.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -150,6 +151,9 @@ shader_param/time = 0.0
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 13 )
+
+[node name="AIDirector" type="Node" parent="."]
+script = ExtResource( 19 )
 
 [node name="Pathfinder" type="Node" parent="."]
 

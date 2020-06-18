@@ -6,4 +6,6 @@ signal phase_transition_complete
 signal change_phase(phase)
 signal begin_phase(phase)
 signal action_complete()
+signal enemy_spawned(enemy)
+signal enemy_died(enemy)
 

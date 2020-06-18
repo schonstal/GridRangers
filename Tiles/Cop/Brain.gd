@@ -7,22 +7,22 @@ var sleeping = true
 
 func _ready():
   animation.connect("animation_finished", self, "_on_Animation_finished")
-  EventBus.connect("begin_phase", self, "_on_begin_phase")
   tile.connect("matched", self, "_on_matched")
+
+  EventBus.emit_signal("enemy_spawned", self)
+
+func execute_turn():
+  if sleeping:
+    sleeping = false
+    animation.play("WakeUp")
+  else:
+    print("attacking")
 
 func _on_matched():
   animation.play("Die")
+  EventBus.emit_signal("enemy_died", self)
 
 func _on_Animation_finished(name):
   if name == "WakeUp":
+    EventBus.emit_signal("turn_complete")
     animation.play("Idle")
-
-func _on_begin_phase(phase):
-  if phase != Game.PHASE_ENEMY:
-    return
-
-  if !sleeping:
-    return
-
-  sleeping = false
-  animation.play("WakeUp")

@@ -3,6 +3,7 @@ extends Area2D
 export var type = "Default"
 export var traversable = true
 export var enemy = false
+export var player = true
 export var health = 1
 
 var grid_position = Vector2()

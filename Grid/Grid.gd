@@ -136,7 +136,7 @@ func match(x, y, mark):
 
   return matched
 
-func check_match(a, b, c, mark):
+func check_match(a, b, c, mark = false):
   if a != null && b != null && c != null && a.type == b.type && b.type == c.type:
     if mark:
       a.match()
