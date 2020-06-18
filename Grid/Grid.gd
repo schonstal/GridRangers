@@ -50,6 +50,7 @@ func spawn_rangers():
     tiles[instance.grid_position.x][instance.grid_position.y] = instance
     instance.position = grid_to_pixel(instance.grid_position)
     instance.scale = Vector2(0.8, 0.8)
+    Game.scene.players.append(instance)
     add_child(instance)
 
 func spawn_tiles():

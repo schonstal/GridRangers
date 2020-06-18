@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Shaders/VHS.shader" type="Shader" id=17]
 [ext_resource path="res://UI/PhaseTransition.gd" type="Script" id=18]
 [ext_resource path="res://AIDirector.gd" type="Script" id=19]
+[ext_resource path="res://Pathfinder.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -155,8 +156,6 @@ script = ExtResource( 13 )
 [node name="AIDirector" type="Node" parent="."]
 script = ExtResource( 19 )
 
-[node name="Pathfinder" type="Node" parent="."]
-
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2( 0, 32 )
 script = ExtResource( 1 )
@@ -177,6 +176,9 @@ one_shot = true
 [node name="CollapseTimer" type="Timer" parent="Grid"]
 wait_time = 0.3
 one_shot = true
+
+[node name="Pathfinder" type="Node2D" parent="."]
+script = ExtResource( 20 )
 
 [node name="PhaseTransition" type="BackBufferCopy" parent="."]
 visible = false

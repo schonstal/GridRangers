@@ -6,6 +6,7 @@
 
 [node name="BlueRanger" instance=ExtResource( 1 )]
 type = "BlueRanger"
+player = true
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

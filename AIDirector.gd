@@ -9,7 +9,7 @@ func _ready():
 
 func execute_turns():
   for enemy in enemies:
-    enemy.execute_turn()
+    enemy.call_deferred("execute_turn")
     yield(EventBus, "turn_complete")
 
   EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
@@ -22,5 +22,7 @@ func _on_enemy_spawned(enemy):
   enemies.push_back(enemy)
 
 func _on_enemy_died(enemy):
-  enemies.remove(enemies.find(enemy))
+  var index = enemies.find(enemy)
+  if index > -1:
+    enemies.remove(index)
 
