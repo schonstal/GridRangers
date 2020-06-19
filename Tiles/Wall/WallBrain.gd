@@ -1,12 +1,13 @@
 extends Node
 
 onready var tile = $'..'
+onready var animation = $'../AnimationPlayer'
 
 func _ready():
   tile.connect("hurt", self, "_on_hurt")
 
 func _on_hurt():
   if tile.health < 2:
-    tile.modulate = Color(1.0, 0.5, 0.5, 0.5)
+    animation.play("Break")
     tile.traversable = true
     tile.player = true
