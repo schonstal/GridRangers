@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/PIGandCDUI/BadgeUI.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Increase"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 8, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Badge" type="Sprite"]
+position = Vector2( 72.2451, -62.5006 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -43.7729
+margin_top = -18.4712
+margin_right = 42.2272
+margin_bottom = 19.5288
+custom_fonts/font = ExtResource( 1 )
+text = "0/12"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Increase = SubResource( 1 )

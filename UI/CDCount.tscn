@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/Badge.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/CDCount.gd" type="Script" id=3]
+[ext_resource path="res://UI/PIGandCDUI/CDUI.png" type="Texture" id=4]
+[ext_resource path="res://UI/PIGandCDUI/CDLabelUI.png" type="Texture" id=5]
+
+[node name="CD" type="Node2D"]
+position = Vector2( 175, 373 )
+script = ExtResource( 3 )
+
+[node name="CD_Count" type="Sprite" parent="."]
+position = Vector2( -37.5184, 66.2931 )
+texture = ExtResource( 5 )
+
+[node name="Icon" type="Sprite" parent="."]
+position = Vector2( -40.38, -15.5797 )
+texture = ExtResource( 4 )
+
+[node name="Badge" parent="." instance=ExtResource( 1 )]
+position = Vector2( 50.3064, -55.6646 )
