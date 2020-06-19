@@ -47,12 +47,15 @@ func drag():
       mouse_position.y
     ) + drag_offset
 
+  var target = Vector2()
   if abs(origin_position.x - new_position.x) > abs(origin_position.y - new_position.y):
-    global_position.x = max(min(new_position.x, origin_position.x + max_move.x), origin_position.x - min_move.x)
-    global_position.y = origin_position.y
+    target.x = max(min(new_position.x, origin_position.x + max_move.x), origin_position.x - min_move.x)
+    target.y = origin_position.y
   else:
-    global_position.x = origin_position.x
-    global_position.y = max(min(new_position.y, origin_position.y + max_move.y), origin_position.y - min_move.y)
+    target.x = origin_position.x
+    target.y = max(min(new_position.y, origin_position.y + max_move.y), origin_position.y - min_move.y)
+
+  global_position = lerp(global_position, target, 0.5)
 
 func start_drag():
   dragging = true
