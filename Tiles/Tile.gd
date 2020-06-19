@@ -5,6 +5,7 @@ export var traversable = true
 export var enemy = false
 export var player = false
 export var health = 1
+export var persistent = false
 
 var grid_position = Vector2()
 var previous_grid_position = Vector2()
@@ -22,8 +23,9 @@ var matched = false
 var dead setget ,get_dead
 
 signal matched
-signal swapped
+signal swapped(other)
 signal moved
+signal hurt
 
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
@@ -62,6 +64,7 @@ func stop_drag():
 
 func hurt(damage):
   health -= damage
+  emit_signal("hurt")
 
 func get_dead():
   return health < 1
@@ -121,4 +124,5 @@ func _on_MoveTween_tween_completed(_a, _b):
   emit_signal("moved")
 
 func _on_FadeTween_tween_completed(_a, _b):
-  queue_free()
+  if !persistent:
+    queue_free()

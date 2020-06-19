@@ -18,14 +18,13 @@ var cola = 0
 
 var phase = Game.PHASE_PLAYER
 
-var players = []
+var players = {}
 
 func _ready():
   EventBus.connect("turn_complete", self, "_on_turn_complete")
   EventBus.connect("phase_transition_complete", self, "_on_phase_transition_complete")
   EventBus.connect("change_phase", self, "_on_change_phase")
   EventBus.connect("begin_phase", self, "_on_begin_phase")
-  EventBus.connect("player_died", self, "_on_player_died")
   EventBus.connect("enemy_died", self, "_on_enemy_died")
   EventBus.connect("coin_collected", self, "_on_coin_collected")
   EventBus.connect("cola_collected", self, "_on_cola_collected")
@@ -57,7 +56,7 @@ func _on_begin_phase(new_phase):
     player_moves = max_player_moves
 
 func _on_cola_collected():
-  cola += 75
+  cola += 50
   if cola >= 100:
     cola -= 100
     player_moves += 1
@@ -67,18 +66,3 @@ func _on_coin_collected():
 
 func _on_enemy_died(enemy):
   kills += 1
-
-func _on_player_died(player):
-  var index = players.find(player)
-
-  # Player is still in array
-  if index > -1:
-    players.remove(index)
-
-  var new_players = []
-  # Object was already deleted
-  for p in players:
-    if is_instance_valid(p):
-      new_players.append(p)
-
-  players = new_players

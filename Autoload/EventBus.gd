@@ -8,7 +8,7 @@ signal begin_phase(phase)
 signal action_complete()
 signal enemy_spawned(enemy)
 signal enemy_died(enemy)
-signal player_died(player)
+signal player_died(color)
 signal coin_collected
 signal cola_collected
 

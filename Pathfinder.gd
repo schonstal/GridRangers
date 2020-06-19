@@ -10,23 +10,28 @@ var points_array = []
 
 var grid = null
 
-func generate_map():
+func generate_map(start):
   grid = Game.scene.grid
   astar = AStar.new()
-  var points = add_walkable_cells()
+  var points = add_walkable_cells(start)
   connect_walkable_cells(points)
 
-func add_walkable_cells():
+func add_walkable_cells(start):
   for y in grid.height:
     for x in grid.width:
       var point = Vector2(x, y)
-      if !grid.get_tile(point).traversable:
+      if point != start && grid.get_tile(point).enemy:
         obstacles.push_back(point)
         continue
 
       points_array.append(point)
       var point_index = calculate_point_index(point)
       astar.add_point(point_index, Vector3(point.x, point.y, 0.0))
+
+      if grid.get_tile(point).traversable:
+        astar.set_point_weight_scale(point_index, 1)
+      else:
+        astar.set_point_weight_scale(point_index, 2)
 
   return points_array
 
@@ -53,7 +58,7 @@ func calculate_point_index(point):
 
 func find_path(start, end):
   if astar == null:
-    generate_map()
+    generate_map(start)
 
   var start_point_index = calculate_point_index(start)
   var end_point_index = calculate_point_index(end)

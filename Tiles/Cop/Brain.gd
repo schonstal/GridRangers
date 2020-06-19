@@ -2,6 +2,7 @@ extends Node
 
 onready var animation = $'../Sprite/AnimationPlayer'
 onready var tile = $'../'
+onready var sprite = $'../Sprite'
 
 var sleeping = true
 
@@ -17,46 +18,39 @@ func execute_turn():
     sleeping = false
     animation.play("WakeUp")
   else:
-    Game.scene.pathfinder.generate_map()
+    Game.scene.pathfinder.generate_map(tile.grid_position)
+
     var paths = []
 
-    var points_relative = PoolVector2Array([
-      Vector2(tile.grid_position.x + 1, tile.grid_position.y),
-      Vector2(tile.grid_position.x - 1, tile.grid_position.y),
-      Vector2(tile.grid_position.x, tile.grid_position.y + 1),
-      Vector2(tile.grid_position.x, tile.grid_position.y - 1)])
-
-    for player in Game.scene.players:
-      if !is_instance_valid(player):
+    var length = 100
+    var shortest_path = null
+    for key in Game.scene.players:
+      var player = Game.scene.players[key]
+      if !is_instance_valid(player) || player.dead:
         continue
 
-      for start in points_relative:
-        var tile = Game.scene.grid.get_tile(start)
-        if tile == null || tile.enemy:
-          continue
-        print(Game.scene.players)
-        var end = player.grid_position
-        var path = Game.scene.pathfinder.find_path(start, end)
-        if path != null:
-          paths.append(path)
-
-    var shortest_path = null
-    var length = 100
-    for path in paths:
-      var size = path.size()
-      if size > 0 && size < length:
-        shortest_path = path
-        length = size
+      var path = Game.scene.pathfinder.find_path(tile.grid_position, player.grid_position)
+      if path != null:
+        var size = path.size()
+        if size > 0 && size < length:
+          shortest_path = path
+          length = size
 
     if shortest_path == null || shortest_path.size() < 1:
       EventBus.emit_signal("turn_complete")
     else:
-      var to_swap = shortest_path[0]
-      Game.scene.grid.auto_swap(tile.grid_position, to_swap)
+      var to_swap = shortest_path[1]
+      var target = Game.scene.grid.get_tile(to_swap)
+      if target.traversable:
+        Game.scene.grid.auto_swap(tile.grid_position, to_swap)
+      else:
+        target.hurt(1)
+        animation.play("Attack")
+        yield(animation, "animation_finished")
+        EventBus.emit_signal("turn_complete")
 
-func _on_swapped():
+func _on_swapped(other_tile):
   if Game.scene.phase == Game.PHASE_ENEMY:
-    var other_tile = Game.scene.grid.get_tile(tile.previous_grid_position)
     if other_tile.player:
       other_tile.hurt(1)
       animation.play("Attack")

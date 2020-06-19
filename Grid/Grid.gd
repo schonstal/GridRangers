@@ -4,11 +4,12 @@ export var width = 24
 export var height = 24
 
 export(Array,Resource) var tile_scenes = []
-var rangers = [
-  preload("res://Tiles/Rangers/RedRanger.tscn"),
-  preload("res://Tiles/Rangers/BlueRanger.tscn"),
-  preload("res://Tiles/Rangers/YellowRanger.tscn")
-]
+
+var rangers = {
+  'red': preload("res://Tiles/Rangers/RedRanger.tscn"),
+  'blue': preload("res://Tiles/Rangers/BlueRanger.tscn"),
+  'yellow': preload("res://Tiles/Rangers/YellowRanger.tscn")
+}
 
 var tiles = []
 var tile_size = 128
@@ -53,14 +54,16 @@ func create_empty_grid():
       tiles[x].append(null)
 
 func spawn_rangers():
-  for i in 3:
-    var instance = rangers[i].instance()
+  var i = 0
+  for key in rangers:
+    var instance = rangers[key].instance()
     instance.set_grid_position(Vector2(2 * i + 1, height - 2))
     tiles[instance.grid_position.x][instance.grid_position.y] = instance
     instance.position = grid_to_pixel(instance.grid_position)
     instance.scale = Vector2(0.8, 0.8)
-    Game.scene.players.append(instance)
+    Game.scene.players[key] = instance
     add_child(instance)
+    i += 1
 
 func spawn_tiles():
   for x in width:
@@ -211,8 +214,8 @@ func swap_tiles(selected, other):
   selected.set_grid_position(other_position)
   selected.position = grid_to_pixel(other_position)
 
-  other.emit_signal("swapped")
-  selected.emit_signal("swapped")
+  other.emit_signal("swapped", selected)
+  selected.emit_signal("swapped", other)
 
   check_matches()
 

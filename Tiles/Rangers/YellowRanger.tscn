@@ -13,3 +13,4 @@ texture = ExtResource( 2 )
 
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )
+color = "yellow"
