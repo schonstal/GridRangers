@@ -5,15 +5,16 @@ onready var ai_director = $AIDirector
 onready var pathfinder = $Pathfinder
 
 var max_player_moves = 1
+var max_energy = 15
 
 var combo = 0
 var player_moves = max_player_moves
-var player_control = true
+var player_control = true setget ,get_player_control
 
 var kills = 0
 var kill_target = 12
 var coins = 0
-var energy = 0
+var energy = 10
 var cola = 0
 
 var phase = Game.PHASE_PLAYER
@@ -28,12 +29,17 @@ func _ready():
   EventBus.connect("enemy_died", self, "_on_enemy_died")
   EventBus.connect("coin_collected", self, "_on_coin_collected")
   EventBus.connect("cola_collected", self, "_on_cola_collected")
+  EventBus.connect("energy_collected", self, "_on_energy_collected")
+  EventBus.connect("energy_spent", self, "_on_energy_spent")
 
 func disable_input():
   player_control = false
 
 func enable_input():
   player_control = true
+
+func get_player_control():
+  return player_control && player_moves > 0
 
 func _on_turn_complete():
   if phase == Game.PHASE_PLAYER:
@@ -66,3 +72,10 @@ func _on_coin_collected():
 
 func _on_enemy_died(enemy):
   kills += 1
+
+func _on_energy_collected():
+  if energy < max_energy:
+    energy += 1
+
+func _on_energy_spent(amount):
+  energy -= amount

@@ -10,4 +10,3 @@ func _on_hurt():
   if tile.health < 2:
     animation.play("Break")
     tile.traversable = true
-    tile.player = true

@@ -4,6 +4,7 @@ export var type = "Default"
 export var traversable = true
 export var enemy = false
 export var player = false
+export var enemy_can_attack = false
 export var health = 1
 export var persistent = false
 

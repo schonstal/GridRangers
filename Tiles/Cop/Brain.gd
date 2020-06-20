@@ -51,7 +51,7 @@ func execute_turn():
 
 func _on_swapped(other_tile):
   if Game.scene.phase == Game.PHASE_ENEMY:
-    if other_tile.player:
+    if other_tile.enemy_can_attack:
       other_tile.hurt(1)
       animation.play("Attack")
 

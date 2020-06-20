@@ -22,6 +22,7 @@ tracks/0/keys = {
 [node name="WallTile" instance=ExtResource( 1 )]
 type = "Wall"
 traversable = false
+enemy_can_attack = true
 health = 2
 
 [node name="Sprite" parent="." index="0"]

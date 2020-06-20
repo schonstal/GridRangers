@@ -18,7 +18,6 @@ func _ready():
   bg.frame = color_frames[color]
   head.frame = color_frames[color]
   frame.frame = color_frames[color]
-
   
   EventBus.connect("player_died", self, "_on_player_died")
   

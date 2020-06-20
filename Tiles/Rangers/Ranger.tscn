@@ -24,6 +24,7 @@ tracks/0/keys = {
 [node name="BlueRanger" instance=ExtResource( 1 )]
 type = "BlueRanger"
 player = true
+enemy_can_attack = true
 persistent = true
 
 [node name="Sprite" parent="." index="0"]
