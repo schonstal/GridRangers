@@ -4,7 +4,7 @@ onready var grid = $Grid
 onready var ai_director = $AIDirector
 onready var pathfinder = $Pathfinder
 
-var max_player_moves = 100
+var max_player_moves = 3
 var max_energy = 15
 
 var combo = 0
@@ -64,7 +64,7 @@ func _on_begin_phase(new_phase):
     player_moves = max_player_moves
 
 func _on_cola_collected():
-  cola += 50
+  cola += 35
   if cola >= 100:
     cola -= 100
     player_moves += 1

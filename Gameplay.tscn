@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://UI/Screen/GameBackground.png" type="Texture" id=21]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Autoload/MusicPlayer.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Effects/Explosions.gd" type="Script" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -191,8 +192,12 @@ one_shot = true
 [node name="Pathfinder" type="Node2D" parent="."]
 script = ExtResource( 20 )
 
+[node name="Explosions" type="Node2D" parent="."]
+script = ExtResource( 24 )
+
 [node name="PhaseTransition" type="BackBufferCopy" parent="."]
 visible = false
+z_index = 100
 rect = Rect2( 0, 0, 1920, 1080 )
 script = ExtResource( 18 )
 
@@ -224,6 +229,7 @@ anims/EnemyPhase = SubResource( 3 )
 anims/PlayerPhase = SubResource( 4 )
 
 [node name="Chromatic" type="BackBufferCopy" parent="."]
+z_index = 101
 rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="ChromaticAb" type="ColorRect" parent="Chromatic"]
@@ -241,6 +247,7 @@ __meta__ = {
 [node name="BlurTween" type="Tween" parent="Chromatic/ChromaticAb"]
 
 [node name="FilmGrain" type="BackBufferCopy" parent="."]
+z_index = 102
 rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="FilmGrain" type="ColorRect" parent="FilmGrain"]

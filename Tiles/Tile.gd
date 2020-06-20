@@ -69,6 +69,7 @@ func stop_drag():
 func hurt(damage):
   health -= damage
   emit_signal("hurt")
+  EventBus.emit_signal("explode", global_position)
 
 func get_dead():
   return health < 1

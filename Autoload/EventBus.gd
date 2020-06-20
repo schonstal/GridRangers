@@ -19,3 +19,4 @@ signal energy_collected
 
 signal energy_spent
 
+signal explode(position)

@@ -104,7 +104,6 @@ frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 autoplay = "Idle"
-playback_speed = 1.2
 anims/Attack = SubResource( 1 )
 anims/Idle = SubResource( 2 )
 
