@@ -19,6 +19,7 @@ func _ready():
   connect("input_event", self, "_on_input_event")
 
   EventBus.connect("energy_collected", self, "_on_energy_collected")
+  EventBus.connect("energy_spent", self, "_on_energy_spent")
 
   color = window.color
 
@@ -39,7 +40,6 @@ func set_ability(ability_name):
     active_ability = null
   else:
     active_ability = abilities.get_node(ability_name)
-    print(active_ability)
 
   if active_ability != null && is_instance_valid(active_ability):
     abilities.visible = true
@@ -62,6 +62,8 @@ func activate():
       Game.scene.disable_input()
       EventBus.emit_signal("energy_spent", active_ability.energy_cost)
       active_ability.activate_at(Game.scene.players[color].grid_position)
+      # Game jam haxxx
+      Game.scene.players[color].get_node("Brain").call_deferred("attack")
 
   update_active()
 
@@ -79,8 +81,11 @@ func update_active():
     active = false
     modulate = Color(0.5, 0.5, 0.5, 1)
 
+func _on_energy_spent(amount):
+  call_deferred("update_active")
+
 func _on_energy_collected():
-  update_active()
+  call_deferred("update_active")
 
 func _on_mouse_entered():
   if self.enough_energy:

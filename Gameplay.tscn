@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Pathfinder.gd" type="Script" id=20]
 [ext_resource path="res://UI/Screen/GameBackground.png" type="Texture" id=21]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Autoload/MusicPlayer.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -30,7 +31,7 @@ shader_param/strength = 0.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "ChangePhase"
-length = 1.8
+length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("VHS:material:shader_param/strength")
 tracks/0/interp = 2
@@ -38,7 +39,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.3, 0.4, 1.6, 1.7 ),
+"times": PoolRealArray( 0, 0.1, 1.3, 1.4 ),
 "transitions": PoolRealArray( 1, 4, 1, 4 ),
 "update": 0,
 "values": [ 0.0, 1.0, 1.0, 0.0 ]
@@ -50,10 +51,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 1.7 ),
-"transitions": PoolRealArray( 1, 1, 2.82843 ),
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 2.82843 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -253,3 +254,5 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="MusicPlayer" parent="." instance=ExtResource( 23 )]

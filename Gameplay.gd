@@ -4,7 +4,7 @@ onready var grid = $Grid
 onready var ai_director = $AIDirector
 onready var pathfinder = $Pathfinder
 
-var max_player_moves = 1
+var max_player_moves = 100
 var max_energy = 15
 
 var combo = 0
@@ -31,6 +31,8 @@ func _ready():
   EventBus.connect("cola_collected", self, "_on_cola_collected")
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
+
+  MusicPlayer.play_file("res://Music/ambient.ogg")
 
 func disable_input():
   player_control = false

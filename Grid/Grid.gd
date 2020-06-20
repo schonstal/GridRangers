@@ -101,7 +101,8 @@ func execute_match():
         tiles[x][y] = null
         Game.scene.combo += 1
 
-  EventBus.emit_signal("blur_chromatic", log(Game.scene.combo - 1), 2.0)
+  var effect_strength = log(Game.scene.combo - 1)
+  EventBus.emit_signal("blur_chromatic", effect_strength, 2.0)
   match_timer.start()
   Game.scene.disable_input()
 

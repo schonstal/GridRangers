@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bigband.ogg-30acb93419a715993dc2b8d1b21211ec.oggstr"
+
+[deps]
+
+source_file="res://Music/bigband.ogg"
+dest_files=[ "res://.import/bigband.ogg-30acb93419a715993dc2b8d1b21211ec.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 Game="*res://Game.gd"
 EventBus="*res://Autoload/EventBus.gd"
 ActionQueue="*res://ActionQueue.gd"
+MusicPlayer="*res://Autoload/MusicPlayer.tscn"
 
 [display]
 

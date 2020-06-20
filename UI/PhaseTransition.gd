@@ -14,6 +14,8 @@ func _on_Animation_finished(name):
 func _on_change_phase(phase):
   animation.play("ChangePhase")
 
+  MusicPlayer.call_deferred("fade_filter", 1.6)
+
   if phase == Game.PHASE_PLAYER:
     player_phase.visible = true
     enemy_phase.visible = false
