@@ -3,7 +3,6 @@ extends Sprite
 export var energy_cost = 4
 
 func activate_at(position):
-  print("activating")
   for x in Game.scene.grid.width:
     var tile = Game.scene.grid.get_tile(Vector2(x, position.y))
     if tile.player == false:

@@ -27,7 +27,7 @@ func _ready():
   elif color == 'blue':
     set_ability('ClearColumn')
   else:
-    set_ability(null)
+    set_ability('WallsToCD')
 
 func _process(delta):
   if !selected:
