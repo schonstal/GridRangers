@@ -17,6 +17,7 @@ var tile_size = 128
 var selected_tile = null
 var swap_intent = null
 var dragging = false
+var respawn_enemies = false
 
 onready var background = $Background
 onready var match_timer = $MatchTimer
@@ -45,13 +46,48 @@ func outside_bounds(position):
 func populate_grid():
   create_empty_grid()
   spawn_rangers()
+  spawn_enemies()
   spawn_tiles()
+  respawn_enemies = true
 
 func create_empty_grid():
   for x in width:
     tiles.append([])
     for y in height:
       tiles[x].append(null)
+
+func spawn_enemies():
+  var locations = []
+  for x in width:
+    for y in 5:
+      locations.append(Vector2(x, y))
+
+  locations.shuffle()
+
+  var index = 0
+  for count in Game.scene.enemy_count:
+    var enemy = spawn_enemy(locations[index])
+    while !enemy:
+      enemy = spawn_enemy(locations[index])
+      index += 1
+    index += 1
+
+func spawn_enemy(position):
+  var scene = Game.scene.get_enemy_scene()
+  var instance = scene.instance()
+  instance.set_grid_position(position)
+  tiles[position.x][position.y] = instance
+  for x in width:
+    for y in 5:
+      if match(x, y, false):
+        tiles[position.x][position.y] = null
+        return false
+
+  instance.position = grid_to_pixel(instance.grid_position)
+  instance.scale.x = 0.8
+  instance.scale.y = 0.8
+  call_deferred("add_child", instance)
+  return instance
 
 func spawn_rangers():
   var i = 0
@@ -80,6 +116,8 @@ func spawn_tile(x, y):
   while shuffled.size() > 0:
     var scene = shuffled.pop_front()
     instance = scene.instance()
+    if instance.enemy && !respawn_enemies:
+      continue
     instance.set_grid_position(Vector2(x, y))
     tiles[x][y] = instance
     if !match(x, y, false):
@@ -200,6 +238,7 @@ func attempt_swap(grid_position):
     selected_tile = null
     return
 
+  EventBus.emit_signal("player_acted")
   swap_tiles(selected_tile, tiles[grid_position.x][grid_position.y])
 
   selected_tile = null

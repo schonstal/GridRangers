@@ -15,8 +15,10 @@ signal player_died(color)
 
 signal coin_collected
 signal cola_collected
-signal energy_collected
 
+signal energy_collected
 signal energy_spent
 
 signal explode(position)
+
+signal player_acted

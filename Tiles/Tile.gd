@@ -20,6 +20,7 @@ var max_move = Vector2(128, 128)
 var min_move = Vector2(128, 128)
 
 var matched = false
+var awake = false
 
 var dead setget ,get_dead
 

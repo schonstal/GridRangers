@@ -4,12 +4,31 @@ onready var animation = $'../Sprite/AnimationPlayer'
 onready var tile = $'../'
 onready var sprite = $'../Sprite'
 
-var sleeping = true
+var sleeping
+var awake_chance = 50
 
 func _ready():
   animation.connect("animation_finished", self, "_on_Animation_finished")
   tile.connect("matched", self, "_on_matched")
   tile.connect("swapped", self, "_on_swapped")
+
+  var points_relative = [
+      Vector2(tile.grid_position.x, tile.grid_position.y + 1),
+      Vector2(tile.grid_position.x, tile.grid_position.y - 1),
+      Vector2(tile.grid_position.x - 1, tile.grid_position.y),
+      Vector2(tile.grid_position.x + 1, tile.grid_position.y)
+    ]
+
+  for point in points_relative:
+    var neighbor = Game.scene.grid.get_tile(point)
+    if neighbor != null && neighbor.player:
+      sleeping = true
+
+  if sleeping == null:
+    sleeping = rand_range(0, 100) > awake_chance
+
+  if !sleeping:
+    animation.play("Idle")
 
   EventBus.emit_signal("enemy_spawned", self)
 

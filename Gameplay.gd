@@ -14,10 +14,16 @@ var player_control = true setget ,get_player_control
 var kills = 0
 var kill_target = 12
 var coins = 0
-var energy = 10
+var energy = 0
 var cola = 0
 
+var enemy_count = 6
+
 var phase = Game.PHASE_PLAYER
+
+var enemy_tile_scenes = [
+  preload("res://Tiles/Cop/CopTile.tscn")
+]
 
 var players = {}
 
@@ -31,8 +37,13 @@ func _ready():
   EventBus.connect("cola_collected", self, "_on_cola_collected")
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
+  EventBus.connect("player_acted", self, "_on_player_acted")
 
   MusicPlayer.play_file("res://Music/ambient.ogg")
+
+func get_enemy_scene():
+  enemy_tile_scenes.shuffle()
+  return enemy_tile_scenes[0]
 
 func disable_input():
   player_control = false
@@ -43,11 +54,16 @@ func enable_input():
 func get_player_control():
   return player_control && player_moves > 0
 
+func _on_player_acted():
+  if phase == Game.PHASE_PLAYER:
+    player_moves -= 1
+    if player_moves < 0:
+      player_moves = 0
+
 func _on_turn_complete():
   if phase == Game.PHASE_PLAYER:
     combo = 0
     enable_input()
-    player_moves -= 1
     if player_moves < 1:
       EventBus.emit_signal("change_phase", Game.PHASE_ENEMY)
 
@@ -80,6 +96,8 @@ func _on_enemy_died(enemy):
 func _on_energy_collected():
   if energy < max_energy:
     energy += 1
+  else:
+    energy = max_energy
 
 func _on_energy_spent(amount):
   if energy > amount:
