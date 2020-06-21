@@ -8,7 +8,7 @@ var max_player_moves = 3
 var max_energy = 15
 
 var combo = 0
-var player_moves = max_player_moves
+var player_moves = 1
 var player_control = true setget ,get_player_control
 
 var kills = 0
@@ -61,13 +61,15 @@ func _on_phase_transition_complete():
 func _on_begin_phase(new_phase):
   if new_phase == Game.PHASE_PLAYER:
     enable_input()
-    player_moves = max_player_moves
+    player_moves = 1
+    cola = 0
 
 func _on_cola_collected():
-  cola += 35
+  cola += 50
   if cola >= 100:
     cola -= 100
-    player_moves += 1
+    if player_moves < max_player_moves:
+      player_moves += 1
 
 func _on_coin_collected():
   coins += 1
@@ -80,4 +82,7 @@ func _on_energy_collected():
     energy += 1
 
 func _on_energy_spent(amount):
-  energy -= amount
+  if energy > amount:
+    energy -= amount
+  else:
+    energy = 0

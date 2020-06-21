@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Autoload/MusicPlayer.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Effects/Explosions.gd" type="Script" id=24]
+[ext_resource path="res://Tiles/OtherEnergy/EnergyTile.tscn" type="PackedScene" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -173,7 +174,7 @@ position = Vector2( 0, 40 )
 script = ExtResource( 1 )
 width = 7
 height = 8
-tile_scenes = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 2 ) ]
+tile_scenes = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 2 ), ExtResource( 25 ) ]
 
 [node name="Background" type="Sprite" parent="Grid"]
 texture = ExtResource( 11 )
@@ -193,6 +194,7 @@ one_shot = true
 script = ExtResource( 20 )
 
 [node name="Explosions" type="Node2D" parent="."]
+z_index = 10
 script = ExtResource( 24 )
 
 [node name="PhaseTransition" type="BackBufferCopy" parent="."]

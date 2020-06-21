@@ -131,6 +131,8 @@ func collapse_board():
 
 func match(x, y, mark):
   var tile = tiles[x][y]
+  if tile == null:
+    return
   var matched = false
 
   if x > 1:
