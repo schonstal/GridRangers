@@ -7,6 +7,7 @@ onready var tween = $Tween
 func _ready():
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
+  update_width()
 
 func _on_energy_collected():
   update_width()
