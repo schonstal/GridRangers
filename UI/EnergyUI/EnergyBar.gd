@@ -18,7 +18,7 @@ func _on_energy_spent(_amount):
 func update_width():
   tween.stop_all()
   var width = pixel_width * Game.scene.energy / Game.scene.max_energy
-  
+
   tween.interpolate_property(self, "region_rect", region_rect, Rect2(0, 0, width, 57), 0.3, Tween.TRANS_QUART, Tween.EASE_OUT)
   tween.start()
 

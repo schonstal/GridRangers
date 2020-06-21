@@ -27,10 +27,10 @@ func _ready():
   if sleeping == null:
     sleeping = rand_range(0, 100) > awake_chance
 
-  if !sleeping:
-    animation.play("Idle")
-
   EventBus.emit_signal("enemy_spawned", self)
+
+  if !sleeping:
+    animation.play("WakeUp")
 
 func execute_turn():
   if sleeping:

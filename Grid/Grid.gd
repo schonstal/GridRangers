@@ -24,6 +24,7 @@ onready var match_timer = $MatchTimer
 onready var collapse_timer = $CollapseTimer
 onready var backdrop = $Backdrop
 onready var fade_tween = $FadeTween
+onready var sequence_timer = $SequenceTimer
 
 signal spawn_phase_completed
 
@@ -50,7 +51,7 @@ func outside_bounds(position):
          position.y >= height
 
 func fade_in():
-  backdrop.modulate = Color(100, 100, 100, 1)
+  #backdrop.modulate = Color(100, 100, 100, 1)
   fade_tween.interpolate_property(
     background,
     "fade",
@@ -67,7 +68,7 @@ func fade_in():
   backdrop.modulate = Color(1, 1, 1, 1)
   
 func fade_out():
-  backdrop.modulate = Color(100, 100, 100, 1)
+  #backdrop.modulate = Color(100, 100, 100, 1)
   fade_tween.interpolate_property(
     background,
     "fade",
@@ -92,6 +93,12 @@ func populate_grid():
   yield(self, "spawn_phase_completed")
   call_deferred("spawn_tiles")
   yield(self, "spawn_phase_completed")
+  call_deferred("teleport_rangers")
+  yield(self, "spawn_phase_completed")
+  sequence_timer.start(0.25)
+  yield(sequence_timer, "timeout")
+
+  EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
 
   respawn_enemies = true
 
@@ -149,7 +156,24 @@ func spawn_rangers():
     add_child(instance)
     i += 1
 
-  print("spawned")
+  emit_signal("spawn_phase_completed")
+
+func teleport_rangers():
+  sequence_timer.start(0.5)
+  yield(sequence_timer, "timeout")
+
+  var ranger
+  for key in Game.scene.players:
+    ranger = Game.scene.players[key]
+    if ranger != null && is_instance_valid(ranger):
+      ranger.brain.teleport_in()
+      EventBus.emit_signal("blur_chromatic", 2.0, 0.25)
+      sequence_timer.start(0.25)
+      yield(sequence_timer, "timeout")
+
+  if ranger != null:
+    yield(ranger.brain, "teleport_completed")
+
   emit_signal("spawn_phase_completed")
 
 func spawn_tiles():
@@ -162,9 +186,11 @@ func spawn_tiles():
         tile.call_deferred("appear")
       else:
         tile = tiles[x][y]
-        tile.call_deferred("appear")
-    if tile != null:
-      yield(tile, "appear_started")
+        if !tile.player:
+          tile.call_deferred("appear")
+
+    sequence_timer.start(0.025)
+    yield(sequence_timer, "timeout")
 
   emit_signal("spawn_phase_completed")
 

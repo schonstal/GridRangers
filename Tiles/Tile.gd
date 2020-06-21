@@ -35,6 +35,7 @@ signal appeared
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
 onready var appear_tween = $AppearTween
+onready var brain = $Brain
 
 func _ready():
   connect("input_event", self, "_on_Tile_input_event")
@@ -111,8 +112,7 @@ func appear():
       Vector2(0.8, 0.8),
       0.5,
       Tween.TRANS_ELASTIC,
-      Tween.EASE_OUT,
-      0.01
+      Tween.EASE_OUT
     )
   appear_tween.interpolate_property(
       self,
@@ -121,12 +121,9 @@ func appear():
       Color(1, 1, 1, 1),
       0.5,
       Tween.TRANS_QUART,
-      Tween.EASE_OUT,
-      0.01
+      Tween.EASE_OUT
     )
   appear_tween.start()
-  yield(appear_tween, "tween_started")
-  emit_signal("appear_started")
   yield(appear_tween, "tween_completed")
   emit_signal("appeared")
 

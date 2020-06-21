@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Tiles/Rangers/Yellow/Yellow.png" type="Texture" id=1]
 [ext_resource path="res://Tiles/Rangers/Ranger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tiles/Rangers/Yellow/YellowTeleport.png" type="Texture" id=3]
 
 [node name="YellowRanger" instance=ExtResource( 2 )]
 
@@ -14,3 +15,6 @@ hframes = 7
 color = "yellow"
 attack_offset = Vector2( -69, -30 )
 idle_offset = Vector2( -16, -3 )
+
+[node name="Teleport" parent="." index="6"]
+texture = ExtResource( 3 )

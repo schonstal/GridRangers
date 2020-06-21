@@ -33,8 +33,10 @@ func update_label():
     pause.visible = true
     play.visible = false
     pips.visible = true
-  else:
+  elif Game.scene.phase == Game.PHASE_ENEMY:
     pips.visible = false
     pause.visible = false
     play.visible = true
+  else:
+    visible = false
 

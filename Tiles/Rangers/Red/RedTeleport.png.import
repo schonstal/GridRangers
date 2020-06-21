@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player.png-d0e6bb3217a2afe844edb26115282415.stex"
+path="res://.import/RedTeleport.png-e171032ac5806fd8a328c8c4e7eed203.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Ranger/player.png"
-dest_files=[ "res://.import/player.png-d0e6bb3217a2afe844edb26115282415.stex" ]
+source_file="res://Tiles/Rangers/Red/RedTeleport.png"
+dest_files=[ "res://.import/RedTeleport.png-e171032ac5806fd8a328c8c4e7eed203.stex" ]
 
 [params]
 

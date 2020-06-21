@@ -3,10 +3,13 @@ extends Node
 onready var tile = $'..'
 onready var animation = $'../Sprite/AnimationPlayer'
 onready var sprite = $'../Sprite'
+onready var teleport_animation = $'../Teleport/AnimationPlayer'
 
 export var color = 'red'
 export var attack_offset = Vector2()
 export var idle_offset = Vector2()
+
+signal teleport_completed
 
 func _ready():
   tile.connect("swapped", self, "_on_swapped")
@@ -21,6 +24,16 @@ func _on_swapped(other_tile):
     if other_tile.enemy:
       other_tile.hurt(1)
       call_deferred("attack")
+      
+func teleport_in():
+  teleport_animation.play("TeleportIn")
+  yield(teleport_animation, "animation_finished")
+  emit_signal("teleport_completed")
+  
+func teleport_out():
+  teleport_animation.play("TeleportIn")
+  yield(teleport_animation, "animation_finished")
+  emit_signal("teleport_completed")
 
 func attack():
   animation.play("Attack")

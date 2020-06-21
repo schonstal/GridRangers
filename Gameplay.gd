@@ -19,7 +19,7 @@ var cola = 0
 
 var enemy_count = 6
 
-var phase = Game.PHASE_PLAYER
+var phase = Game.PHASE_NONE
 
 var enemy_tile_scenes = [
   preload("res://Tiles/Cop/CopTile.tscn")
