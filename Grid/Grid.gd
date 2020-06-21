@@ -26,7 +26,7 @@ onready var backdrop = $Backdrop
 onready var fade_tween = $FadeTween
 onready var sequence_timer = $SequenceTimer
 
-signal spawn_phase_completed
+signal sequence_completed
 
 func _ready():
   randomize()
@@ -35,6 +35,8 @@ func _ready():
   position.x = 1920 / 2 - width * tile_size / 2
 
   Game.scene.disable_input()
+
+  EventBus.connect("level_completed", self, "_on_level_completed")
 
   call_deferred("populate_grid")
 
@@ -57,14 +59,14 @@ func fade_in():
     "fade",
     0.0,
     10.0,
-    0.25,
+    0.5,
     Tween.TRANS_LINEAR,
     Tween.EASE_OUT,
     0.5
    )
   fade_tween.start()
   yield(fade_tween, "tween_completed")
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
   backdrop.modulate = Color(1, 1, 1, 1)
   
 func fade_out():
@@ -72,29 +74,29 @@ func fade_out():
   fade_tween.interpolate_property(
     background,
     "fade",
-    10.0,
+    8.0,
     0.0,
-    0.25,
+    0.5,
     Tween.TRANS_LINEAR,
     Tween.EASE_OUT,
     0.5
    )
   fade_tween.start()
   yield(fade_tween, "tween_completed")
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
 
 func populate_grid():
   create_empty_grid()
   call_deferred("fade_in")
-  yield(self, "spawn_phase_completed")
+  yield(self, "sequence_completed")
   call_deferred("spawn_rangers")
-  yield(self, "spawn_phase_completed")
+  yield(self, "sequence_completed")
   call_deferred("spawn_enemies")
-  yield(self, "spawn_phase_completed")
+  yield(self, "sequence_completed")
   call_deferred("spawn_tiles")
-  yield(self, "spawn_phase_completed")
+  yield(self, "sequence_completed")
   call_deferred("teleport_rangers")
-  yield(self, "spawn_phase_completed")
+  yield(self, "sequence_completed")
   sequence_timer.start(0.25)
   yield(sequence_timer, "timeout")
 
@@ -126,7 +128,7 @@ func spawn_enemies():
       index += 1
     index += 1
 
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
 
 func spawn_enemy(position):
   var scene = Game.scene.get_enemy_scene()
@@ -156,17 +158,17 @@ func spawn_rangers():
     add_child(instance)
     i += 1
 
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
 
 func teleport_rangers():
-  sequence_timer.start(0.5)
+  sequence_timer.start(0.2)
   yield(sequence_timer, "timeout")
 
   var ranger
   for key in Game.scene.players:
     ranger = Game.scene.players[key]
     if ranger != null && is_instance_valid(ranger):
-      ranger.brain.teleport_in()
+      ranger.brain.teleport()
       EventBus.emit_signal("blur_chromatic", 2.0, 0.25)
       sequence_timer.start(0.25)
       yield(sequence_timer, "timeout")
@@ -174,7 +176,7 @@ func teleport_rangers():
   if ranger != null:
     yield(ranger.brain, "teleport_completed")
 
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
 
 func spawn_tiles():
   for y in height:
@@ -189,10 +191,10 @@ func spawn_tiles():
         if !tile.player:
           tile.call_deferred("appear")
 
-    sequence_timer.start(0.025)
+    sequence_timer.start(0.05)
     yield(sequence_timer, "timeout")
 
-  emit_signal("spawn_phase_completed")
+  emit_signal("sequence_completed")
 
 func spawn_tile(x, y):
   var shuffled = tile_scenes.duplicate()
@@ -331,6 +333,9 @@ func attempt_swap(grid_position):
   selected_tile = null
 
 func swap_tiles(selected, other):
+  if selected == null || other == null:
+    return
+
   var selected_position = selected.grid_position
   var other_position = other.grid_position
 
@@ -352,8 +357,10 @@ func check_matches():
   while evaluate_matches() > 0:
     execute_match()
     yield(match_timer, "timeout")
-    collapse_board()
-    yield(collapse_timer, "timeout")
+
+    if Game.scene.phase == Game.PHASE_PLAYER || Game.scene.phase == Game.PHASE_ENEMY:
+      collapse_board()
+      yield(collapse_timer, "timeout")
 
   EventBus.emit_signal("turn_complete")
 
@@ -418,3 +425,22 @@ func _input(event):
         else:
           swap_intent = null
 
+func _on_level_completed():
+  MusicPlayer.fade(0, -72, 1.0)
+  for y in range(height - 1, -1, -1):
+    for x in width:
+      if tiles[x][y] != null && tiles[x][y].player == false:
+        tiles[x][y].hurt(100)
+    sequence_timer.start(0.05)
+    check_matches()
+    yield(sequence_timer, "timeout")
+
+  teleport_rangers()
+  yield(self, "sequence_completed")
+  MusicPlayer.play_file("res://Music/bigband.ogg")
+  MusicPlayer.fade(-72, -6, 0.01)
+
+  EventBus.emit_signal("spawn_shop")
+
+  call_deferred("fade_out")
+  yield(self, "sequence_completed")

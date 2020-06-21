@@ -24,14 +24,13 @@ func _on_swapped(other_tile):
     if other_tile.enemy:
       other_tile.hurt(1)
       call_deferred("attack")
-      
-func teleport_in():
-  teleport_animation.play("TeleportIn")
-  yield(teleport_animation, "animation_finished")
-  emit_signal("teleport_completed")
-  
-func teleport_out():
-  teleport_animation.play("TeleportIn")
+
+func teleport():
+  if sprite.visible:
+    teleport_animation.play("TeleportOut")
+  else:
+    teleport_animation.play("TeleportIn")
+
   yield(teleport_animation, "animation_finished")
   emit_signal("teleport_completed")
 

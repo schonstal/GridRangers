@@ -37,7 +37,6 @@ z_index = 101
 script = ExtResource( 24 )
 
 [node name="Shop" parent="." instance=ExtResource( 27 )]
-visible = false
 z_index = 11
 
 [node name="PhaseTransition" parent="." instance=ExtResource( 3 )]

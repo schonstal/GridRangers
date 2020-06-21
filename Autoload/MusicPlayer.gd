@@ -3,8 +3,7 @@ extends AudioStreamPlayer
 var low_pass:AudioEffectLowPassFilter
 var pitch_shift:AudioEffectPitchShift
 var bus_index = 0
-var low_pass_index = 0
-var pitch_shift_index = 1
+var pitch_shift_index = 0
 var music_volume = 0
 var current_file = ""
 
@@ -17,7 +16,6 @@ func _ready():
   pitch_shift = AudioEffectPitchShift.new()
   pitch_shift.pitch_scale = 1
 
-  AudioServer.add_bus_effect(bus_index, low_pass, low_pass_index)
   AudioServer.add_bus_effect(bus_index, pitch_shift, pitch_shift_index)
   disable_filter()
 
@@ -34,28 +32,15 @@ func play_file(audio_file):
   self.play()
 
 func disable_filter():
-  filter_tween.stop(low_pass)
   filter_tween.stop(pitch_shift)
-  AudioServer.set_bus_effect_enabled(bus_index, low_pass_index, false)
   AudioServer.set_bus_effect_enabled(bus_index, pitch_shift_index, false)
 
 func enable_filter():
-  filter_tween.stop(low_pass)
   filter_tween.stop(pitch_shift)
-  AudioServer.set_bus_effect_enabled(bus_index, low_pass_index, true)
   AudioServer.set_bus_effect_enabled(bus_index, pitch_shift_index, true)
 
 func fade_filter(duration):
   enable_filter()
-
-  filter_tween.interpolate_property(
-      low_pass,
-      "cutoff_hz",
-      400,
-      22000,
-      duration,
-      Tween.TRANS_QUAD,
-      Tween.EASE_OUT)
 
   filter_tween.interpolate_property(
       pitch_shift,
@@ -71,6 +56,7 @@ func fade_filter(duration):
   disable_filter()
 
 func fade(start_volume_db, end_volume_db, duration):
+  print("fading volume")
   fade_tween.interpolate_property(
       self,
       "music_volume",

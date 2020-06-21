@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://UI/EnergyUI/EnergyUI.png" type="Texture" id=1]
 [ext_resource path="res://UI/EnergyUI/LoadingCube.png" type="Texture" id=2]
 [ext_resource path="res://UI/EnergyUI/LoadingBar.png" type="Texture" id=3]
 [ext_resource path="res://UI/EnergyUI/EnergyBar.gd" type="Script" id=4]
+[ext_resource path="res://UI/EnergyUI/Energy.gd" type="Script" id=5]
+[ext_resource path="res://UI/WindowAppear.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Spin"
@@ -23,6 +25,9 @@ tracks/0/keys = {
 }
 
 [node name="Energy" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="WindowAppear" parent="." instance=ExtResource( 6 )]
 
 [node name="Frame" type="Sprite" parent="."]
 texture = ExtResource( 1 )

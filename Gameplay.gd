@@ -12,7 +12,7 @@ var player_moves = 1
 var player_control = true setget ,get_player_control
 
 var kills = 0
-var kill_target = 12
+var kill_target = 1
 var coins = 0
 var energy = 0
 var cola = 0
@@ -61,6 +61,13 @@ func _on_player_acted():
       player_moves = 0
 
 func _on_turn_complete():
+  if phase != Game.PHASE_NONE && kills >= kill_target:
+    disable_input()
+    phase = Game.PHASE_NONE
+    EventBus.emit_signal("change_phase", Game.PHASE_NONE)
+    EventBus.emit_signal("level_completed")
+    return
+
   if phase == Game.PHASE_PLAYER:
     combo = 0
     enable_input()

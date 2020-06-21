@@ -12,7 +12,8 @@ func execute_turns():
     enemy.call_deferred("execute_turn")
     yield(EventBus, "turn_complete")
 
-  EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
+  if Game.scene.phase != Game.PHASE_NONE:
+    EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
 
 func _on_begin_phase(phase):
   if phase == Game.PHASE_ENEMY:

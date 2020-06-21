@@ -24,3 +24,7 @@ signal explode(position)
 signal player_acted
 
 signal keeper_message(message)
+
+signal level_completed
+
+signal spawn_shop

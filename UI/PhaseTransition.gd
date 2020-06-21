@@ -12,6 +12,9 @@ func _on_Animation_finished(name):
   EventBus.emit_signal("phase_transition_complete")
 
 func _on_change_phase(phase):
+  if phase == Game.PHASE_NONE:
+    return
+
   animation.play("ChangePhase")
 
   MusicPlayer.call_deferred("fade_filter", 1.6)

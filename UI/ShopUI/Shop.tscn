@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Shaders/SpriteGlitch.shader" type="Shader" id=1]
 [ext_resource path="res://UI/ShopUI/K33p3erProfilePic.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/ShopUI/Shop.gd" type="Script" id=7]
 [ext_resource path="res://UI/ShopUI/Messages.gd" type="Script" id=8]
 [ext_resource path="res://Abilities/AbilityIcon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/WindowAppear.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -49,6 +50,7 @@ tracks/0/keys = {
 extents = Vector2( 97.7272, 159.795 )
 
 [node name="Shop" type="Node2D"]
+visible = false
 script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -101,3 +103,8 @@ script = ExtResource( 8 )
 
 [node name="AbilityIcon" parent="Abilities" instance=ExtResource( 9 )]
 position = Vector2( 535.526, 725.757 )
+
+[node name="WindowAppear" parent="." instance=ExtResource( 10 )]
+
+[node name="MessageTimer" type="Timer" parent="."]
+one_shot = true

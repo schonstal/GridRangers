@@ -20,7 +20,8 @@ func add_walkable_cells(start):
   for y in grid.height:
     for x in grid.width:
       var point = Vector2(x, y)
-      if point != start && grid.get_tile(point).enemy:
+      var tile = grid.get_tile(point)
+      if tile == null || point != start && tile.enemy:
         obstacles.push_back(point)
         continue
 
@@ -28,7 +29,7 @@ func add_walkable_cells(start):
       var point_index = calculate_point_index(point)
       astar.add_point(point_index, Vector3(point.x, point.y, 0.0))
 
-      if grid.get_tile(point).traversable:
+      if tile.traversable:
         astar.set_point_weight_scale(point_index, 1)
       else:
         astar.set_point_weight_scale(point_index, 2)
