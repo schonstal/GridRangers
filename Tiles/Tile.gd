@@ -68,7 +68,6 @@ func stop_drag():
   dragging = false
 
 func hurt(damage):
-  print(grid_position, "ouch", damage)
   health -= damage
   emit_signal("hurt")
   EventBus.emit_signal("explode", global_position)
