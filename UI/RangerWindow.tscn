@@ -8,7 +8,6 @@
 [ext_resource path="res://UI/RangerWindow.gd" type="Script" id=6]
 [ext_resource path="res://Abilities/AbilityButton.tscn" type="PackedScene" id=7]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/time = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Effects/Explosions.gd" type="Script" id=24]
 [ext_resource path="res://Tiles/OtherEnergy/EnergyTile.tscn" type="PackedScene" id=25]
 [ext_resource path="res://UI/PlayPauseUI/TurnCounter.tscn" type="PackedScene" id=26]
+[ext_resource path="res://UI/ShopUI/Shop.tscn" type="PackedScene" id=27]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -197,6 +198,9 @@ script = ExtResource( 20 )
 [node name="Explosions" type="Node2D" parent="."]
 z_index = 101
 script = ExtResource( 24 )
+
+[node name="Shop" parent="." instance=ExtResource( 27 )]
+z_index = 11
 
 [node name="PhaseTransition" type="BackBufferCopy" parent="."]
 visible = false

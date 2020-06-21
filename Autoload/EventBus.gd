@@ -22,3 +22,5 @@ signal energy_spent
 signal explode(position)
 
 signal player_acted
+
+signal keeper_message(message)

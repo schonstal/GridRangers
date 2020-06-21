@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Shaders/SpriteGlitch.shader" type="Shader" id=1]
+[ext_resource path="res://UI/ShopUI/K33p3erProfilePic.png" type="Texture" id=2]
+[ext_resource path="res://UI/ShopUI/ShopUI.png" type="Texture" id=3]
+[ext_resource path="res://UI/ShopUI/K33p3erProfilePic.gd" type="Script" id=4]
+[ext_resource path="res://UI/ShopUI/DoneButton_2x1.png" type="Texture" id=5]
+[ext_resource path="res://UI/ShopUI/DoneButton.gd" type="Script" id=6]
+[ext_resource path="res://UI/ShopUI/Shop.gd" type="Script" id=7]
+[ext_resource path="res://UI/ShopUI/Messages.gd" type="Script" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/time = 0.0
+shader_param/strength = 0.5
+
+[sub_resource type="Animation" id=2]
+resource_name = "Click"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 97.7272, 159.795 )
+
+[node name="Shop" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 403.0
+margin_top = 167.0
+margin_right = 1505.0
+margin_bottom = 900.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="K33p3erProfilePic" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 523.637, 402.545 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="ShopUI" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 3 )
+
+[node name="DoneButton" type="Area2D" parent="."]
+position = Vector2( 1409.55, 741.93 )
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="DoneButton"]
+texture = ExtResource( 5 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoneButton"]
+autoplay = "Idle"
+anims/Click = SubResource( 2 )
+anims/Idle = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoneButton"]
+visible = false
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Messages" type="Node2D" parent="."]
+position = Vector2( 668.656, 249.314 )
+script = ExtResource( 8 )
