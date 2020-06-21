@@ -22,12 +22,18 @@ var respawn_enemies = false
 onready var background = $Background
 onready var match_timer = $MatchTimer
 onready var collapse_timer = $CollapseTimer
+onready var backdrop = $Backdrop
+onready var fade_tween = $FadeTween
+
+signal spawn_phase_completed
 
 func _ready():
   randomize()
 
   background.region_rect = Rect2(0, 0, width * 128, height * 128)
   position.x = 1920 / 2 - width * tile_size / 2
+
+  Game.scene.disable_input()
 
   call_deferred("populate_grid")
 
@@ -43,11 +49,50 @@ func outside_bounds(position):
          position.x >= width ||\
          position.y >= height
 
+func fade_in():
+  backdrop.modulate = Color(100, 100, 100, 1)
+  fade_tween.interpolate_property(
+    background,
+    "fade",
+    0.0,
+    10.0,
+    0.25,
+    Tween.TRANS_LINEAR,
+    Tween.EASE_OUT,
+    0.5
+   )
+  fade_tween.start()
+  yield(fade_tween, "tween_completed")
+  emit_signal("spawn_phase_completed")
+  backdrop.modulate = Color(1, 1, 1, 1)
+  
+func fade_out():
+  backdrop.modulate = Color(100, 100, 100, 1)
+  fade_tween.interpolate_property(
+    background,
+    "fade",
+    10.0,
+    0.0,
+    0.25,
+    Tween.TRANS_LINEAR,
+    Tween.EASE_OUT,
+    0.5
+   )
+  fade_tween.start()
+  yield(fade_tween, "tween_completed")
+  emit_signal("spawn_phase_completed")
+
 func populate_grid():
   create_empty_grid()
-  spawn_rangers()
-  spawn_enemies()
-  spawn_tiles()
+  call_deferred("fade_in")
+  yield(self, "spawn_phase_completed")
+  call_deferred("spawn_rangers")
+  yield(self, "spawn_phase_completed")
+  call_deferred("spawn_enemies")
+  yield(self, "spawn_phase_completed")
+  call_deferred("spawn_tiles")
+  yield(self, "spawn_phase_completed")
+
   respawn_enemies = true
 
 func create_empty_grid():
@@ -57,6 +102,7 @@ func create_empty_grid():
       tiles[x].append(null)
 
 func spawn_enemies():
+  print("ok")
   var locations = []
   for x in width:
     for y in 5:
@@ -65,12 +111,15 @@ func spawn_enemies():
   locations.shuffle()
 
   var index = 0
+  var enemy
   for count in Game.scene.enemy_count:
-    var enemy = spawn_enemy(locations[index])
+    enemy = spawn_enemy(locations[index])
     while !enemy:
       enemy = spawn_enemy(locations[index])
       index += 1
     index += 1
+
+  emit_signal("spawn_phase_completed")
 
 func spawn_enemy(position):
   var scene = Game.scene.get_enemy_scene()
@@ -84,8 +133,7 @@ func spawn_enemy(position):
         return false
 
   instance.position = grid_to_pixel(instance.grid_position)
-  instance.scale.x = 0.8
-  instance.scale.y = 0.8
+  instance.scale = Vector2(0, 0)
   call_deferred("add_child", instance)
   return instance
 
@@ -101,11 +149,24 @@ func spawn_rangers():
     add_child(instance)
     i += 1
 
+  print("spawned")
+  emit_signal("spawn_phase_completed")
+
 func spawn_tiles():
-  for x in width:
-    for y in height:
+  for y in height:
+    var tile
+    for x in width:
       if tiles[x][y] == null:
-        spawn_tile(x, y)
+        tile = spawn_tile(x, y)
+        tile.scale = Vector2(0, 0)
+        tile.call_deferred("appear")
+      else:
+        tile = tiles[x][y]
+        tile.call_deferred("appear")
+    if tile != null:
+      yield(tile, "appear_started")
+
+  emit_signal("spawn_phase_completed")
 
 func spawn_tile(x, y):
   var shuffled = tile_scenes.duplicate()

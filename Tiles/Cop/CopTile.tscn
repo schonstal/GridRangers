@@ -4,7 +4,7 @@
 [ext_resource path="res://Tiles/Cop/PIGDeath_10x2.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/Cop/Brain.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "Attack"
 length = 0.6
 tracks/0/type = "value"
@@ -32,8 +32,7 @@ tracks/1/keys = {
 "values": [ 1.5 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Die"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -47,7 +46,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -75,7 +74,7 @@ tracks/1/keys = {
 "values": [ 0.75 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -89,7 +88,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -130,11 +129,11 @@ frame = 11
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 autoplay = "Sleeping"
 playback_speed = 1.5
-anims/Attack = SubResource( 5 )
-anims/Die = SubResource( 1 )
-anims/Idle = SubResource( 2 )
-anims/Sleeping = SubResource( 3 )
-anims/WakeUp = SubResource( 4 )
+anims/Attack = SubResource( 1 )
+anims/Die = SubResource( 2 )
+anims/Idle = SubResource( 3 )
+anims/Sleeping = SubResource( 4 )
+anims/WakeUp = SubResource( 5 )
 
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )

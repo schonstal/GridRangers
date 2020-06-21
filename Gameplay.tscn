@@ -1,161 +1,17 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Grid/Grid.gd" type="Script" id=1]
-[ext_resource path="res://Tiles/Energy/EnergyTile.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Tiles/Wall/WallTile.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/PlayerPhase.png" type="Texture" id=4]
-[ext_resource path="res://Tiles/Cop/CopTile.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Tiles/Coin/CoinTile.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Shaders/FilmGrain.shader" type="Shader" id=7]
-[ext_resource path="res://Shaders/ChromaticAb.shader" type="Shader" id=8]
-[ext_resource path="res://Shaders/vignette.png" type="Texture" id=9]
-[ext_resource path="res://Shaders/FilmGrain.gd" type="Script" id=10]
-[ext_resource path="res://Tiles/Grid.png" type="Texture" id=11]
-[ext_resource path="res://Shaders/ChromaticAb.gd" type="Script" id=12]
+[ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shaders/FilmGrain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shaders/PhaseTransition.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Shaders/Chromatic.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Gameplay.gd" type="Script" id=13]
-[ext_resource path="res://Tiles/Cola/Cola.tscn" type="PackedScene" id=14]
-[ext_resource path="res://UI/EnemyPhase.png" type="Texture" id=15]
-[ext_resource path="res://Shaders/VHS.gd" type="Script" id=16]
-[ext_resource path="res://Shaders/VHS.shader" type="Shader" id=17]
-[ext_resource path="res://UI/PhaseTransition.gd" type="Script" id=18]
 [ext_resource path="res://AIDirector.gd" type="Script" id=19]
 [ext_resource path="res://Pathfinder.gd" type="Script" id=20]
 [ext_resource path="res://UI/Screen/GameBackground.png" type="Texture" id=21]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Autoload/MusicPlayer.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Effects/Explosions.gd" type="Script" id=24]
-[ext_resource path="res://Tiles/OtherEnergy/EnergyTile.tscn" type="PackedScene" id=25]
 [ext_resource path="res://UI/PlayPauseUI/TurnCounter.tscn" type="PackedScene" id=26]
 [ext_resource path="res://UI/ShopUI/Shop.tscn" type="PackedScene" id=27]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 17 )
-shader_param/time = 0.0
-shader_param/strength = 0.0
-
-[sub_resource type="Animation" id=2]
-resource_name = "ChangePhase"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("VHS:material:shader_param/strength")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 1.3, 1.4 ),
-"transitions": PoolRealArray( 1, 4, 1, 4 ),
-"update": 0,
-"values": [ 0.0, 1.0, 1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4 ),
-"transitions": PoolRealArray( 1, 2.82843 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "EnemyPhase"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("VHS:material:shader_param/strength")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.2, 0.3, 1.3, 1.4 ),
-"transitions": PoolRealArray( 1, 4, 1, 4 ),
-"update": 0,
-"values": [ 0.0, 1.0, 1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 2.82843 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("EnemyPhase:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.2, 0.3, 1.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "PlayerPhase"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("VHS:material:shader_param/strength")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 4, 1, 4 ),
-"update": 0,
-"values": [ 0.0, 1.0, 1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4 ),
-"transitions": PoolRealArray( 1, 2.82843 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PlayerPhase:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 8 )
-shader_param/amount = 0.25
-shader_param/offset_texture = ExtResource( 9 )
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 7 )
-shader_param/screen_size = Vector2( 1920, 1080 )
-shader_param/enabled = true
-shader_param/grain_amount = 0.05
-shader_param/colored = false
-shader_param/color_amount = 0.6
-shader_param/grain_size = 1.6
-shader_param/lum_amount = 1.0
-shader_param/time = 0.0
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 13 )
@@ -171,26 +27,7 @@ centered = false
 [node name="AIDirector" type="Node" parent="."]
 script = ExtResource( 19 )
 
-[node name="Grid" type="Node2D" parent="."]
-position = Vector2( 0, 40 )
-script = ExtResource( 1 )
-width = 7
-height = 8
-tile_scenes = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 2 ), ExtResource( 25 ) ]
-
-[node name="Background" type="Sprite" parent="Grid"]
-texture = ExtResource( 11 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 1920, 1080 )
-
-[node name="MatchTimer" type="Timer" parent="Grid"]
-wait_time = 0.5
-one_shot = true
-
-[node name="CollapseTimer" type="Timer" parent="Grid"]
-wait_time = 0.3
-one_shot = true
+[node name="Grid" parent="." instance=ExtResource( 1 )]
 
 [node name="Pathfinder" type="Node2D" parent="."]
 script = ExtResource( 20 )
@@ -200,86 +37,15 @@ z_index = 101
 script = ExtResource( 24 )
 
 [node name="Shop" parent="." instance=ExtResource( 27 )]
+visible = false
 z_index = 11
 
-[node name="PhaseTransition" type="BackBufferCopy" parent="."]
-visible = false
-z_index = 100
-rect = Rect2( 0, 0, 1920, 1080 )
-script = ExtResource( 18 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="VHS" type="ColorRect" parent="PhaseTransition"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.00012207
-color = Color( 0.764706, 0.0784314, 0.0784314, 1 )
-script = ExtResource( 16 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="PlayerPhase" type="Sprite" parent="PhaseTransition"]
-visible = false
-position = Vector2( 960, 540 )
-texture = ExtResource( 4 )
-
-[node name="EnemyPhase" type="Sprite" parent="PhaseTransition"]
-visible = false
-position = Vector2( 960, 540 )
-texture = ExtResource( 15 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PhaseTransition"]
-anims/ChangePhase = SubResource( 2 )
-anims/EnemyPhase = SubResource( 3 )
-anims/PlayerPhase = SubResource( 4 )
+[node name="PhaseTransition" parent="." instance=ExtResource( 3 )]
 
 [node name="TurnCounter" parent="." instance=ExtResource( 26 )]
 position = Vector2( 196.29, 655.111 )
 z_index = 101
 
-[node name="Chromatic" type="BackBufferCopy" parent="."]
-z_index = 101
-rect = Rect2( 0, 0, 1920, 1080 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Chromatic" parent="." instance=ExtResource( 4 )]
 
-[node name="ChromaticAb" type="ColorRect" parent="Chromatic"]
-material = SubResource( 5 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.00012207
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="BlurTween" type="Tween" parent="Chromatic/ChromaticAb"]
-
-[node name="FilmGrain" type="BackBufferCopy" parent="."]
-z_index = 102
-rect = Rect2( 0, 0, 1920, 1080 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="FilmGrain" type="ColorRect" parent="FilmGrain"]
-material = SubResource( 6 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 0.00012207
-color = Color( 0.764706, 0.0784314, 0.0784314, 1 )
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="MusicPlayer" parent="." instance=ExtResource( 23 )]
+[node name="FilmGrain" parent="." instance=ExtResource( 2 )]

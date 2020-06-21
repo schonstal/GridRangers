@@ -29,8 +29,12 @@ signal swapped(other)
 signal moved
 signal hurt
 
+signal appear_started
+signal appeared
+
 onready var move_tween = $MoveTween
 onready var fade_tween = $FadeTween
+onready var appear_tween = $AppearTween
 
 func _ready():
   connect("input_event", self, "_on_Tile_input_event")
@@ -98,6 +102,33 @@ func set_grid_position(new_position):
     max_move.x = 0
   else:
     max_move.x = 128
+
+func appear():
+  appear_tween.interpolate_property(
+      self,
+      "scale",
+      Vector2(1.0, 0),
+      Vector2(0.8, 0.8),
+      0.5,
+      Tween.TRANS_ELASTIC,
+      Tween.EASE_OUT,
+      0.01
+    )
+  appear_tween.interpolate_property(
+      self,
+      "modulate",
+      Color(10, 10, 10, 1),
+      Color(1, 1, 1, 1),
+      0.5,
+      Tween.TRANS_QUART,
+      Tween.EASE_OUT,
+      0.01
+    )
+  appear_tween.start()
+  yield(appear_tween, "tween_started")
+  emit_signal("appear_started")
+  yield(appear_tween, "tween_completed")
+  emit_signal("appeared")
 
 func match():
   emit_signal("matched")
