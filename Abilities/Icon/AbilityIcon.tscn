@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Abilities/AbilityIcons/EnergyCost.png" type="Texture" id=2]
+[ext_resource path="res://Abilities/AbilityIcons/DocumentBackground.png" type="Texture" id=3]
+[ext_resource path="res://Abilities/Icon/AbilityIcon.gd" type="Script" id=4]
+
+[node name="AbilityIcon" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="EnergyCost" type="Sprite" parent="."]
+position = Vector2( -64.9184, -72.7303 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="EnergyCost"]
+margin_left = -25.7185
+margin_top = -11.0529
+margin_right = 25.2815
+margin_bottom = 41.9471
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "2
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

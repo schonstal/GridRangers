@@ -9,6 +9,8 @@ onready var frame = $Frame
 onready var animation = $AnimationPlayer
 onready var window_appear = $WindowAppear
 
+var dead = false
+
 var color_frames = {
   'blue': 0,
   'red': 1,
@@ -33,3 +35,4 @@ func _ready():
 func _on_player_died(player_color):
   if player_color == color:
     animation.play("Die")
+    dead = true

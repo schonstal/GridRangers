@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Abilities/Ability.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Abilities/AbilityIcons/WallsToCD.png" type="Texture" id=2]
+[ext_resource path="res://Abilities/WallsToCD.gd" type="Script" id=3]
+
+[node name="Ability" instance=ExtResource( 1 )]
+cd_cost = 25
+energy_cost = 9
+description = [ "Change all planters to CDs." ]
+
+[node name="Logo" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="Effect" parent="." index="2"]
+script = ExtResource( 3 )

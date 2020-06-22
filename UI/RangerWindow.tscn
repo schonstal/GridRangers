@@ -6,7 +6,7 @@
 [ext_resource path="res://Shaders/SpriteGlitch.shader" type="Shader" id=4]
 [ext_resource path="res://UI/Error.gd" type="Script" id=5]
 [ext_resource path="res://UI/RangerWindow.gd" type="Script" id=6]
-[ext_resource path="res://Abilities/AbilityButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Abilities/Button/AbilityButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/WindowAppear.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -97,6 +97,7 @@ script = ExtResource( 5 )
 
 [node name="AbilityButton" parent="." instance=ExtResource( 7 )]
 position = Vector2( -1.55322, 21.4236 )
+collision_layer = 2
 
 [node name="Head" type="Sprite" parent="."]
 position = Vector2( 78.4387, 77.2412 )

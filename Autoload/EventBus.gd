@@ -14,6 +14,7 @@ signal enemy_died(enemy)
 signal player_died(color)
 
 signal coin_collected
+signal coins_spent(amount)
 signal cola_collected
 
 signal energy_collected

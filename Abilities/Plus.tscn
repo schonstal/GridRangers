@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Abilities/Plus.gd" type="Script" id=1]
+[ext_resource path="res://Abilities/Ability.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Abilities/AbilityIcons/Plus.png" type="Texture" id=3]
+
+[node name="Ability" instance=ExtResource( 2 )]
+cd_cost = 6
+energy_cost = 3
+description = [ "Attack tiles near the ranger." ]
+
+[node name="Logo" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="Effect" parent="." index="2"]
+script = ExtResource( 1 )

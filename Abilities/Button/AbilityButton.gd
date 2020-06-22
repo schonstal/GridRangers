@@ -6,11 +6,12 @@ var active = false
 var color = 'blue'
 
 onready var animation = $AnimationPlayer
-onready var abilities = $Abilities
+
 onready var window = $'..'
 
 var active_ability = null
 
+var dead setget ,_get_dead
 var enough_energy setget ,_get_enough_energy
 
 func _ready():
@@ -18,36 +19,20 @@ func _ready():
   connect("mouse_exited", self, "_on_mouse_exited")
   connect("input_event", self, "_on_input_event")
 
+  connect("on_area_entered", self, "_on_area_entered")
+  connect("on_area_exited", self, "_on_area_exited")
+
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
 
-  color = window.color
-
-  if color == 'red':
-    set_ability('ClearRow')
-  elif color == 'blue':
-    set_ability('ClearColumn')
-  else:
-    set_ability('WallsToCD')
+func set_ability(ability):
+  active_ability = ability
+  add_child(active_ability)
 
 func _process(delta):
-  if !selected:
-    abilities.scale.x = lerp(abilities.scale.x, 1, 0.5)
-    abilities.scale.y = lerp(abilities.scale.y, 1, 0.5)
-
-func set_ability(ability_name):
-  if ability_name == null:
-    active_ability = null
-  else:
-    active_ability = abilities.get_node(ability_name)
-
-  if active_ability != null && is_instance_valid(active_ability):
-    abilities.visible = true
-    for node in abilities.get_children():
-      node.visible = false
-    active_ability.visible = true
-  else:
-    abilities.visible = true
+  if !selected && active_ability:
+    active_ability.scale.x = lerp(active_ability.scale.x, 1, 0.5)
+    active_ability.scale.y = lerp(active_ability.scale.y, 1, 0.5)
 
   update_active()
 
@@ -67,6 +52,9 @@ func activate():
       Game.scene.players[color].get_node("Brain").call_deferred("attack")
 
   update_active()
+
+func _get_dead():
+  return window.dead
 
 func _get_enough_energy():
   return active_ability != null &&\
@@ -111,3 +99,9 @@ func _on_input_event(_viewport, event, _shape_id):
         animation.play("Hover")
         clicked = false
         call_deferred("activate")
+
+func _on_area_entered(other):
+  print("entered", other)
+
+func _on_area_exited(other):
+  print("exited", other)

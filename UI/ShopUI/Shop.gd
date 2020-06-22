@@ -4,6 +4,8 @@ var first_time = true
 
 onready var message_timer = $MessageTimer
 onready var done_button = $DoneButton
+onready var window_appear = $WindowAppear
+onready var abilities = $Abilities
 
 var greetings = [
   "What R u buyin?",
@@ -18,14 +20,18 @@ var tutorial = [
   "Drag a file to a RANGER window to buy it."
 ]
 
-onready var window_appear = $WindowAppear
-
 func _ready():
   EventBus.connect("spawn_shop", self, "_on_spawn_shop")
   done_button.connect("pressed", self, "_on_DoneButton_pressed")
+  window_appear.connect("appeared", self, "_on_window_appeared")
+
+func _on_window_appeared():
+  abilities.visible = true
+  abilities.spawn_abilities()
 
 func _on_DoneButton_pressed():
   window_appear.disappear()
+  abilities.visible = false
   EventBus.emit_signal("start_level")
 
 func _on_spawn_shop():

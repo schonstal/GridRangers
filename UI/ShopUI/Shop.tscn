@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Shaders/SpriteGlitch.shader" type="Shader" id=1]
 [ext_resource path="res://UI/ShopUI/K33p3erProfilePic.png" type="Texture" id=2]
@@ -8,9 +8,15 @@
 [ext_resource path="res://UI/ShopUI/DoneButton.gd" type="Script" id=6]
 [ext_resource path="res://UI/ShopUI/Shop.gd" type="Script" id=7]
 [ext_resource path="res://UI/ShopUI/Messages.gd" type="Script" id=8]
-[ext_resource path="res://Abilities/AbilityIcon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/ShopUI/Abilities.gd" type="Script" id=9]
 [ext_resource path="res://UI/WindowAppear.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/Backdrop.gd" type="Script" id=11]
+[ext_resource path="res://Abilities/ExtraTurn.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Abilities/Square.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Abilities/ClearRow.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Abilities/WallsToCD.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Abilities/ClearColumn.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Abilities/Plus.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -51,13 +57,12 @@ tracks/0/keys = {
 extents = Vector2( 97.7272, 159.795 )
 
 [node name="Shop" type="Node2D"]
-visible = false
 script = ExtResource( 7 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 403.0
+margin_left = 404.722
 margin_top = 167.0
-margin_right = 1505.0
+margin_right = 1506.72
 margin_bottom = 900.0
 script = ExtResource( 11 )
 __meta__ = {
@@ -102,9 +107,9 @@ position = Vector2( 668.656, 249.314 )
 script = ExtResource( 8 )
 
 [node name="Abilities" type="Node2D" parent="."]
-
-[node name="AbilityIcon" parent="Abilities" instance=ExtResource( 9 )]
-position = Vector2( 535.526, 725.757 )
+position = Vector2( 547.721, 712.571 )
+script = ExtResource( 9 )
+ability_pool = [ ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 13 ) ]
 
 [node name="WindowAppear" parent="." instance=ExtResource( 10 )]
 

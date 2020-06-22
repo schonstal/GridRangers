@@ -39,6 +39,7 @@ func _ready():
   EventBus.connect("level_completed", self, "_on_level_completed")
   EventBus.connect("start_level", self, "_on_start_level")
 
+  create_empty_grid()
   call_deferred("populate_grid")
 
 func get_tile(position):
@@ -89,7 +90,7 @@ func fade_out():
 func populate_grid():
   respawn_enemies = false
 
-  create_empty_grid()
+  clear_grid()
   call_deferred("fade_in")
   yield(self, "sequence_completed")
   call_deferred("spawn_rangers")
@@ -107,8 +108,14 @@ func populate_grid():
 
   respawn_enemies = true
 
+func clear_grid():
+  for x in width:
+    for y in height:
+      if tiles[x][y] != null:
+        tiles[x][y].queue_free()
+      tiles[x][y] = null
+
 func create_empty_grid():
-  tiles = []
   for x in width:
     tiles.append([])
     for y in height:

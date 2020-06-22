@@ -12,7 +12,7 @@ var player_moves = 1
 var player_control = true setget ,get_player_control
 
 var kills = 0
-var kill_target = 1
+var kill_target = 8
 var coins = 0
 var energy = 0
 var cola = 0
@@ -38,6 +38,8 @@ func _ready():
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
   EventBus.connect("player_acted", self, "_on_player_acted")
+  EventBus.connect("coins_spent", self, "_on_coins_spent")
+  EventBus.connect("start_level", self, "_on_start_level")
 
 func get_enemy_scene():
   enemy_tile_scenes.shuffle()
@@ -117,3 +119,12 @@ func _on_energy_spent(amount):
     energy -= amount
   else:
     energy = 0
+
+func _on_coins_spent(amount):
+  if coins > amount:
+    coins -= amount
+  else:
+    coins = 0
+
+func _on_start_level():
+  kills = 0

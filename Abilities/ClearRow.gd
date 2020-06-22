@@ -1,4 +1,4 @@
-extends Sprite
+extends Node
 
 export var energy_cost = 4
 

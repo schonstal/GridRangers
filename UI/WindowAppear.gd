@@ -1,9 +1,7 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal appeared
+signal disappeared
 
 onready var window = $'..'
 var initial_position
@@ -44,6 +42,7 @@ func appear(delay = 0):
 
   appear_tween.start()
   yield(appear_tween, "tween_completed")
+  emit_signal("appeared")
   appear_tween.queue_free()
 
 func disappear(delay = 0):
@@ -76,5 +75,6 @@ func disappear(delay = 0):
 
   disappear_tween.start()
   yield(disappear_tween, "tween_completed")
+  emit_signal("disappeared")
   window.visible = false
   disappear_tween.queue_free()

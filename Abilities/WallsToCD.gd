@@ -1,4 +1,4 @@
-extends Sprite
+extends Node
 
 var cd_tile = preload("res://Tiles/Coin/CoinTile.tscn")
 
