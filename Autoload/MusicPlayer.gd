@@ -14,6 +14,8 @@ onready var fade_tween = $FadeTween
 onready var filter_tween = $FilterTween
 
 func _ready():
+  EventBus.connect("game_over", self, "_on_game_over")
+
   bus_index = AudioServer.get_bus_index("Music")
 
   pitch_shift = AudioEffectPitchShift.new()
@@ -33,6 +35,9 @@ func _process(_delta):
 #
 #  self.stream = load(audio_file)
 #  self.play()
+
+func _on_game_over():
+  ambient.volume_db = -80
 
 func disable_filter():
   filter_tween.stop(pitch_shift)

@@ -10,6 +10,7 @@ signal pressed
 func _ready():
   connect("mouse_exited", self, "_on_mouse_exited")
   connect("input_event", self, "_on_input_event")
+  animation.play("Idle")
 
 func _on_mouse_exited():
   clicked = false

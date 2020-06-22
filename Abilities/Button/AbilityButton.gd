@@ -5,8 +5,7 @@ var clicked = false
 var active = false
 var color = 'blue'
 
-onready var animation = $AnimationPlayer
-
+onready var tween = $Tween
 onready var window = $'..'
 
 var active_ability = null
@@ -25,15 +24,17 @@ func _ready():
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
 
+  color = window.color
+
 func set_ability(ability):
+  if active_ability != null:
+    active_ability.queue_free()
+
   active_ability = ability
   add_child(active_ability)
+  active_ability.z_index = 10
 
 func _process(delta):
-  if !selected && active_ability:
-    active_ability.scale.x = lerp(active_ability.scale.x, 1, 0.5)
-    active_ability.scale.y = lerp(active_ability.scale.y, 1, 0.5)
-
   update_active()
 
 func activate():
@@ -69,6 +70,41 @@ func update_active():
   else:
     active = false
     modulate = Color(0.5, 0.5, 0.5, 1)
+    if active_ability != null:
+      active_ability.scale = Vector2(1, 1)
+
+func blur():
+  if active_ability == null:
+    return
+  tween.stop_all()
+  tween.interpolate_property(
+      active_ability,
+      "scale",
+      active_ability.scale,
+      Vector2(1, 1),
+      0.1,
+      Tween.TRANS_QUART,
+      Tween.EASE_OUT
+  )
+  tween.start()
+
+func hover():
+  if active_ability == null:
+    return
+  tween.stop_all()
+  tween.interpolate_property(
+      active_ability,
+      "scale",
+      active_ability.scale,
+      Vector2(1.2, 1.2),
+      0.1,
+      Tween.TRANS_QUART,
+      Tween.EASE_OUT
+  )
+  tween.start()
+
+func click():
+  active_ability.scale = Vector2(0.8, 0.8)
 
 func _on_energy_spent(amount):
   call_deferred("update_active")
@@ -79,12 +115,12 @@ func _on_energy_collected():
 func _on_mouse_entered():
   if self.enough_energy:
     selected = true
-    animation.play("Hover")
+    hover()
 
 func _on_mouse_exited():
   selected = false
   clicked = false
-  animation.stop()
+  blur()
 
 func _on_input_event(_viewport, event, _shape_id):
   if !selected || !active || !Game.scene.player_control:
@@ -94,9 +130,9 @@ func _on_input_event(_viewport, event, _shape_id):
     if event.button_index == BUTTON_LEFT:
       if event.pressed:
         clicked = true
-        animation.play("Click")
+        click()
       if !event.pressed && clicked:
-        animation.play("Hover")
+        hover()
         clicked = false
         call_deferred("activate")
 

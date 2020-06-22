@@ -5,7 +5,7 @@
 [ext_resource path="res://UI/ShopUI/ShopUI.png" type="Texture" id=3]
 [ext_resource path="res://UI/ShopUI/K33p3erProfilePic.gd" type="Script" id=4]
 [ext_resource path="res://UI/ShopUI/DoneButton_2x1.png" type="Texture" id=5]
-[ext_resource path="res://UI/ShopUI/DoneButton.gd" type="Script" id=6]
+[ext_resource path="res://UI/WindowButton.gd" type="Script" id=6]
 [ext_resource path="res://UI/ShopUI/Shop.gd" type="Script" id=7]
 [ext_resource path="res://UI/ShopUI/Messages.gd" type="Script" id=8]
 [ext_resource path="res://UI/ShopUI/Abilities.gd" type="Script" id=9]
@@ -22,6 +22,7 @@
 shader = ExtResource( 1 )
 shader_param/time = 0.0
 shader_param/strength = 0.5
+shader_param/jitter_offset = 6.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Click"

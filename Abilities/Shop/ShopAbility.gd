@@ -90,6 +90,7 @@ func _on_input_event(_viewport, event, _shape_id):
             if area.dead:
               EventBus.emit_signal("keeper_message", "I can't send it to an offline ranger.")
             elif Game.scene.coins >= ability.cd_cost:
+              EventBus.emit_signal("keeper_message", "Thx. :)")
               area.call_deferred("set_ability", ability)
               ability.scale = Vector2(1, 1)
               remove_child(ability)

@@ -27,6 +27,12 @@ var enemy_tile_scenes = [
 
 var players = {}
 
+var players_alive = {
+  'blue': true,
+  'red': true,
+  'yellow': true
+ }
+
 func _ready():
   EventBus.connect("turn_complete", self, "_on_turn_complete")
   EventBus.connect("phase_transition_complete", self, "_on_phase_transition_complete")
@@ -40,6 +46,17 @@ func _ready():
   EventBus.connect("player_acted", self, "_on_player_acted")
   EventBus.connect("coins_spent", self, "_on_coins_spent")
   EventBus.connect("start_level", self, "_on_start_level")
+  EventBus.connect("restart_game", self, "_on_restart_game")
+  EventBus.connect("quit_game", self, "_on_quit_game")
+  EventBus.connect("player_died", self, "_on_player_died")
+
+  MusicPlayer.fade("ambient", 0.3)
+
+func _enter_tree():
+  Game.initialize()
+
+func _on_restart_game():
+  Game.reset()
 
 func get_enemy_scene():
   enemy_tile_scenes.shuffle()
@@ -53,6 +70,17 @@ func enable_input():
 
 func get_player_control():
   return player_control && player_moves > 0
+
+func _on_player_died(player_color):
+  players_alive[player_color] = false
+
+  var game_over = true
+  for key in players_alive:
+    if players_alive[key]:
+      game_over = false
+
+  if game_over:
+    EventBus.emit_signal("game_over")
 
 func _on_player_acted():
   if phase == Game.PHASE_PLAYER:
@@ -75,6 +103,7 @@ func _on_turn_complete():
       EventBus.emit_signal("change_phase", Game.PHASE_ENEMY)
 
 func _on_change_phase(new_phase):
+  player_moves = 1
   disable_input()
   phase = new_phase
 

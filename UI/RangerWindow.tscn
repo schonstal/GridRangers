@@ -13,6 +13,7 @@
 shader = ExtResource( 4 )
 shader_param/time = 0.0
 shader_param/strength = 10.0
+shader_param/jitter_offset = 6.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Die"
@@ -101,6 +102,7 @@ collision_layer = 2
 
 [node name="Head" type="Sprite" parent="."]
 position = Vector2( 78.4387, 77.2412 )
+z_index = 11
 texture = ExtResource( 3 )
 hframes = 4
 frame = 3

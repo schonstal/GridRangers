@@ -38,9 +38,13 @@ func _ready():
 
   EventBus.connect("level_completed", self, "_on_level_completed")
   EventBus.connect("start_level", self, "_on_start_level")
+  EventBus.connect("game_over", self, "_on_game_over")
 
   create_empty_grid()
   call_deferred("populate_grid")
+
+func _on_game_over():
+  queue_free()
 
 func get_tile(position):
   if outside_bounds(position):

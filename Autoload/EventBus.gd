@@ -30,3 +30,7 @@ signal level_completed
 signal start_level
 
 signal spawn_shop
+
+signal restart_game
+signal quit_game
+signal game_over
