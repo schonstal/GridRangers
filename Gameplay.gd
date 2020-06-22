@@ -86,6 +86,8 @@ func _on_begin_phase(new_phase):
     cola = 0
 
 func _on_cola_collected():
+  if phase == Game.PHASE_NONE:
+    return
   cola += 50
   if cola >= 100:
     cola -= 100
@@ -93,12 +95,18 @@ func _on_cola_collected():
       player_moves += 1
 
 func _on_coin_collected():
+  if phase == Game.PHASE_NONE:
+    return
   coins += 1
 
 func _on_enemy_died(enemy):
+  if phase == Game.PHASE_NONE:
+    return
   kills += 1
 
 func _on_energy_collected():
+  if phase == Game.PHASE_NONE:
+    return
   if energy < max_energy:
     energy += 1
   else:
