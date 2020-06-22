@@ -35,3 +35,5 @@ signal spawn_shop
 signal restart_game
 signal quit_game
 signal game_over
+
+signal turns_spent(amount)

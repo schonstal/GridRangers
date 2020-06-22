@@ -87,6 +87,7 @@ func _on_player_acted():
     player_moves -= 1
     if player_moves < 0:
       player_moves = 0
+    EventBus.emit_signal("turns_spent", 1)
 
 func _on_turn_complete():
   if phase != Game.PHASE_NONE && kills >= kill_target:
@@ -97,13 +98,15 @@ func _on_turn_complete():
     return
 
   if phase == Game.PHASE_PLAYER:
+    cola = 0
     combo = 0
     enable_input()
     if player_moves < 1:
       EventBus.emit_signal("change_phase", Game.PHASE_ENEMY)
 
 func _on_change_phase(new_phase):
-  player_moves = 1
+  if player_moves < 1:
+    player_moves = 1
   disable_input()
   phase = new_phase
 
@@ -119,11 +122,12 @@ func _on_begin_phase(new_phase):
 func _on_cola_collected():
   if phase == Game.PHASE_NONE:
     return
-  cola += 50
+  cola += 67
   if cola >= 100:
     cola -= 100
     if player_moves < max_player_moves:
       player_moves += 1
+    EventBus.emit_signal("turns_spent", -1)
 
 func _on_coin_collected():
   if phase == Game.PHASE_NONE:

@@ -25,3 +25,5 @@ position = Vector2( -104.74, 371.407 )
 
 [node name="Pip3" parent="Pips" instance=ExtResource( 2 )]
 position = Vector2( -64.74, 371.407 )
+
+[node name="FlashTween" type="Tween" parent="."]

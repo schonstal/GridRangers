@@ -3,14 +3,29 @@ extends Node2D
 onready var pips = $Pips
 onready var pause = $Pause
 onready var play = $Play
+onready var flash_tween = $FlashTween
 
 func _ready():
   EventBus.connect("change_phase", self, "_on_change_phase")
   EventBus.connect("phase_transition_complete", self, "_on_phase_transition_complete")
+  EventBus.connect("turns_spent", self, "_on_turns_spent")
   update_label()
 
 func _process(delta):
   update_pips()
+
+func _on_turns_spent(turns):
+  flash_tween.stop_all()
+  flash_tween.interpolate_property(
+    pips,
+    "modulate",
+    Color(10, 10, 10, 1),
+    Color(1, 1, 1, 1),
+    1.0,
+    Tween.TRANS_QUART,
+    Tween.EASE_OUT
+  )
+  flash_tween.start()
 
 func update_pips():
   var i = 0

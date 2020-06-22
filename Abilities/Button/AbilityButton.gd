@@ -18,9 +18,6 @@ func _ready():
   connect("mouse_exited", self, "_on_mouse_exited")
   connect("input_event", self, "_on_input_event")
 
-  connect("on_area_entered", self, "_on_area_entered")
-  connect("on_area_exited", self, "_on_area_exited")
-
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
   EventBus.connect("revive_ranger", self, "_on_revive_ranger")
@@ -143,9 +140,3 @@ func _on_input_event(_viewport, event, _shape_id):
         hover()
         clicked = false
         call_deferred("activate")
-
-func _on_area_entered(other):
-  print("entered", other)
-
-func _on_area_exited(other):
-  print("exited", other)

@@ -17,6 +17,19 @@ func _ready():
   start_position = global_position
   cd_label.text = "%d" % ability.cd_cost
 
+  ability.scale = Vector2(0, 0)
+
+  tween.interpolate_property(
+      ability,
+      "scale",
+      Vector2(0, 0),
+      Vector2(1, 1),
+      0.3,
+      Tween.TRANS_QUART,
+      Tween.EASE_OUT
+  )
+  tween.start()
+
 func _process(delta):
   if dragging:
     drag()

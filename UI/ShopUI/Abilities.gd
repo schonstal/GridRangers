@@ -30,7 +30,6 @@ func spawn_abilities():
   print_messages()
 
 func print_messages():
-  EventBus.emit_signal("keeper_message", "The goods:")
   for a in abilities:
     var format = "# %s"
     for message in a.ability.description:

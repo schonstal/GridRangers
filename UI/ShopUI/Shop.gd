@@ -33,6 +33,7 @@ func _on_DoneButton_pressed():
   window_appear.disappear()
   abilities.visible = false
   EventBus.emit_signal("start_level")
+  EventBus.emit_signal("keeper_message", "L8r nerd.")
 
 func _on_spawn_shop():
   window_appear.call_deferred("appear")
