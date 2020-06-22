@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Tiles/Cop/CopTile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Cola/Cola.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Tiles/OtherEnergy/EnergyTile.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Shaders/GradientFade.shader" type="Shader" id=9]
 [ext_resource path="res://Grid/Background.gd" type="Script" id=10]
+[ext_resource path="res://UI/Backdrop.gd" type="Script" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -26,6 +27,7 @@ tile_scenes = [ ExtResource( 1 ), ExtResource( 7 ), ExtResource( 5 ), ExtResourc
 margin_right = 897.0
 margin_bottom = 1021.0
 color = Color( 0.101961, 0.0980392, 0.247059, 1 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

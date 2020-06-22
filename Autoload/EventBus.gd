@@ -26,5 +26,6 @@ signal player_acted
 signal keeper_message(message)
 
 signal level_completed
+signal start_level
 
 signal spawn_shop

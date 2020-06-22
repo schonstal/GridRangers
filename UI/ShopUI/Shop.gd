@@ -3,6 +3,7 @@ extends Node2D
 var first_time = true
 
 onready var message_timer = $MessageTimer
+onready var done_button = $DoneButton
 
 var greetings = [
   "What R u buyin?",
@@ -21,6 +22,11 @@ onready var window_appear = $WindowAppear
 
 func _ready():
   EventBus.connect("spawn_shop", self, "_on_spawn_shop")
+  done_button.connect("pressed", self, "_on_DoneButton_pressed")
+
+func _on_DoneButton_pressed():
+  window_appear.disappear()
+  EventBus.emit_signal("start_level")
 
 func _on_spawn_shop():
   window_appear.call_deferred("appear")

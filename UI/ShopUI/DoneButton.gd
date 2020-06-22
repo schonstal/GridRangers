@@ -5,6 +5,8 @@ var clicked = false
 
 onready var animation = $AnimationPlayer
 
+signal pressed
+
 func _ready():
   connect("mouse_exited", self, "_on_mouse_exited")
   connect("input_event", self, "_on_input_event")
@@ -22,4 +24,4 @@ func _on_input_event(_viewport, event, _shape_id):
       if !event.pressed && clicked:
         animation.play("Idle")
         clicked = false
-        print("clicked done")
+        emit_signal("pressed")

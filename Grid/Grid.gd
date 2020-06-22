@@ -37,6 +37,7 @@ func _ready():
   Game.scene.disable_input()
 
   EventBus.connect("level_completed", self, "_on_level_completed")
+  EventBus.connect("start_level", self, "_on_start_level")
 
   call_deferred("populate_grid")
 
@@ -86,6 +87,8 @@ func fade_out():
   emit_signal("sequence_completed")
 
 func populate_grid():
+  respawn_enemies = false
+
   create_empty_grid()
   call_deferred("fade_in")
   yield(self, "sequence_completed")
@@ -105,6 +108,7 @@ func populate_grid():
   respawn_enemies = true
 
 func create_empty_grid():
+  tiles = []
   for x in width:
     tiles.append([])
     for y in height:
@@ -426,7 +430,6 @@ func _input(event):
           swap_intent = null
 
 func _on_level_completed():
-  MusicPlayer.fade(0, -72, 1.0)
   for y in range(height - 1, -1, -1):
     for x in width:
       if tiles[x][y] != null && tiles[x][y].player == false:
@@ -435,12 +438,15 @@ func _on_level_completed():
     check_matches()
     yield(sequence_timer, "timeout")
 
+  MusicPlayer.call_deferred("fade", "big_band", 1.0)
   teleport_rangers()
   yield(self, "sequence_completed")
-  MusicPlayer.play_file("res://Music/bigband.ogg")
-  MusicPlayer.fade(-72, -6, 0.01)
 
   EventBus.emit_signal("spawn_shop")
 
   call_deferred("fade_out")
   yield(self, "sequence_completed")
+
+func _on_start_level():
+  populate_grid()
+  MusicPlayer.call_deferred("fade", "ambient", 1.0)
