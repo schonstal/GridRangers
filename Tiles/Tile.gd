@@ -128,6 +128,9 @@ func appear():
   emit_signal("appeared")
 
 func match():
+  if matched:
+    return
+
   emit_signal("matched")
   matched = true
   modulate = Color(10, 10, 10, 1)
