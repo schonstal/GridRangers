@@ -7,7 +7,7 @@
 [node name="Ability" instance=ExtResource( 1 )]
 cd_cost = 25
 energy_cost = 9
-description = [ "Change all planters to CDs." ]
+description = [ "Change all planters to CDs" ]
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 2 )

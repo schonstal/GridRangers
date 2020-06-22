@@ -43,9 +43,6 @@ func hover():
 
   z_index = 13
 
-  for message in ability.description:
-    EventBus.emit_signal("keeper_message", message)
-
   tween.stop_all()
   tween.interpolate_property(
       ability,
@@ -76,6 +73,31 @@ func _on_mouse_exited():
   )
   tween.start()
 
+func drop_ability(area):
+  if area.dead:
+    EventBus.emit_signal("keeper_message", "I can't send it to an offline ranger.")
+  elif Game.scene.coins >= ability.cd_cost:
+    EventBus.emit_signal("keeper_message", "Thx. :)")
+    area.call_deferred("set_ability", ability)
+    ability.scale = Vector2(1, 1)
+    remove_child(ability)
+    EventBus.emit_signal("coins_spent", ability.cd_cost)
+    queue_free()
+  else:
+    EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
+
+func drop_revive(area):
+  if area.dead:
+    if Game.scene.coins >= ability.cd_cost:
+      EventBus.emit_signal("revive_ranger", area.color)
+      EventBus.emit_signal("keeper_message", "Sending reboot sequence...")
+      queue_free()
+    else:
+      EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
+  else:
+    EventBus.emit_signal("keeper_message", "That ranger is online...")
+    EventBus.emit_signal("keeper_message", "I can't reboot the terminal.")
+
 func _on_input_event(_viewport, event, _shape_id):
   if event is InputEventMouseButton:
     if event.button_index == BUTTON_LEFT:
@@ -87,15 +109,10 @@ func _on_input_event(_viewport, event, _shape_id):
         dragging = false
         for area in get_overlapping_areas():
           if area.has_method("set_ability"):
-            if area.dead:
-              EventBus.emit_signal("keeper_message", "I can't send it to an offline ranger.")
-            elif Game.scene.coins >= ability.cd_cost:
-              EventBus.emit_signal("keeper_message", "Thx. :)")
-              area.call_deferred("set_ability", ability)
-              ability.scale = Vector2(1, 1)
-              remove_child(ability)
-              EventBus.emit_signal("coins_spent", ability.cd_cost)
-              queue_free()
-            else:
-              EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
+            if ability == null:
+              return
 
+            if ability.revive:
+              drop_revive(area)
+            else:
+              drop_ability(area)

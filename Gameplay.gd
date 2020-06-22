@@ -48,6 +48,7 @@ func _ready():
   EventBus.connect("start_level", self, "_on_start_level")
   EventBus.connect("quit_game", self, "_on_quit_game")
   EventBus.connect("player_died", self, "_on_player_died")
+  EventBus.connect("revive_ranger", self, "_on_revive_ranger")
 
   MusicPlayer.fade("ambient", 0.3)
 
@@ -66,6 +67,9 @@ func enable_input():
 
 func get_player_control():
   return player_control && player_moves > 0
+
+func _on_revive_ranger(player_color):
+  players_alive[player_color] = true
 
 func _on_player_died(player_color):
   players_alive[player_color] = false

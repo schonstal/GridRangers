@@ -1,11 +1,12 @@
 extends Node2D
 
-onready var label = $Badge/Label
+onready var label = $Badge/Sprite/Label
 onready var animation = $Badge/AnimationPlayer
 
 func _ready():
   EventBus.connect("coin_collected", self, "_on_coin_collected")
   EventBus.connect("coins_spent", self, "_on_coins_spent")
+  animation.play("Appear")
 
 func _on_coin_collected():
   animation.play("Increase")

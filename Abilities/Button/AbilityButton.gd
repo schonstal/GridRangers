@@ -23,16 +23,24 @@ func _ready():
 
   EventBus.connect("energy_collected", self, "_on_energy_collected")
   EventBus.connect("energy_spent", self, "_on_energy_spent")
+  EventBus.connect("revive_ranger", self, "_on_revive_ranger")
 
   color = window.color
 
+func _on_revive_ranger(revive_color):
+  if revive_color == color:
+    if active_ability != null && is_instance_valid(active_ability):
+      active_ability.queue_free()
+      active_ability = null
+
 func set_ability(ability):
-  if active_ability != null:
+  if active_ability != null && is_instance_valid(active_ability):
     active_ability.queue_free()
 
   active_ability = ability
   add_child(active_ability)
   active_ability.z_index = 10
+  visible = true
 
 func _process(delta):
   update_active()
@@ -70,7 +78,7 @@ func update_active():
   else:
     active = false
     modulate = Color(0.5, 0.5, 0.5, 1)
-    if active_ability != null:
+    if active_ability != null && is_instance_valid(active_ability):
       active_ability.scale = Vector2(1, 1)
 
 func blur():

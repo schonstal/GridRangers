@@ -1,14 +1,41 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/PIGandCDUI/BadgeUI.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "Increase"
+resource_name = "Appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 3, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,15 +46,22 @@ tracks/0/keys = {
 "values": [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[node name="Badge" type="Sprite"]
-position = Vector2( 72.2451, -62.5006 )
+[node name="Node2D" type="Node2D"]
+position = Vector2( 0, -50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/Appear = SubResource( 1 )
+anims/Increase = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = -43.7729
-margin_top = -18.4712
-margin_right = 42.2272
-margin_bottom = 19.5288
+[node name="Label" type="Label" parent="Sprite"]
+margin_left = -43.9402
+margin_top = -18.2634
+margin_right = 42.0599
+margin_bottom = 19.7366
 custom_fonts/font = ExtResource( 1 )
 text = "0/12"
 align = 1
@@ -35,6 +69,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Increase = SubResource( 1 )

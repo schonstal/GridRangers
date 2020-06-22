@@ -471,4 +471,3 @@ func _on_MatchTimer_timeout():
 
 func _on_CollapseTimer_timeout():
   check_matches()
-

@@ -6,6 +6,8 @@ export var description = [
   "Attack all tiles in the ranger's column."
  ]
 
+export var revive = false
+
 onready var icon = $Icon
 onready var effect = $Effect
 

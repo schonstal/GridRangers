@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Abilities/Ability.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Abilities/Revive/ReviveDocumentBackground.png" type="Texture" id=2]
+[ext_resource path="res://Abilities/Revive/ReviveHeart.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Beat"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 59.7141, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+
+[node name="Ability" instance=ExtResource( 1 )]
+cd_cost = 6
+energy_cost = 0
+description = [ "Reboot a crashed ranger" ]
+revive = true
+
+[node name="AbilityIcon" parent="." index="0"]
+visible = false
+
+[node name="Logo" parent="." index="1"]
+visible = false
+
+[node name="ReviveDocumentBackground" type="Sprite" parent="." index="3"]
+texture = ExtResource( 2 )
+
+[node name="ReviveHeart" type="Sprite" parent="ReviveDocumentBackground" index="0"]
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ReviveDocumentBackground/ReviveHeart" index="0"]
+autoplay = "Beat"
+playback_speed = 0.5
+anims/Beat = SubResource( 1 )

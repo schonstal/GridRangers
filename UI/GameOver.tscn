@@ -14,6 +14,7 @@ shader = ExtResource( 3 )
 shader_param/time = 3.0
 shader_param/strength = 2.0
 shader_param/jitter_offset = 2.0
+shader_param/color_strength = 0.1
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 105.113, 51.1167 )
