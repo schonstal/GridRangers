@@ -74,7 +74,7 @@ func fade_in():
   yield(fade_tween, "tween_completed")
   emit_signal("sequence_completed")
   backdrop.modulate = Color(1, 1, 1, 1)
-  
+
 func fade_out():
   #backdrop.modulate = Color(100, 100, 100, 1)
   fade_tween.interpolate_property(
@@ -164,6 +164,8 @@ func spawn_enemy(position):
 func spawn_rangers():
   var i = 0
   for key in rangers:
+    if !Game.scene.players_alive[key]:
+      continue
     var instance = rangers[key].instance()
     instance.set_grid_position(Vector2(2 * i + 1, height - 2))
     tiles[instance.grid_position.x][instance.grid_position.y] = instance
@@ -250,6 +252,10 @@ func execute_match():
 
 func collapse_board():
   collapse_timer.start()
+
+  if Game.scene.phase == Game.PHASE_NONE:
+    return
+
   for x in width:
     var tiles_shifted = 0
     for y in range(height - 1, -1, -1):
@@ -369,13 +375,15 @@ func swap_tiles(selected, other):
   check_matches()
 
 func check_matches():
+  collapse_timer.stop()
+  match_timer.stop()
+
   while evaluate_matches() > 0:
     execute_match()
     yield(match_timer, "timeout")
 
-    if Game.scene.phase == Game.PHASE_PLAYER || Game.scene.phase == Game.PHASE_ENEMY:
-      collapse_board()
-      yield(collapse_timer, "timeout")
+    collapse_board()
+    yield(collapse_timer, "timeout")
 
   EventBus.emit_signal("turn_complete")
 
