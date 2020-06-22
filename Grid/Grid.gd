@@ -40,6 +40,9 @@ func _ready():
   EventBus.connect("start_level", self, "_on_start_level")
   EventBus.connect("game_over", self, "_on_game_over")
 
+  collapse_timer.connect("timeout", self, "_on_CollapseTimer_timeout")
+  match_timer.connect("timeout", self, "_on_MatchTimer_timeout")
+
   create_empty_grid()
   call_deferred("populate_grid")
 
@@ -126,7 +129,6 @@ func create_empty_grid():
       tiles[x].append(null)
 
 func spawn_enemies():
-  print("ok")
   var locations = []
   for x in width:
     for y in 5:
@@ -375,17 +377,10 @@ func swap_tiles(selected, other):
   check_matches()
 
 func check_matches():
-  collapse_timer.stop()
-  match_timer.stop()
-
-  while evaluate_matches() > 0:
+  if evaluate_matches() > 0:
     execute_match()
-    yield(match_timer, "timeout")
-
-    collapse_board()
-    yield(collapse_timer, "timeout")
-
-  EventBus.emit_signal("turn_complete")
+  else:
+    EventBus.emit_signal("turn_complete")
 
 func evaluate_matches():
   var matches = 0
@@ -469,3 +464,11 @@ func _on_level_completed():
 func _on_start_level():
   populate_grid()
   MusicPlayer.call_deferred("fade", "ambient", 1.0)
+
+func _on_MatchTimer_timeout():
+  if Game.scene.phase == Game.PHASE_PLAYER || Game.scene.phase == Game.PHASE_ENEMY:
+    collapse_board()
+
+func _on_CollapseTimer_timeout():
+  check_matches()
+

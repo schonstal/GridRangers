@@ -36,6 +36,8 @@ func execute_turn():
   if sleeping:
     sleeping = false
     animation.play("WakeUp")
+    yield(animation, "animation_finished")
+    EventBus.emit_signal("turn_complete")
   else:
     Game.scene.pathfinder.generate_map(tile.grid_position)
 
@@ -80,7 +82,6 @@ func _on_matched():
 
 func _on_Animation_finished(name):
   if name == "WakeUp":
-    EventBus.emit_signal("turn_complete")
     animation.play("Idle")
 
   if name == "Attack":
