@@ -15,6 +15,10 @@ var target_scene
 func _ready():
   randomize()
   Overlay.connect("fade_complete", self, "_on_Overlay_fade_complete")
+  EventBus.connect("restart_game", self, "_on_restart_game")
+
+func _on_restart_game():
+  Game.reset()
 
 func initialize():
   scene = $'../Gameplay'

@@ -46,7 +46,6 @@ func _ready():
   EventBus.connect("player_acted", self, "_on_player_acted")
   EventBus.connect("coins_spent", self, "_on_coins_spent")
   EventBus.connect("start_level", self, "_on_start_level")
-  EventBus.connect("restart_game", self, "_on_restart_game")
   EventBus.connect("quit_game", self, "_on_quit_game")
   EventBus.connect("player_died", self, "_on_player_died")
 
@@ -54,9 +53,6 @@ func _ready():
 
 func _enter_tree():
   Game.initialize()
-
-func _on_restart_game():
-  Game.reset()
 
 func get_enemy_scene():
   enemy_tile_scenes.shuffle()
