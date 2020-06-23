@@ -1,4 +1,11 @@
-[gd_resource type="AudioBusLayout" format=2]
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
+
+[sub_resource type="AudioEffectLowPassFilter" id=2]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectPitchShift" id=1]
+resource_name = "PitchShift"
+pitch_scale = 0.5
 
 [resource]
 bus/1/name = "Music"
@@ -13,3 +20,13 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 2 )
+bus/2/effect/0/enabled = false
+bus/3/name = "PitchShift"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = "SFX"
+bus/3/effect/0/effect = SubResource( 1 )
+bus/3/effect/0/enabled = false

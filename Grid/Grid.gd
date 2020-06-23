@@ -25,6 +25,8 @@ onready var collapse_timer = $CollapseTimer
 onready var backdrop = $Backdrop
 onready var fade_tween = $FadeTween
 onready var sequence_timer = $SequenceTimer
+onready var match_sound = $MatchSound
+onready var swap_sound = $SwapSound
 
 signal sequence_completed
 
@@ -247,6 +249,7 @@ func execute_match():
         tiles[x][y] = null
         Game.scene.combo += 1
 
+  match_sound.play()
   var effect_strength = log(Game.scene.combo - 1)
   EventBus.emit_signal("blur_chromatic", effect_strength, 2.0)
   match_timer.start()
@@ -352,6 +355,7 @@ func attempt_swap(grid_position):
 
   EventBus.emit_signal("player_acted")
   swap_tiles(selected_tile, tiles[grid_position.x][grid_position.y])
+  swap_sound.play()
 
   selected_tile = null
 

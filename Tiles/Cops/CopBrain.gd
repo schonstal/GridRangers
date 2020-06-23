@@ -100,6 +100,7 @@ func _on_Animation_finished(name):
   if name == "WakeUp":
     turn_count = turns
     if shield:
+      tile.health = 2
       animation.play("IdleShield")
     else:
       animation.play("Idle")

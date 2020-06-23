@@ -4,6 +4,8 @@ onready var tile = $'..'
 onready var animation = $'../Sprite/AnimationPlayer'
 onready var sprite = $'../Sprite'
 onready var teleport_animation = $'../Teleport/AnimationPlayer'
+onready var death_sound = $DeathSound
+onready var appear_sound = $AppearSound
 
 export var color = 'red'
 export var attack_offset = Vector2()
@@ -18,6 +20,7 @@ func _ready():
 
 func _on_matched():
   EventBus.emit_signal("player_died", color)
+  death_sound.play()
 
 func _on_swapped(other_tile):
   if Game.scene.phase == Game.PHASE_PLAYER:
@@ -26,6 +29,8 @@ func _on_swapped(other_tile):
       call_deferred("attack")
 
 func teleport():
+  if !tile.dead:
+    appear_sound.play()
   if sprite.visible:
     teleport_animation.play("TeleportOut")
   else:

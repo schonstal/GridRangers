@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MatchThree"
-run/main_scene="res://UI/TitleScreen.tscn"
+run/main_scene="res://Gameplay.tscn"
 config/icon="res://icon.png"
 
 [autoload]

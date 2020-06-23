@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Tiles/Tile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Rangers/Blue/Blue.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/Rangers/Brain.gd" type="Script" id=3]
 [ext_resource path="res://Tiles/Rangers/Blue/BlueTeleport.png" type="Texture" id=4]
+[ext_resource path="res://sfx/Player_Death_SFX.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sfx/Player_Appear_SFX.ogg" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -216,9 +218,18 @@ anims/Idle = SubResource( 2 )
 script = ExtResource( 3 )
 color = "blue"
 
+[node name="DeathSound" type="AudioStreamPlayer" parent="Brain" index="0"]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="AppearSound" type="AudioStreamPlayer" parent="Brain" index="1"]
+stream = ExtResource( 6 )
+bus = "SFX"
+
 [node name="Teleport" type="Sprite" parent="." index="6"]
 visible = false
 position = Vector2( 0, -246.229 )
+z_index = 20
 texture = ExtResource( 4 )
 vframes = 2
 hframes = 6
