@@ -8,12 +8,14 @@ var sleeping
 var awake_chance = 50
 
 export var turns = 1
+export var shield = false
 var turn_count = 1
 
 func _ready():
   animation.connect("animation_finished", self, "_on_Animation_finished")
   tile.connect("matched", self, "_on_matched")
   tile.connect("swapped", self, "_on_swapped")
+  tile.connect("hurt", self, "_on_hurt")
 
   var points_relative = [
       Vector2(tile.grid_position.x, tile.grid_position.y + 1),
@@ -69,24 +71,41 @@ func execute_turn():
         Game.scene.grid.auto_swap(tile.grid_position, to_swap)
       else:
         target.hurt(1)
-        animation.play("Attack")
+        attack()
         yield(animation, "animation_finished")
         EventBus.emit_signal("turn_complete")
+
+func attack():
+  if shield:
+    animation.play("AttackShield")
+  else:
+    animation.play("Attack")
 
 func _on_swapped(other_tile):
   if Game.scene.phase == Game.PHASE_ENEMY:
     if other_tile.enemy_can_attack:
       other_tile.hurt(1)
-      animation.play("Attack")
+      attack()
 
 func _on_matched():
   animation.play("Die")
   EventBus.emit_signal("enemy_died", self)
 
+func _on_hurt():
+  if shield:
+    animation.play("Idle")
+    shield = false
+
 func _on_Animation_finished(name):
   if name == "WakeUp":
     turn_count = turns
-    animation.play("Idle")
+    if shield:
+      animation.play("IdleShield")
+    else:
+      animation.play("Idle")
 
   if name == "Attack":
     animation.play("Idle")
+
+  if name == "AttackShield":
+    animation.play("IdleShield")
