@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shaders/ChromaticAb.gd" type="Script" id=1]
 [ext_resource path="res://Shaders/vignette.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/ChromaticAb.shader" type="Shader" id=3]
+[ext_resource path="res://Shaders/ChromaticLayer.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -12,6 +13,7 @@ shader_param/offset_texture = ExtResource( 2 )
 [node name="Chromatic" type="BackBufferCopy"]
 z_index = 101
 rect = Rect2( 0, 0, 1920, 1080 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
