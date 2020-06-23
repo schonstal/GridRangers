@@ -5,7 +5,7 @@
 [ext_resource path="res://Abilities/WallsToCD.gd" type="Script" id=3]
 
 [node name="Ability" instance=ExtResource( 1 )]
-cd_cost = 12
+cd_cost = 9
 energy_cost = 15
 description = [ "Change all planters to CDs" ]
 

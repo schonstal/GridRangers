@@ -5,8 +5,8 @@
 [ext_resource path="res://Abilities/AbilityIcons/Plus.png" type="Texture" id=3]
 
 [node name="Ability" instance=ExtResource( 2 )]
-cd_cost = 4
-energy_cost = 6
+cd_cost = 3
+energy_cost = 4
 description = [ "Attack tiles near the ranger" ]
 
 [node name="Logo" parent="." index="1"]

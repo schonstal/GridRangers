@@ -1,29 +1,28 @@
 extends Node
 
-var enemies = []
-
 func _ready():
-  EventBus.connect("enemy_spawned", self, "_on_enemy_spawned")
-  EventBus.connect("enemy_died", self, "_on_enemy_died")
   EventBus.connect("begin_phase", self, "_on_begin_phase")
 
 func execute_turns():
-  for enemy in enemies:
-    enemy.call_deferred("execute_turn")
-    yield(EventBus, "turn_complete")
+  var enemies = Game.scene.grid.get_enemies()
 
-  if Game.scene.phase != Game.PHASE_NONE:
-    EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
+  for enemy in enemies:
+    if !is_instance_enemy(enemy):
+      continue
+    for i in enemy.brain.turns:
+      # enemy might die between turns if it matches itself
+      if !is_instance_enemy(enemy):
+        continue
+      enemy.brain.call_deferred("execute_turn")
+      yield(EventBus, "turn_complete")
+
+  EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
+
+# is_instance_valid fails sometimes, it might be
+# repopulated by now with a random object
+func is_instance_enemy(enemy):
+  return enemy != null && is_instance_valid(enemy) && enemy.get("brain") != null && !enemy.get("dead")
 
 func _on_begin_phase(phase):
   if phase == Game.PHASE_ENEMY:
     execute_turns()
-
-func _on_enemy_spawned(enemy):
-  enemies.push_back(enemy)
-
-func _on_enemy_died(enemy):
-  var index = enemies.find(enemy)
-  if index > -1:
-    enemies.remove(index)
-

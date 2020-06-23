@@ -34,7 +34,7 @@ tracks/1/keys = {
 }
 
 [node name="Ability" instance=ExtResource( 1 )]
-cd_cost = 6
+cd_cost = 3
 energy_cost = 0
 description = [ "Reboot a crashed ranger" ]
 revive = true

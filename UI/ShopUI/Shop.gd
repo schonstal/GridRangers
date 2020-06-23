@@ -6,6 +6,7 @@ onready var message_timer = $MessageTimer
 onready var done_button = $DoneButton
 onready var window_appear = $WindowAppear
 onready var abilities = $Abilities
+onready var messages = $Messages
 
 var greetings = [
   "What R u buyin?",
@@ -14,7 +15,6 @@ var greetings = [
 ]
 
 var tutorial = [
-  "Hey.",
   "U the one takin care of those pigs?",
   "If U got CDs, I can hook U up.",
   "Drag a file to a RANGER window to buy it."
@@ -32,12 +32,14 @@ func _on_window_appeared():
 func _on_DoneButton_pressed():
   window_appear.disappear()
   abilities.visible = false
+  EventBus.emit_signal("keeper_message", "L8r.")
+  EventBus.emit_signal("keeper_message", "============= DISCONNECTED =============")
   EventBus.emit_signal("start_level")
-  EventBus.emit_signal("keeper_message", "L8r nerd.")
 
 func _on_spawn_shop():
   window_appear.call_deferred("appear")
 
+  EventBus.emit_signal("keeper_message", "Hey.")
   if first_time:
     for message in tutorial:
       EventBus.emit_signal("keeper_message", message)

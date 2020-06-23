@@ -408,6 +408,15 @@ func mouse_to_grid():
   var mouse_position = get_viewport().get_mouse_position()
   return pixel_to_grid(mouse_position)
 
+func get_enemies():
+  var enemies = []
+  for x in width:
+    for y in height:
+      if tiles[x][y] != null && is_instance_valid(tiles[x][y]) && tiles[x][y].enemy:
+        enemies.push_back(tiles[x][y])
+
+  return enemies
+
 func _input(event):
   if !Game.scene.player_control:
     return

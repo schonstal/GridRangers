@@ -22,7 +22,9 @@ var enemy_count = 6
 var phase = Game.PHASE_NONE
 
 var enemy_tile_scenes = [
-  preload("res://Tiles/Cop/CopTile.tscn")
+  preload("res://Tiles/Cops/Standard/StandardCop.tscn"),
+  preload("res://Tiles/Cops/Moto/MotoCop.tscn"),
+  preload("res://Tiles/Cops/Shield/ShieldCop.tscn")
 ]
 
 var players = {}

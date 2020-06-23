@@ -5,8 +5,8 @@
 [ext_resource path="res://Abilities/Square.gd" type="Script" id=3]
 
 [node name="Ability" instance=ExtResource( 2 )]
-cd_cost = 9
-energy_cost = 8
+cd_cost = 3
+energy_cost = 6
 description = [ "Attack all tiles near the ranger" ]
 
 [node name="Logo" parent="." index="1"]
