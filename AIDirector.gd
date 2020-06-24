@@ -9,7 +9,9 @@ func execute_turns():
   for enemy in enemies:
     if !is_instance_enemy(enemy):
       continue
-    for i in enemy.brain.turns:
+    for i in enemy.brain.turn_count:
+      if Game.scene.phase == Game.PHASE_NONE:
+        return
       # enemy might die between turns if it matches itself
       if !is_instance_enemy(enemy):
         continue
