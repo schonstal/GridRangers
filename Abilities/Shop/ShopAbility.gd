@@ -13,11 +13,15 @@ func _ready():
   connect("mouse_entered", self, "_on_mouse_entered")
   connect("mouse_exited", self, "_on_mouse_exited")
   connect("input_event", self, "_on_input_event")
+  EventBus.connect("coins_spent", self, "_on_coins_spent")
 
   start_position = global_position
   cd_label.text = "%d" % ability.cd_cost
 
   ability.scale = Vector2(0, 0)
+
+  if !can_afford():
+    modulate = Color(0.5, 0.5, 0.5, 1)
 
   tween.interpolate_property(
       ability,
@@ -30,6 +34,14 @@ func _ready():
   )
   tween.start()
 
+func _on_coins_spent(_coins):
+  if !can_afford():
+    modulate = Color(0.5, 0.5, 0.5, 1)
+    deselect()
+
+func can_afford():
+  return ability.cd_cost <= Game.scene.coins
+
 func _process(delta):
   if dragging:
     drag()
@@ -37,6 +49,9 @@ func _process(delta):
     global_position = lerp(global_position, start_position, 0.3)
 
 func drag():
+  if !can_afford():
+    return
+
   var mouse_position = get_viewport().get_mouse_position()
 
   global_position = Vector2(
@@ -51,7 +66,7 @@ func _on_mouse_entered():
   hover()
 
 func hover():
-  if z_index == 13:
+  if z_index == 13 || !can_afford():
     return
 
   z_index = 13
@@ -71,7 +86,9 @@ func hover():
 func _on_mouse_exited():
   if dragging:
     return
+  deselect()
 
+func deselect():
   z_index = 12
 
   tween.stop_all()
@@ -89,24 +106,21 @@ func _on_mouse_exited():
 func drop_ability(area):
   if area.dead:
     EventBus.emit_signal("keeper_message", "I can't send it to an offline ranger.")
-  elif Game.scene.coins >= ability.cd_cost:
+  elif can_afford():
     EventBus.emit_signal("keeper_message", "Thx. :)")
     area.call_deferred("set_ability", ability)
     ability.scale = Vector2(1, 1)
     remove_child(ability)
     EventBus.emit_signal("coins_spent", ability.cd_cost)
     queue_free()
-  else:
-    EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
 
 func drop_revive(area):
   if area.dead:
-    if Game.scene.coins >= ability.cd_cost:
+    if can_afford():
       EventBus.emit_signal("revive_ranger", area.color)
       EventBus.emit_signal("keeper_message", "Sending reboot sequence...")
+      EventBus.emit_signal("coins_spent", ability.cd_cost)
       queue_free()
-    else:
-      EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
   else:
     EventBus.emit_signal("keeper_message", "That ranger is online...")
     EventBus.emit_signal("keeper_message", "I can't reboot the terminal.")
@@ -115,9 +129,12 @@ func _on_input_event(_viewport, event, _shape_id):
   if event is InputEventMouseButton:
     if event.button_index == BUTTON_LEFT:
       if event.pressed:
-        hover()
-        drag_offset = global_position - get_viewport().get_mouse_position()
-        dragging = true
+        if can_afford():
+          hover()
+          drag_offset = global_position - get_viewport().get_mouse_position()
+          dragging = true
+        else:
+          EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
       if !event.pressed:
         dragging = false
         for area in get_overlapping_areas():
