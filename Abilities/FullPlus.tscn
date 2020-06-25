@@ -6,8 +6,8 @@
 
 [node name="FullPlus" instance=ExtResource( 1 )]
 cd_cost = 9
-energy_cost = 12
-description = [ "Attack tiles in the ranger's row/column." ]
+energy_cost = 10
+description = [ "Attack tiles in the ranger's row/column" ]
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 2 )
