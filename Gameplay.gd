@@ -4,6 +4,8 @@ onready var grid = $Grid
 onready var ai_director = $AIDirector
 onready var pathfinder = $Pathfinder
 
+export(Array,Resource) var levels = []
+
 var max_player_moves = 3
 var max_energy = 15
 
@@ -17,15 +19,12 @@ var coins = 0
 var energy = 0
 var cola = 0
 
+export var level_index = 0
+var current_level setget ,get_current_level
+
 var enemy_count = 6
 
 var phase = Game.PHASE_NONE
-
-var enemy_tile_scenes = [
-  preload("res://Tiles/Cops/Standard/StandardCop.tscn"),
-  preload("res://Tiles/Cops/Moto/MotoCop.tscn"),
-  preload("res://Tiles/Cops/Shield/ShieldCop.tscn")
-]
 
 var players = {}
 
@@ -51,15 +50,14 @@ func _ready():
   EventBus.connect("quit_game", self, "_on_quit_game")
   EventBus.connect("player_died", self, "_on_player_died")
   EventBus.connect("revive_ranger", self, "_on_revive_ranger")
+  EventBus.connect("level_completed", self, "_on_level_completed")
+
+  kill_target = Game.scene.current_level.kill_count
 
   MusicPlayer.fade("ambient", 0.3)
 
 func _enter_tree():
   Game.initialize()
-
-func get_enemy_scene():
-  enemy_tile_scenes.shuffle()
-  return enemy_tile_scenes[0]
 
 func disable_input():
   player_control = false
@@ -90,6 +88,12 @@ func _on_player_acted():
     if player_moves < 0:
       player_moves = 0
     EventBus.emit_signal("turns_spent", 1)
+
+func _on_level_completed():
+  level_index += 1
+  if level_index >= levels.size():
+    # Should be 'you won' but for now...
+    EventBus.emit_signal("game_over")
 
 func _on_turn_complete():
   if phase != Game.PHASE_NONE && kills >= kill_target:
@@ -162,4 +166,8 @@ func _on_coins_spent(amount):
     coins = 0
 
 func _on_start_level():
+  kill_target = Game.scene.current_level.kill_count
   kills = 0
+
+func get_current_level():
+  return levels[level_index]

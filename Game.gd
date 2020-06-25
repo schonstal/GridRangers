@@ -12,6 +12,12 @@ var PHASE_NONE = "none"
 
 var target_scene
 
+var ENEMY_SCENES = {
+  'standard': preload("res://Tiles/Cops/Standard/StandardCop.tscn"),
+  'moto': preload("res://Tiles/Cops/Moto/MotoCop.tscn"),
+  'shield': preload("res://Tiles/Cops/Shield/ShieldCop.tscn")
+}
+
 func _ready():
   randomize()
   Overlay.connect("fade_complete", self, "_on_Overlay_fade_complete")

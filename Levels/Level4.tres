@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Levels/Level.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+kill_count = 10
+standard = 2
+moto = 1
+shield = 1
+standard_rate = 5
+moto_rate = 19
+shield_rate = 13
+alt_color_chance = 0.0

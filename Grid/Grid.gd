@@ -18,6 +18,7 @@ var selected_tile = null
 var swap_intent = null
 var dragging = false
 var respawn_enemies = false
+var spawn_count = 0
 
 onready var background = $Background
 onready var match_timer = $MatchTimer
@@ -140,17 +141,29 @@ func spawn_enemies():
 
   var index = 0
   var enemy
-  for count in Game.scene.enemy_count:
-    enemy = spawn_enemy(locations[index])
+  for count in Game.scene.current_level.standard:
+    enemy = spawn_enemy(locations[index], "standard")
     while !enemy:
-      enemy = spawn_enemy(locations[index])
+      enemy = spawn_enemy(locations[index], "standard")
+      index += 1
+    index += 1
+  for count in Game.scene.current_level.moto:
+    enemy = spawn_enemy(locations[index], "moto")
+    while !enemy:
+      enemy = spawn_enemy(locations[index], "moto")
+      index += 1
+    index += 1
+  for count in Game.scene.current_level.shield:
+    enemy = spawn_enemy(locations[index], "shield")
+    while !enemy:
+      enemy = spawn_enemy(locations[index], "shield")
       index += 1
     index += 1
 
   emit_signal("sequence_completed")
 
-func spawn_enemy(position):
-  var scene = Game.scene.get_enemy_scene()
+func spawn_enemy(position, type):
+  var scene = Game.ENEMY_SCENES[type]
   var instance = scene.instance()
   instance.set_grid_position(position)
   tiles[position.x][position.y] = instance
@@ -226,8 +239,6 @@ func spawn_tile(x, y):
   while shuffled.size() > 0:
     var scene = shuffled.pop_front()
     instance = scene.instance()
-    if instance.enemy && !respawn_enemies:
-      continue
     instance.set_grid_position(Vector2(x, y))
     tiles[x][y] = instance
     if !match(x, y, false):
@@ -277,9 +288,23 @@ func collapse_board():
     var empty_spaces = height - tiles_shifted - 1
     for y in range(0, height):
       if tiles[x][y] == null:
-        tiles[x][y] = spawn_tile(x, y)
+        if respawn_enemies:
+          if get_enemies().size() == 0:
+            if !spawn_enemy(Vector2(x, y), 'standard'):
+              spawn_tile(x, y)
+          else:
+            spawn_count += 1
+            var enemy_type = Game.scene.ai_director.enemy_spawn_type(spawn_count)
+            if enemy_type == null:
+              tiles[x][y] = spawn_tile(x, y)
+            else:
+              if !spawn_enemy(Vector2(x, y), enemy_type):
+                tiles[x][y] = spawn_tile(x, y)
+        else:
+          tiles[x][y] = spawn_tile(x, y)
         tiles[x][y].position = grid_to_pixel(Vector2(x, -empty_spaces))
-        tiles[x][y].move_to(grid_to_pixel(Vector2(x, y)))
+        tiles[x][y].scale = Vector2(0.8, 0.8)
+        tiles[x][y].call_deferred("move_to", grid_to_pixel(Vector2(x, y)))
         empty_spaces -= 1
 
 func match(x, y, mark):
@@ -416,7 +441,7 @@ func get_enemies():
   var enemies = []
   for x in width:
     for y in height:
-      if tiles[x][y] != null && is_instance_valid(tiles[x][y]) && tiles[x][y].enemy:
+      if tiles[x][y] != null && is_instance_valid(tiles[x][y]) && tiles[x][y].get("enemy") && tiles[x][y].get("brain") != null:
         enemies.push_back(tiles[x][y])
 
   return enemies
@@ -457,6 +482,7 @@ func _input(event):
           swap_intent = null
 
 func _on_level_completed():
+  spawn_count = 0
   for y in range(height - 1, -1, -1):
     for x in width:
       if tiles[x][y] != null && tiles[x][y].player == false:

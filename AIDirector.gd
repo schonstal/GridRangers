@@ -18,7 +18,8 @@ func execute_turns():
       enemy.brain.call_deferred("execute_turn")
       yield(EventBus, "turn_complete")
 
-  EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
+  if Game.scene.kills < Game.scene.kill_target:
+    EventBus.emit_signal("change_phase", Game.PHASE_PLAYER)
 
 # is_instance_valid fails sometimes, it might be
 # repopulated by now with a random object
@@ -28,3 +29,13 @@ func is_instance_enemy(enemy):
 func _on_begin_phase(phase):
   if phase == Game.PHASE_ENEMY:
     execute_turns()
+
+func enemy_spawn_type(count):
+  if Game.scene.current_level.standard_rate > 0 && count % Game.scene.current_level.standard_rate == 0:
+    return "standard"
+  elif Game.scene.current_level.moto_rate > 0 && count % Game.scene.current_level.moto_rate == 0:
+    return "moto"
+  elif Game.scene.current_level.shield_rate > 0 && count % Game.scene.current_level.shield_rate == 0:
+    return "shield"
+
+  return null
