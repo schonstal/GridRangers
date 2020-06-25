@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Grid/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Shaders/FilmGrain.tscn" type="PackedScene" id=2]
@@ -22,9 +22,17 @@
 [ext_resource path="res://Pathfinder.gd" type="Script" id=20]
 [ext_resource path="res://UI/Screen/GameBackground.png" type="Texture" id=21]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sfx/Pig_Death_SFX.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Effects/Explosions.gd" type="Script" id=24]
+[ext_resource path="res://SFXLimiter.gd" type="Script" id=25]
 [ext_resource path="res://UI/PlayPauseUI/TurnCounter.tscn" type="PackedScene" id=26]
 [ext_resource path="res://UI/ShopUI/Shop.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sfx/Standard_Pig_Move_SFX.ogg" type="AudioStream" id=28]
+[ext_resource path="res://sfx/Pig_Shield_Death.ogg" type="AudioStream" id=29]
+[ext_resource path="res://sfx/Pig_Wheels_Death_2_SFX.ogg" type="AudioStream" id=30]
+[ext_resource path="res://sfx/Pig_Wake_Up.ogg" type="AudioStream" id=31]
+[ext_resource path="res://sfx/Pig_Wheels_Move_SFX.ogg" type="AudioStream" id=32]
+[ext_resource path="res://sfx/Pig_Shield_Move_SFX.ogg" type="AudioStream" id=33]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 13 )
@@ -58,6 +66,57 @@ z_index = 11
 [node name="GameOver" parent="." instance=ExtResource( 5 )]
 visible = false
 script = ExtResource( 6 )
+
+[node name="SFXLimiter" type="Node2D" parent="."]
+script = ExtResource( 25 )
+
+[node name="standard" type="Node" parent="SFXLimiter"]
+
+[node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
+stream = ExtResource( 23 )
+volume_db = -3.0
+
+[node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
+stream = ExtResource( 31 )
+
+[node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
+stream = ExtResource( 28 )
+
+[node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
+stream = ExtResource( 28 )
+pitch_scale = 1.5
+
+[node name="shield" type="Node" parent="SFXLimiter"]
+
+[node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
+stream = ExtResource( 29 )
+volume_db = -3.0
+
+[node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
+stream = ExtResource( 31 )
+
+[node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
+stream = ExtResource( 33 )
+
+[node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
+stream = ExtResource( 28 )
+pitch_scale = 1.5
+
+[node name="moto" type="Node" parent="SFXLimiter"]
+
+[node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
+stream = ExtResource( 30 )
+volume_db = -3.0
+
+[node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
+stream = ExtResource( 31 )
+
+[node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
+stream = ExtResource( 32 )
+
+[node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
+stream = ExtResource( 28 )
+pitch_scale = 1.5
 
 [node name="PhaseTransition" parent="." instance=ExtResource( 3 )]
 

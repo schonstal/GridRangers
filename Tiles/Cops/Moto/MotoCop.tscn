@@ -185,4 +185,5 @@ anims/WakeUp = SubResource( 5 )
 
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )
+enemy_type = "moto"
 turns = 2

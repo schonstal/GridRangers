@@ -44,7 +44,7 @@ tracks/2/keys = {
 "values": [ 1.2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "AttackShield"
 length = 0.7
 tracks/0/type = "value"
@@ -84,7 +84,7 @@ tracks/2/keys = {
 "values": [ 1.2 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -110,7 +110,7 @@ tracks/1/keys = {
 "values": [ Vector2( -4.24915, -21.2505 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -150,7 +150,7 @@ tracks/2/keys = {
 "values": [ Vector2( -10.2491, -19.2505 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "IdleShield"
 length = 0.4
 loop = true
@@ -191,7 +191,7 @@ tracks/2/keys = {
 "values": [ Vector2( -1.24915, -13.2505 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -217,7 +217,7 @@ tracks/1/keys = {
 "values": [ Vector2( 15, -32 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -271,13 +271,14 @@ frame = 26
 autoplay = "Sleeping"
 playback_speed = 1.5
 anims/Attack = SubResource( 1 )
-anims/AttackShield = SubResource( 6 )
-anims/Die = SubResource( 2 )
-anims/Idle = SubResource( 3 )
-anims/IdleShield = SubResource( 7 )
-anims/Sleeping = SubResource( 4 )
-anims/WakeUp = SubResource( 5 )
+anims/AttackShield = SubResource( 2 )
+anims/Die = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/IdleShield = SubResource( 5 )
+anims/Sleeping = SubResource( 6 )
+anims/WakeUp = SubResource( 7 )
 
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )
+enemy_type = "shield"
 shield = true

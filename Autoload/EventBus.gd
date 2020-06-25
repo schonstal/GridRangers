@@ -37,4 +37,6 @@ signal restart_game
 signal quit_game
 signal game_over
 
+signal play_sound(category, sound)
+
 signal turns_spent(amount)

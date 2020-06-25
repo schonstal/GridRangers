@@ -7,6 +7,7 @@ onready var sprite = $'../Sprite'
 var sleeping
 var awake_chance = 50
 
+export var enemy_type = 'standard'
 export var turns = 1
 export var shield = false
 var turn_count = 1
@@ -41,6 +42,7 @@ func execute_turn():
   if sleeping:
     sleeping = false
     animation.play("WakeUp")
+    EventBus.emit_signal("play_sound", enemy_type, "Wake")
     yield(animation, "animation_finished")
     EventBus.emit_signal("turn_complete")
   else:
@@ -68,6 +70,7 @@ func execute_turn():
       var to_swap = shortest_path[1]
       var target = Game.scene.grid.get_tile(to_swap)
       if target.traversable:
+        EventBus.emit_signal("play_sound", enemy_type, "Move")
         Game.scene.grid.auto_swap(tile.grid_position, to_swap)
       else:
         target.hurt(1)
@@ -80,6 +83,7 @@ func attack():
     animation.play("AttackShield")
   else:
     animation.play("Attack")
+  EventBus.emit_signal("play_sound", enemy_type, "Attack")
 
 func _on_swapped(other_tile):
   if Game.scene.phase == Game.PHASE_ENEMY:
@@ -88,6 +92,7 @@ func _on_swapped(other_tile):
       attack()
 
 func _on_matched():
+  EventBus.emit_signal("play_sound", enemy_type, "Die")
   animation.play("Die")
   EventBus.emit_signal("enemy_died", self)
 
