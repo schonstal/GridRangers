@@ -53,7 +53,6 @@ func activate():
       Game.scene.disable_input()
       EventBus.emit_signal("energy_spent", active_ability.energy_cost)
       active_ability.activate_at(Game.scene.players[color].grid_position)
-      EventBus.emit_signal("player_acted")
       # Game jam haxxx
       Game.scene.players[color].get_node("Brain").call_deferred("attack")
 

@@ -5,7 +5,7 @@
 
 [node name="Ability" instance=ExtResource( 1 )]
 cd_cost = 6
-energy_cost = 8
+energy_cost = 10
 description = [ "Attack all tiles in the ranger's column" ]
 
 [node name="Effect" parent="." index="2"]

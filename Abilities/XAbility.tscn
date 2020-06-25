@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Abilities/AbilityIcons/ExtraTurn.png" type="Texture" id=1]
+[ext_resource path="res://Abilities/AbilityIcons/FullX.png" type="Texture" id=1]
 [ext_resource path="res://Abilities/Ability.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Abilities/ExtraTurn.gd" type="Script" id=3]
+[ext_resource path="res://Abilities/FullPlus.gd" type="Script" id=3]
 
-[node name="Ability" instance=ExtResource( 2 )]
-cd_cost = 12
+[node name="X" instance=ExtResource( 2 )]
+cd_cost = 6
 energy_cost = 12
-description = [ "Gain an extra turn" ]
+description = [ "Attack tiles diagonally from the ranger" ]
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 1 )
