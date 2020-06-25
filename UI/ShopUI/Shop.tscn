@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Shaders/SpriteGlitch.shader" type="Shader" id=1]
 [ext_resource path="res://UI/ShopUI/K33p3erProfilePic.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Abilities/Plus.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Abilities/XAbility.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Abilities/FullPlus.tscn" type="PackedScene" id=19]
+[ext_resource path="res://sfx/Equip_Power_Up.ogg" type="AudioStream" id=20]
+[ext_resource path="res://sfx/Reboot_Ranger_SFX.ogg" type="AudioStream" id=21]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -119,3 +121,10 @@ ability_pool = [ ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtRes
 
 [node name="MessageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="EquipSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -5.0
+
+[node name="RebootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )

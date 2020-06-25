@@ -9,6 +9,7 @@ var current_file = ""
 
 onready var ambient = $AudioStreamAmbient
 onready var big_band = $AudioStreamBigBand
+onready var title = $AudioStreamTitle
 
 onready var fade_tween = $FadeTween
 onready var filter_tween = $FilterTween
@@ -87,8 +88,8 @@ func fade(mode, duration):
     fade_tween.start()
     yield(fade_tween, "tween_completed")
     big_band.stop()
-
-  else:
+    title.stop()
+  elif mode == "big_band":
     big_band.play()
 
     fade_tween.interpolate_property(
@@ -112,3 +113,16 @@ func fade(mode, duration):
     fade_tween.start()
     yield(fade_tween, "tween_completed")
     ambient.stop()
+    title.stop()
+  else:
+    fade_tween.interpolate_property(
+      title,
+      "volume_db",
+      0,
+      -80,
+      duration,
+      Tween.TRANS_QUAD,
+      Tween.EASE_IN)
+    fade_tween.start()
+    yield(fade_tween, "tween_completed")
+    title.stop()

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Standard_Pig_Move_SFX.ogg-4774b591b8aceb33f610f1ec5db723cb.oggstr"
+
+[deps]
+
+source_file="res://sfx/Standard_Pig_Move_SFX.ogg"
+dest_files=[ "res://.import/Standard_Pig_Move_SFX.ogg-4774b591b8aceb33f610f1ec5db723cb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

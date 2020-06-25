@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pig_Wake_Up.ogg-912cbe595b169d11246257d1bf95bc29.oggstr"
+
+[deps]
+
+source_file="res://sfx/Pig_Wake_Up.ogg"
+dest_files=[ "res://.import/Pig_Wake_Up.ogg-912cbe595b169d11246257d1bf95bc29.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

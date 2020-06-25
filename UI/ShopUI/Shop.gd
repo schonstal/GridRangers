@@ -7,6 +7,8 @@ onready var done_button = $DoneButton
 onready var window_appear = $WindowAppear
 onready var abilities = $Abilities
 onready var messages = $Messages
+onready var equip_sound = $EquipSound
+onready var reboot_sound = $RebootSound
 
 var greetings = [
   "What R u buyin?",
@@ -22,6 +24,9 @@ var tutorial = [
 
 func _ready():
   EventBus.connect("spawn_shop", self, "_on_spawn_shop")
+  EventBus.connect("buy_ability", self, "_on_buy_ability")
+  EventBus.connect("revive_ranger", self, "_on_revive_ranger")
+
   done_button.connect("pressed", self, "_on_DoneButton_pressed")
   window_appear.connect("appeared", self, "_on_window_appeared")
 
@@ -47,3 +52,9 @@ func _on_spawn_shop():
   else:
     greetings.shuffle()
     EventBus.emit_signal("keeper_message", greetings[0])
+
+func _on_buy_ability(_ability):
+  equip_sound.play()
+
+func _on_revive_ranger(_color):
+  reboot_sound.play()

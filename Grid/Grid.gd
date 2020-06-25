@@ -74,7 +74,7 @@ func fade_in():
     0.5,
     Tween.TRANS_LINEAR,
     Tween.EASE_OUT,
-    1.0 if Game.scene.level_index < 1 else 1.5
+    1.5
    )
   fade_tween.start()
   yield(fade_tween, "tween_completed")
@@ -504,9 +504,9 @@ func _on_start_level():
   if fade_tween.is_active():
     yield(self, "sequence_completed")
 
-  populate_grid()
   MusicPlayer.call_deferred("fade", "ambient", 1.0)
   Game.scene.combo = 0
+  populate_grid()
 
 func _on_MatchTimer_timeout():
   if Game.scene.phase == Game.PHASE_PLAYER || Game.scene.phase == Game.PHASE_ENEMY:

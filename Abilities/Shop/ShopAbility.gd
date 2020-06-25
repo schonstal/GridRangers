@@ -8,6 +8,8 @@ var drag_offset = Vector2()
 
 onready var tween = $Tween
 onready var cd_label = $CDCost/Label
+onready var click_sound = $ClickSound
+onready var error_sound = $ErrorSound
 
 func _ready():
   connect("mouse_entered", self, "_on_mouse_entered")
@@ -105,8 +107,10 @@ func deselect():
 
 func drop_ability(area):
   if area.dead:
+    error_sound.play()
     EventBus.emit_signal("keeper_message", "I can't send it to an offline ranger.")
   elif can_afford():
+    EventBus.emit_signal("buy_ability", ability)
     EventBus.emit_signal("keeper_message", "Thx. :)")
     area.call_deferred("set_ability", ability)
     ability.scale = Vector2(1, 1)
@@ -122,6 +126,7 @@ func drop_revive(area):
       EventBus.emit_signal("coins_spent", ability.cd_cost)
       queue_free()
   else:
+    error_sound.play()
     EventBus.emit_signal("keeper_message", "That ranger is online...")
     EventBus.emit_signal("keeper_message", "I can't reboot the terminal.")
 
@@ -133,7 +138,9 @@ func _on_input_event(_viewport, event, _shape_id):
           hover()
           drag_offset = global_position - get_viewport().get_mouse_position()
           dragging = true
+          click_sound.play()
         else:
+          error_sound.play()
           EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
       if !event.pressed:
         dragging = false

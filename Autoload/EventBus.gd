@@ -13,6 +13,7 @@ signal enemy_died(enemy)
 
 signal player_died(color)
 signal revive_ranger(color)
+signal buy_ability(ability)
 
 signal coin_collected
 signal coins_spent(amount)

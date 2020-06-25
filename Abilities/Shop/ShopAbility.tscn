@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Abilities/Shop/ShopAbility.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Abilities/AbilityIcons/CDCost.png" type="Texture" id=3]
+[ext_resource path="res://sfx/Click_SFX.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sfx/XP_Error_SFX.ogg" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 85.9952, 115.967 )
@@ -36,3 +38,9 @@ position = Vector2( -3.01102, 14.7206 )
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="ErrorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
