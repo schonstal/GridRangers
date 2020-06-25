@@ -1,6 +1,8 @@
 extends Resource
 class_name Level
 
+export(String) var title = "border router"
+
 export(int) var kill_count = 8
 
 export(int) var standard = 6

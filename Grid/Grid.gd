@@ -74,7 +74,7 @@ func fade_in():
     0.5,
     Tween.TRANS_LINEAR,
     Tween.EASE_OUT,
-    0.5
+    1.0 if Game.scene.level_index < 1 else 1.5
    )
   fade_tween.start()
   yield(fade_tween, "tween_completed")
@@ -261,7 +261,7 @@ func execute_match():
         Game.scene.combo += 1
 
   match_sound.play()
-  var effect_strength = log(Game.scene.combo - 1)
+  var effect_strength = log(Game.scene.combo)
   EventBus.emit_signal("blur_chromatic", effect_strength, 2.0)
   match_timer.start()
   Game.scene.disable_input()
@@ -501,8 +501,12 @@ func _on_level_completed():
   yield(self, "sequence_completed")
 
 func _on_start_level():
+  if fade_tween.is_active():
+    yield(self, "sequence_completed")
+
   populate_grid()
   MusicPlayer.call_deferred("fade", "ambient", 1.0)
+  Game.scene.combo = 0
 
 func _on_MatchTimer_timeout():
   if Game.scene.phase == Game.PHASE_PLAYER || Game.scene.phase == Game.PHASE_ENEMY:

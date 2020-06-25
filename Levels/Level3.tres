@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+title = "intranet"
 kill_count = 10
 standard = 4
 moto = 0

@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+title = "firewall"
 kill_count = 8
 standard = 6
 moto = 0

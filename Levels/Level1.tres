@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+title = "border router"
 kill_count = 6
 standard = 6
 moto = 0
