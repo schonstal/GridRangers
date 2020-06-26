@@ -35,6 +35,10 @@ func _ready():
 
   EventBus.emit_signal("enemy_spawned", self)
 
+  if tile.alt_color:
+    sprite.texture = load("res://Tiles/Cops/%s/AltColor.png" % enemy_type)
+    tile.type = "AltCop"
+
   if !sleeping:
     animation.play("WakeUp")
 

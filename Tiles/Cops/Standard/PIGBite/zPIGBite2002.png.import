@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/zPIGBite2002.png-2e4d8c8f7d7971e61667d6c56e240b3c.stex"
+path="res://.import/zPIGBite2002.png-1dd1ab10ccb98f6324cd653714a2d0de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Standard/PIGBite/zPIGBite2002.png"
-dest_files=[ "res://.import/zPIGBite2002.png-2e4d8c8f7d7971e61667d6c56e240b3c.stex" ]
+source_file="res://Tiles/Cops/standard/PIGBite/zPIGBite2002.png"
+dest_files=[ "res://.import/zPIGBite2002.png-1dd1ab10ccb98f6324cd653714a2d0de.stex" ]
 
 [params]
 

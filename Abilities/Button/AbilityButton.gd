@@ -54,6 +54,7 @@ func activate():
     if active_ability.has_method("activate_at"):
       Game.scene.disable_input()
       EventBus.emit_signal("energy_spent", active_ability.energy_cost)
+      # EventBus.emit_signal("player_acted")
       active_ability.activate_at(Game.scene.players[color].grid_position)
       activate_sound.play()
       click_sound.play()

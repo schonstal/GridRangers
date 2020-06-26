@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AltColor.png-8a168f93c81b188c312a466fb530a928.stex"
+path="res://.import/AltColor.png-c93e7917ed6ac358a10759594f66be5c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Standard/AltColor.png"
-dest_files=[ "res://.import/AltColor.png-8a168f93c81b188c312a466fb530a928.stex" ]
+source_file="res://Tiles/Cops/standard/AltColor.png"
+dest_files=[ "res://.import/AltColor.png-c93e7917ed6ac358a10759594f66be5c.stex" ]
 
 [params]
 

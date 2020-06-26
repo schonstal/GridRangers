@@ -13,4 +13,4 @@ export(int) var standard_rate = 5
 export(int) var moto_rate = 0
 export(int) var shield_rate = 0
 
-export(float) var alt_color_chance = 0
+export(int) var alt_color_chance = 0

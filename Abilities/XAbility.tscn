@@ -5,7 +5,7 @@
 [ext_resource path="res://Abilities/X.gd" type="Script" id=3]
 
 [node name="X" instance=ExtResource( 2 )]
-cd_cost = 6
+cd_cost = 8
 energy_cost = 10
 description = [ "Attack tiles diagonally from the ranger" ]
 

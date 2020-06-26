@@ -11,6 +11,8 @@ var points_array = []
 var grid = null
 
 func generate_map(start):
+  points_array = []
+  obstacles = []
   grid = Game.scene.grid
   astar = AStar.new()
   var points = add_walkable_cells(start)

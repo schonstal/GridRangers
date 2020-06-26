@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PigIdle1004.png-c397247f14d4a0787b80c39afeebb545.stex"
+path="res://.import/PigIdle1004.png-9649702eaf3c750086f8fdb9b7b62ce9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Standard/PigIdle/PigIdle1004.png"
-dest_files=[ "res://.import/PigIdle1004.png-c397247f14d4a0787b80c39afeebb545.stex" ]
+source_file="res://Tiles/Cops/standard/PigIdle/PigIdle1004.png"
+dest_files=[ "res://.import/PigIdle1004.png-9649702eaf3c750086f8fdb9b7b62ce9.stex" ]
 
 [params]
 

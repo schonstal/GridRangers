@@ -19,6 +19,7 @@ var swap_intent = null
 var dragging = false
 var respawn_enemies = false
 var spawn_count = 0
+var enemy_spawn_count = 0
 
 onready var background = $Background
 onready var match_timer = $MatchTimer
@@ -163,6 +164,7 @@ func spawn_enemies():
   emit_signal("sequence_completed")
 
 func spawn_enemy(position, type):
+  enemy_spawn_count += 1
   var scene = Game.ENEMY_SCENES[type]
   var instance = scene.instance()
   instance.set_grid_position(position)
@@ -173,6 +175,9 @@ func spawn_enemy(position, type):
         tiles[position.x][position.y] = null
         return false
 
+  if Game.scene.current_level.alt_color_chance > 0 &&\
+     enemy_spawn_count % Game.scene.current_level.alt_color_chance == 0:
+    instance.alt_color = true
   instance.position = grid_to_pixel(instance.grid_position)
   instance.scale = Vector2(0, 0)
   call_deferred("add_child", instance)
@@ -483,6 +488,7 @@ func _input(event):
 
 func _on_level_completed():
   spawn_count = 0
+  enemy_spawn_count = 0
   for y in range(height - 1, -1, -1):
     for x in width:
       if tiles[x][y] != null && tiles[x][y].player == false:

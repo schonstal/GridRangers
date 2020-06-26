@@ -11,7 +11,7 @@ func _ready():
 func _on_coin_collected():
   animation.play("Increase")
 
-func _on_coins_spent():
+func _on_coins_spent(_count):
   animation.play("Increase")
 
 func _process(delta):

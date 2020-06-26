@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BikePIGIdle000000009.png-d2c54746f071996a2467eeb503e2e3b0.stex"
+path="res://.import/BikePIGIdle000000009.png-3c99bb16905aec48bdc1d8b8499cd288.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Moto/Frames/BikePIGIdle000000009.png"
-dest_files=[ "res://.import/BikePIGIdle000000009.png-d2c54746f071996a2467eeb503e2e3b0.stex" ]
+source_file="res://Tiles/Cops/moto/Frames/BikePIGIdle000000009.png"
+dest_files=[ "res://.import/BikePIGIdle000000009.png-3c99bb16905aec48bdc1d8b8499cd288.stex" ]
 
 [params]
 

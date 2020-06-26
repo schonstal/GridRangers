@@ -10,6 +10,7 @@ export var persistent = false
 
 var grid_position = Vector2()
 var previous_grid_position = Vector2()
+var alt_color = false
 
 var dragging = false
 var drag_offset = Vector2()

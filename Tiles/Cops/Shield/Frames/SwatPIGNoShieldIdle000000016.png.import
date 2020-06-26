@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SwatPIGNoShieldIdle000000016.png-1bf3172ab75de95793ccbac33d858714.stex"
+path="res://.import/SwatPIGNoShieldIdle000000016.png-adadb02fc1256d7668c8205d28d1bca5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Shield/Frames/SwatPIGNoShieldIdle000000016.png"
-dest_files=[ "res://.import/SwatPIGNoShieldIdle000000016.png-1bf3172ab75de95793ccbac33d858714.stex" ]
+source_file="res://Tiles/Cops/shield/Frames/SwatPIGNoShieldIdle000000016.png"
+dest_files=[ "res://.import/SwatPIGNoShieldIdle000000016.png-adadb02fc1256d7668c8205d28d1bca5.stex" ]
 
 [params]
 

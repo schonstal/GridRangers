@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/zSwatPigDeathFrame30.png-342deecd0990e994ddd936799a8eefcf.stex"
+path="res://.import/zSwatPigDeathFrame30.png-c6635e315c2799f41ad146fd785d0496.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Shield/Frames/zSwatPigDeathFrame30.png"
-dest_files=[ "res://.import/zSwatPigDeathFrame30.png-342deecd0990e994ddd936799a8eefcf.stex" ]
+source_file="res://Tiles/Cops/shield/Frames/zSwatPigDeathFrame30.png"
+dest_files=[ "res://.import/zSwatPigDeathFrame30.png-c6635e315c2799f41ad146fd785d0496.stex" ]
 
 [params]
 

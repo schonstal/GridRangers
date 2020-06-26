@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BikePIGAttack000000004.png-091d1d1c35d2993988591fa273dd76e5.stex"
+path="res://.import/BikePIGAttack000000004.png-c3d41fb1563ff3fee9b504e784c9963e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Moto/Frames/BikePIGAttack000000004.png"
-dest_files=[ "res://.import/BikePIGAttack000000004.png-091d1d1c35d2993988591fa273dd76e5.stex" ]
+source_file="res://Tiles/Cops/moto/Frames/BikePIGAttack000000004.png"
+dest_files=[ "res://.import/BikePIGAttack000000004.png-c3d41fb1563ff3fee9b504e784c9963e.stex" ]
 
 [params]
 

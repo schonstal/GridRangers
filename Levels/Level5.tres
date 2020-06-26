@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "border router"
+title = "cypher database"
 kill_count = 14
-standard = 4
-moto = 0
-shield = 2
-standard_rate = 5
-moto_rate = 23
+standard = 0
+moto = 2
+shield = 4
+standard_rate = 23
+moto_rate = 5
 shield_rate = 16
-alt_color_chance = 33.0
+alt_color_chance = 0

@@ -8,7 +8,6 @@ export var description = [
 
 export var revive = false
 
-onready var icon = $Icon
 onready var effect = $Effect
 
 func activate_at(position):

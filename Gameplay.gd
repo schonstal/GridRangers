@@ -25,6 +25,7 @@ var current_level setget ,get_current_level
 var enemy_count = 6
 
 var phase = Game.PHASE_NONE
+var game_over = false
 
 var players = {}
 
@@ -74,13 +75,10 @@ func _on_revive_ranger(player_color):
 func _on_player_died(player_color):
   players_alive[player_color] = false
 
-  var game_over = true
+  game_over = true
   for key in players_alive:
     if players_alive[key]:
       game_over = false
-
-  if game_over:
-    EventBus.emit_signal("game_over")
 
 func _on_player_acted():
   if phase == Game.PHASE_PLAYER:
@@ -96,6 +94,10 @@ func _on_level_completed():
     EventBus.emit_signal("game_over")
 
 func _on_turn_complete():
+  if game_over:
+    EventBus.emit_signal("game_over")
+    return
+
   if phase != Game.PHASE_NONE && kills >= kill_target:
     disable_input()
     phase = Game.PHASE_NONE

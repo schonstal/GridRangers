@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PigWakeUp0001.png-52b8f1e63da3e36ee408a958c00f47c2.stex"
+path="res://.import/PigWakeUp0001.png-afe1f62d3a33e9f24dd9ba5a1d535727.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/Cops/Standard/PIGWakeUp/PigWakeUp0001.png"
-dest_files=[ "res://.import/PigWakeUp0001.png-52b8f1e63da3e36ee408a958c00f47c2.stex" ]
+source_file="res://Tiles/Cops/standard/PIGWakeUp/PigWakeUp0001.png"
+dest_files=[ "res://.import/PigWakeUp0001.png-afe1f62d3a33e9f24dd9ba5a1d535727.stex" ]
 
 [params]
 
