@@ -7,6 +7,8 @@ var color = 'blue'
 
 onready var tween = $Tween
 onready var window = $'..'
+onready var activate_sound = $ActivateSound
+onready var click_sound = $ClickSound
 
 var active_ability = null
 
@@ -53,6 +55,8 @@ func activate():
       Game.scene.disable_input()
       EventBus.emit_signal("energy_spent", active_ability.energy_cost)
       active_ability.activate_at(Game.scene.players[color].grid_position)
+      activate_sound.play()
+      click_sound.play()
       # Game jam haxxx
       Game.scene.players[color].get_node("Brain").call_deferred("attack")
 

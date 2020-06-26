@@ -75,48 +75,60 @@ script = ExtResource( 25 )
 [node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
 stream = ExtResource( 23 )
 volume_db = -3.0
+bus = "SFX"
 
 [node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
 stream = ExtResource( 31 )
+bus = "SFX"
 
 [node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
 stream = ExtResource( 28 )
+bus = "SFX"
 
 [node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/standard"]
 stream = ExtResource( 28 )
 pitch_scale = 1.5
+bus = "SFX"
 
 [node name="shield" type="Node" parent="SFXLimiter"]
 
 [node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
 stream = ExtResource( 29 )
 volume_db = -3.0
+bus = "SFX"
 
 [node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
 stream = ExtResource( 31 )
+bus = "SFX"
 
 [node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
 stream = ExtResource( 33 )
+bus = "SFX"
 
 [node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/shield"]
 stream = ExtResource( 28 )
 pitch_scale = 1.5
+bus = "SFX"
 
 [node name="moto" type="Node" parent="SFXLimiter"]
 
 [node name="Die" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
 stream = ExtResource( 30 )
 volume_db = -3.0
+bus = "SFX"
 
 [node name="Wake" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
 stream = ExtResource( 31 )
+bus = "SFX"
 
 [node name="Move" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
 stream = ExtResource( 32 )
+bus = "SFX"
 
 [node name="Attack" type="AudioStreamPlayer" parent="SFXLimiter/moto"]
 stream = ExtResource( 28 )
 pitch_scale = 1.5
+bus = "SFX"
 
 [node name="PhaseTransition" parent="." instance=ExtResource( 3 )]
 

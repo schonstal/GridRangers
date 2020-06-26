@@ -5,7 +5,7 @@ resource_name = "LowPassFilter"
 
 [sub_resource type="AudioEffectPitchShift" id=2]
 resource_name = "PitchShift"
-pitch_scale = 0.5
+pitch_scale = 1.2
 
 [resource]
 bus/0/volume_db = -0.030508
@@ -28,6 +28,6 @@ bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
-bus/3/send = "SFX"
+bus/3/send = "Master"
 bus/3/effect/0/effect = SubResource( 2 )
 bus/3/effect/0/enabled = false

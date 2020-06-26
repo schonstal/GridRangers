@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "firewall"
+title = "demilitarized zone"
 kill_count = 8
 standard = 6
 moto = 0
 shield = 0
-standard_rate = 5
+standard_rate = 6
 moto_rate = 0
-shield_rate = 16
+shield_rate = 15
 alt_color_chance = 0.0

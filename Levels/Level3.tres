@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-title = "intranet"
+title = "Firewall"
 kill_count = 10
-standard = 4
+standard = 3
 moto = 0
-shield = 2
+shield = 3
 standard_rate = 5
 moto_rate = 23
 shield_rate = 16

@@ -5,11 +5,11 @@
 [resource]
 script = ExtResource( 1 )
 title = "border router"
-kill_count = 12
+kill_count = 14
 standard = 0
 moto = 4
 shield = 2
-standard_rate = 5
-moto_rate = 19
-shield_rate = 13
-alt_color_chance = 0.0
+standard_rate = 19
+moto_rate = 13
+shield_rate = 5
+alt_color_chance = 50.0
