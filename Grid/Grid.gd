@@ -504,7 +504,10 @@ func _on_level_completed():
   teleport_rangers()
   yield(self, "sequence_completed")
 
-  EventBus.emit_signal("spawn_shop")
+  if Game.scene.level_index < Game.scene.levels.size():
+    EventBus.emit_signal("spawn_shop")
+  else:
+    EventBus.emit_signal("victory")
 
   call_deferred("fade_out")
   yield(self, "sequence_completed")

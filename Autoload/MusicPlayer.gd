@@ -64,6 +64,7 @@ func fade_filter(duration):
   yield(filter_tween, "tween_completed")
   disable_filter()
 
+# Please forgive me, this is a game jam
 func fade(mode, duration):
   if mode == "ambient":
     ambient.play()
@@ -114,6 +115,30 @@ func fade(mode, duration):
     yield(fade_tween, "tween_completed")
     ambient.stop()
     title.stop()
+  if mode == "title":
+    title.play()
+    fade_tween.interpolate_property(
+        title,
+        "volume_db",
+        -80,
+        0,
+        duration,
+        Tween.TRANS_QUAD,
+        Tween.EASE_IN)
+
+    fade_tween.interpolate_property(
+        big_band,
+        "volume_db",
+        -6,
+        -80,
+        duration,
+        Tween.TRANS_QUAD,
+        Tween.EASE_IN)
+
+    fade_tween.start()
+    yield(fade_tween, "tween_completed")
+    big_band.stop()
+    ambient.stop()
   else:
     fade_tween.interpolate_property(
       title,

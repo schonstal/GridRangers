@@ -15,7 +15,7 @@ func _on_RestartButton_pressed():
   EventBus.emit_signal("restart_game")
   
 func _on_QuitButton_pressed():
-  EventBus.emit_signal("quit_game")
+  Game.return_to_title()
   
 func _on_game_over():
   timer.start()

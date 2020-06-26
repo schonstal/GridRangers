@@ -26,6 +26,7 @@ var enemy_count = 6
 
 var phase = Game.PHASE_NONE
 var game_over = false
+var victory = false
 
 var players = {}
 
@@ -93,8 +94,7 @@ func _on_player_acted():
 func _on_level_completed():
   level_index += 1
   if level_index >= levels.size():
-    # Should be 'you won' but for now...
-    EventBus.emit_signal("game_over")
+    victory = true
 
 func _on_turn_complete():
   if game_over:

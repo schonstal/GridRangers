@@ -14,6 +14,7 @@ func _on_AppearTimer_timeout():
   window_appear.appear()
 
 func _on_PlayButton_pressed():
+  MusicPlayer.fade("none", 0.5)
   EventBus.emit_signal("restart_game")
   
 func _on_QuitButton_pressed():

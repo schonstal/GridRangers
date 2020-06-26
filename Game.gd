@@ -22,6 +22,10 @@ func _ready():
   randomize()
   Overlay.connect("fade_complete", self, "_on_Overlay_fade_complete")
   EventBus.connect("restart_game", self, "_on_restart_game")
+  EventBus.connect("quit_game", self, "_on_quit_game")
+
+func _on_quit_game():
+  get_tree().quit()
 
 func _on_restart_game():
   Game.reset()
@@ -31,6 +35,10 @@ func initialize():
 
 func reset():
   Game.change_scene("res://Gameplay.tscn")
+
+func return_to_title():
+  MusicPlayer.fade("title", 0.5)
+  Game.change_scene("res://UI/TitleScreen.tscn")
 
 func change_scene(scene):
   target_scene = scene

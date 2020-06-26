@@ -1,0 +1,191 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://UI/YouWin/Victory.gd" type="Script" id=1]
+[ext_resource path="res://UI/YouWin/YouWonGameWindow.png" type="Texture" id=2]
+[ext_resource path="res://UI/YouWin/OKButton.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=4]
+[ext_resource path="res://UI/YouWin/Airhorn0001.png" type="Texture" id=5]
+[ext_resource path="res://UI/YouWin/VictoryWindow.gd" type="Script" id=6]
+[ext_resource path="res://UI/WindowButton.gd" type="Script" id=7]
+[ext_resource path="res://UI/YouWin/Winnings.gd" type="Script" id=8]
+[ext_resource path="res://sfx/XP_Error_SFX.ogg" type="AudioStream" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Click"
+tracks/0/type = "value"
+tracks/0/path = NodePath("QuitButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("QuitButton_2x1:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 81.8082, 39.5425 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "GoNuts"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.5 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "GoNuts"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.5 ]
+}
+
+[node name="Victory" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="VictoryWindow" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 2 )
+script = ExtResource( 6 )
+
+[node name="RestartButton" type="Area2D" parent="VictoryWindow"]
+position = Vector2( 0, 180 )
+script = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VictoryWindow/RestartButton"]
+anims/Click = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+
+[node name="QuitButton_2x1" type="Sprite" parent="VictoryWindow/RestartButton"]
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VictoryWindow/RestartButton"]
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="VictoryWindow"]
+one_shot = true
+
+[node name="NotAJoke" type="Label" parent="VictoryWindow"]
+margin_left = -170.937
+margin_top = 3.15387
+margin_right = 169.063
+margin_bottom = 56.1539
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.278431, 0.278431, 0.278431, 1 )
+text = "It is not a joke.
+You beat the game :)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Winnings" type="Label" parent="VictoryWindow"]
+margin_left = -189.23
+margin_top = 88.9378
+margin_right = 184.77
+margin_bottom = 141.938
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.278431, 0.278431, 0.278431, 1 )
+text = "Your winnings: 50 CDs"
+align = 1
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Airhorn0002" type="Sprite" parent="."]
+position = Vector2( 805.902, 471.228 )
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Airhorn0002"]
+autoplay = "GoNuts"
+playback_speed = 1.5
+anims/GoNuts = SubResource( 4 )
+
+[node name="Airhorn0001" type="Sprite" parent="."]
+position = Vector2( 1108.67, 473.12 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Airhorn0001"]
+autoplay = "GoNuts"
+playback_speed = 1.5
+anims/GoNuts = SubResource( 5 )
+
+[node name="VictorySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )

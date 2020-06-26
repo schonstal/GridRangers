@@ -28,7 +28,6 @@ func _on_input_event(_viewport, event, _shape_id):
       if event.pressed:
         clicked = true
         click_sound.play()
-        MusicPlayer.fade("title", 0.5)
         animation.play("Click")
       if !event.pressed && clicked:
         animation.play("Idle")
