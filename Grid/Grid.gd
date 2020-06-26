@@ -75,7 +75,7 @@ func fade_in():
     0.5,
     Tween.TRANS_LINEAR,
     Tween.EASE_OUT,
-    1.5
+    2.0
    )
   fade_tween.start()
   yield(fade_tween, "tween_completed")
