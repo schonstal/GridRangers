@@ -184,18 +184,21 @@ func spawn_enemy(position, type):
   return instance
 
 func spawn_rangers():
-  var i = 0
+  var positions = {
+    'red': Vector2(1, 6),
+    'blue': Vector2(3, 6),
+    'yellow': Vector2(5, 6)
+  }
   for key in rangers:
     if !Game.scene.players_alive[key]:
       continue
     var instance = rangers[key].instance()
-    instance.set_grid_position(Vector2(2 * i + 1, height - 2))
+    instance.set_grid_position(positions[key])
     tiles[instance.grid_position.x][instance.grid_position.y] = instance
     instance.position = grid_to_pixel(instance.grid_position)
     instance.scale = Vector2(0.8, 0.8)
     Game.scene.players[key] = instance
     add_child(instance)
-    i += 1
 
   emit_signal("sequence_completed")
 
