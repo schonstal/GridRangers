@@ -80,6 +80,9 @@ func _on_player_died(player_color):
     if players_alive[key]:
       game_over = false
 
+  if game_over:
+    EventBus.emit_signal("game_over")
+
 func _on_player_acted():
   if phase == Game.PHASE_PLAYER:
     player_moves -= 1
@@ -95,7 +98,6 @@ func _on_level_completed():
 
 func _on_turn_complete():
   if game_over:
-    EventBus.emit_signal("game_over")
     return
 
   if phase != Game.PHASE_NONE && kills >= kill_target:
