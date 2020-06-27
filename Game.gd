@@ -13,9 +13,9 @@ var PHASE_NONE = "none"
 var target_scene
 
 var ENEMY_SCENES = {
-  'standard': preload("res://Tiles/Cops/Standard/StandardCop.tscn"),
-  'moto': preload("res://Tiles/Cops/Moto/MotoCop.tscn"),
-  'shield': preload("res://Tiles/Cops/Shield/ShieldCop.tscn")
+  'standard': preload("res://Tiles/Cops/standard/StandardCop.tscn"),
+  'moto': preload("res://Tiles/Cops/moto/MotoCop.tscn"),
+  'shield': preload("res://Tiles/Cops/shield/ShieldCop.tscn")
 }
 
 func _ready():
