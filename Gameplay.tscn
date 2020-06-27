@@ -137,6 +137,7 @@ pitch_scale = 1.5
 bus = "SFX"
 
 [node name="PhaseTransition" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="TurnCounter" parent="." instance=ExtResource( 26 )]
 position = Vector2( 196.29, 655.111 )

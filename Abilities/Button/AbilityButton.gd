@@ -83,7 +83,7 @@ func update_active():
       active_ability.scale = Vector2(1, 1)
 
 func blur():
-  if active_ability == null:
+  if active_ability == null || !is_instance_valid(active_ability):
     return
   tween.stop_all()
   tween.interpolate_property(
