@@ -102,16 +102,23 @@ func populate_grid():
   respawn_enemies = false
 
   clear_grid()
+
   call_deferred("fade_in")
   yield(self, "sequence_completed")
+
   call_deferred("spawn_rangers")
   yield(self, "sequence_completed")
-  call_deferred("spawn_enemies")
-  yield(self, "sequence_completed")
+
+  if !Game.tutorial:
+    call_deferred("spawn_enemies")
+    yield(self, "sequence_completed")
+
   call_deferred("spawn_tiles")
   yield(self, "sequence_completed")
+
   call_deferred("teleport_rangers")
   yield(self, "sequence_completed")
+
   sequence_timer.start(0.25)
   yield(sequence_timer, "timeout")
 
@@ -239,6 +246,9 @@ func spawn_tiles():
   emit_signal("sequence_completed")
 
 func spawn_tile(x, y):
+  if Game.tutorial:
+    return spawn_tutorial_tile(x, y)
+
   var shuffled = tile_scenes.duplicate()
   shuffled.shuffle()
 
@@ -260,6 +270,16 @@ func spawn_tile(x, y):
   add_child(instance)
 
   return instance
+
+func spawn_tutorial_tile(x, y):
+
+  tiles[x][y] = Game.TUTORIAL_SCENES[Game.TUTORIAL_LEVEL[y][x]].instance()
+  tiles[x][y].set_grid_position(Vector2(x, y))
+  tiles[x][y].position = grid_to_pixel(Vector2(x, y))
+
+  add_child(tiles[x][y])
+
+  return tiles[x][y]
 
 func execute_match():
   for x in width:

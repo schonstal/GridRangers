@@ -18,6 +18,8 @@
 [ext_resource path="res://Grid/StageNumber.gd" type="Script" id=16]
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=17]
 
+
+
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
 shader_param/alpha = 0.0

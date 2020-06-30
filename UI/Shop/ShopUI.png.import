@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/ShopUI.png-e2fe758701cf23d6db5f93c1026263cc.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://UI/Shop/ShopUI.png"
+dest_files=[ "res://.import/ShopUI.png-e2fe758701cf23d6db5f93c1026263cc.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/FilmGrain/FilmGrain.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/FilmGrain/FilmGrain.shader" type="Shader" id=2]
+
+
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/screen_size = Vector2( 1920, 1080 )
+shader_param/enabled = true
+shader_param/grain_amount = 0.05
+shader_param/colored = false
+shader_param/color_amount = 0.6
+shader_param/grain_size = 1.6
+shader_param/lum_amount = 1.0
+shader_param/time = 0.0
+
+[node name="FilmGrain" type="BackBufferCopy"]
+z_index = 102
+rect = Rect2( 0, 0, 1920, 1080 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FilmGrain" type="ColorRect" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.00012207
+color = Color( 0.764706, 0.0784314, 0.0784314, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

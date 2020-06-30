@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/Shop/K33p3rMsg.gd" type="Script" id=2]
+
+[node name="K33p3rMsg" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Username" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.929412, 0, 0.54902, 1 )
+text = "K33p3r:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="."]
+margin_left = 120.582
+margin_right = 375.582
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "What R U buyin?"
+__meta__ = {
+"_edit_use_anchors_": false
+}

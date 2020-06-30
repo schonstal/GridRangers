@@ -1,0 +1,218 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Scenes/TitleScreen/Mall.png" type="Texture" id=1]
+[ext_resource path="res://Shaders/FilmGrain/FilmGrain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shaders/Chromatic/Chromatic.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/TitleScreen/TitleLogo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/MainMenuWindow/MainMenuWindow.png" type="Texture" id=5]
+[ext_resource path="res://UI/Windows/WindowButton.gd" type="Script" id=6]
+[ext_resource path="res://UI/MainMenuWindow/PlayButton_2x1.png" type="Texture" id=7]
+[ext_resource path="res://UI/ErrorWindow/QuitButton_2x1.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/TitleScreen/TitleScreen.gd" type="Script" id=9]
+[ext_resource path="res://UI/MainMenuWindow.gd" type="Script" id=10]
+[ext_resource path="res://Shaders/GlitchSprite/GlitchSprite.gd" type="Script" id=11]
+[ext_resource path="res://Shaders/GlitchSprite/SpriteGlitch.shader" type="Shader" id=12]
+[ext_resource path="res://UI/Windows/WindowAppear.tscn" type="PackedScene" id=13]
+
+
+
+
+
+
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 12 )
+shader_param/time = 0.0
+shader_param/strength = 0.5
+shader_param/jitter_offset = 12.0
+shader_param/color_strength = 0.15
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 105.113, 51.1167 )
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=9]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("QuitButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("QuitButton_2x1:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 105.113, 51.1167 )
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 11 )
+
+[node name="GridRangers" parent="." instance=ExtResource( 4 )]
+position = Vector2( 960, 288.107 )
+
+[node name="Chromatic" parent="." instance=ExtResource( 3 )]
+strength = 0.25
+
+[node name="FilmGrain" parent="." instance=ExtResource( 2 )]
+
+[node name="MainMenuWindow" type="Sprite" parent="."]
+visible = false
+position = Vector2( 960, 806.597 )
+texture = ExtResource( 5 )
+script = ExtResource( 10 )
+
+[node name="PlayButton" type="Area2D" parent="MainMenuWindow"]
+position = Vector2( 0, -86.4604 )
+script = ExtResource( 6 )
+
+[node name="RestartButton_2x1" type="Sprite" parent="MainMenuWindow/PlayButton"]
+texture = ExtResource( 7 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/PlayButton"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/PlayButton"]
+anims/Click = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+
+[node name="TutorialButton" type="Area2D" parent="MainMenuWindow"]
+position = Vector2( 0, 25.176 )
+script = ExtResource( 6 )
+
+[node name="RestartButton_2x1" type="Sprite" parent="MainMenuWindow/TutorialButton"]
+texture = ExtResource( 7 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/TutorialButton"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/TutorialButton"]
+anims/Click = SubResource( 8 )
+anims/Idle = SubResource( 9 )
+
+[node name="QuitButton" type="Area2D" parent="MainMenuWindow"]
+position = Vector2( 0, 134.484 )
+script = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/QuitButton"]
+anims/Click = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+
+[node name="QuitButton_2x1" type="Sprite" parent="MainMenuWindow/QuitButton"]
+texture = ExtResource( 8 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/QuitButton"]
+visible = false
+shape = SubResource( 7 )
+
+[node name="WindowAppear" parent="MainMenuWindow" instance=ExtResource( 13 )]
+
+[node name="AppearTimer" type="Timer" parent="MainMenuWindow"]
+wait_time = 2.0
+one_shot = true
+autostart = true

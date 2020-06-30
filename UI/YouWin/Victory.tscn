@@ -6,9 +6,10 @@
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=4]
 [ext_resource path="res://UI/YouWin/Airhorn0001.png" type="Texture" id=5]
 [ext_resource path="res://UI/YouWin/VictoryWindow.gd" type="Script" id=6]
-[ext_resource path="res://UI/WindowButton.gd" type="Script" id=7]
+[ext_resource path="res://UI/Windows/WindowButton.gd" type="Script" id=7]
 [ext_resource path="res://UI/YouWin/Winnings.gd" type="Script" id=8]
 [ext_resource path="res://sfx/XP_Error_SFX.ogg" type="AudioStream" id=10]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Click"

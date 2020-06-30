@@ -21,14 +21,14 @@ _global_script_class_icons={
 [application]
 
 config/name="MatchThree"
-run/main_scene="res://UI/TitleScreen.tscn"
+run/main_scene="res://Scenes/TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Game="*res://Game.gd"
+Game="*res://Autoload/Game.gd"
 EventBus="*res://Autoload/EventBus.gd"
-ActionQueue="*res://ActionQueue.gd"
+ActionQueue="*res://Autoload/ActionQueue.gd"
 MusicPlayer="*res://Autoload/MusicPlayer.tscn"
 Overlay="*res://Autoload/Overlay.tscn"
 

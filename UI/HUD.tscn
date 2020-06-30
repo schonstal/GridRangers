@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Screen/GameFrameUI.png" type="Texture" id=1]
-[ext_resource path="res://UI/CDCount.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UI/PIGCount.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/Window/RangerWindow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/EnergyUI/Energy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Counters/CDCount.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/Counters/PIGCount.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/RangerWindow/RangerWindow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/EnergyBar/Energy.tscn" type="PackedScene" id=6]
 
 [node name="HUD" type="Node2D"]
 

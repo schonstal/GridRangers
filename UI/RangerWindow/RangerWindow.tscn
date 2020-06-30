@@ -1,0 +1,174 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Shaders/GlitchSprite/SpriteGlitch.shader" type="Shader" id=1]
+[ext_resource path="res://UI/RangerWindow/Bg.png" type="Texture" id=2]
+[ext_resource path="res://UI/RangerWindow/Frames.png" type="Texture" id=3]
+[ext_resource path="res://UI/RangerWindow/Heads.png" type="Texture" id=4]
+[ext_resource path="res://Abilities/Button/AbilityButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Error.gd" type="Script" id=6]
+[ext_resource path="res://UI/RangerWindow/RangerWindow.gd" type="Script" id=7]
+[ext_resource path="res://UI/Windows/WindowAppear.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Shaders/GlitchSprite/GlitchSprite.gd" type="Script" id=9]
+
+
+
+
+
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 1 )
+shader_param/time = 0.0
+shader_param/strength = 0.0
+shader_param/jitter_offset = 6.0
+shader_param/color_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/time = 0.0
+shader_param/strength = 10.0
+shader_param/jitter_offset = 6.0
+shader_param/color_strength = 0.1
+
+[sub_resource type="Animation" id=2]
+resource_name = "Die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bg:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Error:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Error:material:shader_param/strength")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 6.9644, 1 ),
+"update": 0,
+"values": [ 10.0, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AbilityButton:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Revive"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bg:material:shader_param/strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 6.49802, 1 ),
+"update": 0,
+"values": [ 10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bg:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Error:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="RangerWindow" type="Node2D"]
+position = Vector2( 157, 155 )
+script = ExtResource( 7 )
+
+[node name="Bg" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 0, 19.1606 )
+texture = ExtResource( 2 )
+hframes = 4
+script = ExtResource( 9 )
+
+[node name="Error" type="Sprite" parent="."]
+visible = false
+material = SubResource( 1 )
+position = Vector2( 0, 19.1606 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 3
+script = ExtResource( 6 )
+
+[node name="AbilityButton" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( -1.55322, 21.4236 )
+collision_layer = 2
+
+[node name="Head" type="Sprite" parent="."]
+position = Vector2( 78.4387, 77.2412 )
+z_index = 11
+texture = ExtResource( 4 )
+hframes = 4
+frame = 3
+
+[node name="Frame" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 2 )
+anims/Revive = SubResource( 3 )
+
+[node name="WindowAppear" parent="." instance=ExtResource( 8 )]

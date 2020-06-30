@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Overlay.gd" type="Script" id=1]
+[ext_resource path="res://Autoload/Overlay.gd" type="Script" id=1]
 [ext_resource path="res://Autoload/OverlayControl.gd" type="Script" id=2]
+
 
 [node name="Overlay" type="Node2D"]
 z_index = 101

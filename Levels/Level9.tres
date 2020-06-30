@@ -10,6 +10,6 @@ standard = 0
 moto = 2
 shield = 4
 standard_rate = 9
-moto_rate = 13
+moto_rate = 17
 shield_rate = 5
 alt_color_chance = 2
