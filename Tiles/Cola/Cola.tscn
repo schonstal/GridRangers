@@ -15,6 +15,6 @@ script = ExtResource( 3 )
 
 [node name="Label" parent="ToolTip" index="0"]
 margin_right = 413.607
-text = "Gain an extra move
+text = "Gain extra moves
 this turn unless the
 MOVES meter is full"
