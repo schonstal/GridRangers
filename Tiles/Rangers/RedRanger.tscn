@@ -22,4 +22,6 @@ idle_offset = Vector2( 14, 9 )
 texture = ExtResource( 3 )
 
 [node name="Label" parent="ToolTip" index="0"]
+margin_right = 345.607
+margin_bottom = 41.979
 text = "Magenta Ranger"

@@ -14,6 +14,7 @@ texture = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Label" parent="ToolTip" index="0"]
-text = "Gain extra moves
+margin_right = 413.607
+text = "Gain an extra move
 this turn unless the
 MOVES meter is full"

@@ -17,7 +17,7 @@ func _process(delta):
     return
 
   var mouse_position = get_viewport().get_mouse_position()
-  if (mouse_position - last_position).length() > 0.5:
+  if (mouse_position - last_position).length() > 3.0:
     hovering = false
     visible = false
     show_time = 0
