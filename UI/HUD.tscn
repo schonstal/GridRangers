@@ -6,7 +6,6 @@
 [ext_resource path="res://UI/Window/RangerWindow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/EnergyUI/Energy.tscn" type="PackedScene" id=6]
 
-
 [node name="HUD" type="Node2D"]
 
 [node name="Window" type="Sprite" parent="."]

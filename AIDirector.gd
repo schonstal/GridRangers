@@ -24,7 +24,11 @@ func execute_turns():
 # is_instance_valid fails sometimes, it might be
 # repopulated by now with a random object
 func is_instance_enemy(enemy):
-  return enemy != null && is_instance_valid(enemy) && enemy.get("brain") != null && !enemy.get("dead")
+  return enemy != null &&\
+         is_instance_valid(enemy) &&\
+         enemy.get("enemy") &&\
+         enemy.get("brain") != null &&\
+         !enemy.get("dead")
 
 func _on_begin_phase(phase):
   if phase == Game.PHASE_ENEMY:

@@ -137,3 +137,7 @@ anims/WakeUp = SubResource( 5 )
 
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "S.W.I.N.E.
+Standard Unit"

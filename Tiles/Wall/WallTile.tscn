@@ -34,3 +34,8 @@ script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/Break = SubResource( 1 )
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "Enemies cannot pass
+through this tile
+without breaking it"

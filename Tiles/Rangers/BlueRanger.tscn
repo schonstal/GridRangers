@@ -5,8 +5,10 @@
 [node name="BlueRanger" instance=ExtResource( 1 )]
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 0, 0 )
 frame = 0
 
 [node name="Brain" parent="." index="4"]
 attack_offset = Vector2( -67, -56 )
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "Cyan Ranger"

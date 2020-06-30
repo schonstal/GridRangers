@@ -187,3 +187,7 @@ anims/WakeUp = SubResource( 5 )
 script = ExtResource( 3 )
 enemy_type = "moto"
 turns = 2
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "S.W.I.N.E.
+Wheeled Unit"

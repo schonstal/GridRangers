@@ -39,7 +39,6 @@ onready var appear_tween = $AppearTween
 onready var brain = $Brain
 
 func _ready():
-  connect("input_event", self, "_on_Tile_input_event")
   move_tween.connect("tween_completed", self, "_on_MoveTween_tween_completed")
   fade_tween.connect("tween_completed", self, "_on_FadeTween_tween_completed")
 

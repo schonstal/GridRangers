@@ -20,3 +20,6 @@ idle_offset = Vector2( 14, 9 )
 
 [node name="Teleport" parent="." index="6"]
 texture = ExtResource( 3 )
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "Magenta Ranger"

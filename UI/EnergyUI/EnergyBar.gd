@@ -3,6 +3,7 @@ extends Sprite
 export var pixel_width = 393
 
 onready var tween = $Tween
+onready var label = $Label
 
 func _ready():
   EventBus.connect("energy_collected", self, "_on_energy_collected")
@@ -11,9 +12,11 @@ func _ready():
 
 func _on_energy_collected():
   update_width()
+  label.text = "%d" % Game.scene.energy
 
 func _on_energy_spent(_amount):
   update_width()
+  label.text = "%d" % Game.scene.energy
 
 func update_width():
   tween.stop_all()

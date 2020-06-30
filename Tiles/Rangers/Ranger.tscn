@@ -239,3 +239,7 @@ frame = 6
 playback_speed = 1.5
 anims/TeleportIn = SubResource( 3 )
 anims/TeleportOut = SubResource( 4 )
+
+[node name="Label" parent="ToolTip" index="0"]
+text = "Swap with an enemy
+to destroy it"

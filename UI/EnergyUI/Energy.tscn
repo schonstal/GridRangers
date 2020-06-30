@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/EnergyUI/EnergyUI.png" type="Texture" id=1]
 [ext_resource path="res://UI/EnergyUI/LoadingCube.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/EnergyUI/EnergyBar.gd" type="Script" id=4]
 [ext_resource path="res://UI/EnergyUI/Energy.gd" type="Script" id=5]
 [ext_resource path="res://UI/WindowAppear.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Spin"
@@ -50,3 +51,16 @@ region_rect = Rect2( 0, 0, 393, 57 )
 script = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="EnergyBar"]
+
+[node name="Label" type="Label" parent="EnergyBar"]
+margin_left = 46.453
+margin_top = -50.1004
+margin_right = 86.453
+margin_bottom = -25.1004
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.654902, 0.647059, 0.654902, 1 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
