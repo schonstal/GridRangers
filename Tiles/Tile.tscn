@@ -2,23 +2,12 @@
 
 [ext_resource path="res://Tiles/Tile.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Grid.png" type="Texture" id=2]
-[ext_resource path="res://Tiles/ToolTip.gd" type="Script" id=3]
+[ext_resource path="res://UI/ToolTip/ToolTip.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=4]
+[ext_resource path="res://UI/ToolTip/ToolTipWindow.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.121569, 0.0980392, 0.262745, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.639216, 0.145098, 0.407843, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [node name="Tile" type="Area2D"]
 script = ExtResource( 1 )
@@ -37,19 +26,22 @@ shape = SubResource( 1 )
 [node name="AppearTween" type="Tween" parent="."]
 
 [node name="ToolTip" type="Node2D" parent="."]
+visible = false
 scale = Vector2( 1.25, 1.25 )
 z_index = 99
 
+[node name="Background" type="Sprite" parent="ToolTip"]
+position = Vector2( 273.014, -5.41389 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 5 )
+
 [node name="Label" type="Label" parent="ToolTip"]
-visible = false
 margin_left = 69.6069
 margin_top = -43.021
 margin_right = 469.607
 margin_bottom = 56.979
-custom_styles/normal = SubResource( 2 )
 custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color = Color( 0.894118, 0.666667, 0.521569, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Gain extra moves
 on the turn you 
 match this tile"

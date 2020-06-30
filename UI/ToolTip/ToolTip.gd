@@ -11,6 +11,7 @@ var last_position = Vector2(0, 0)
 
 func _ready():
   tile.connect("input_event", self, "_on_Tile_input_event")
+  container.visible = false
   
 func _process(delta):
   if !hovering:
@@ -19,13 +20,13 @@ func _process(delta):
   var mouse_position = get_viewport().get_mouse_position()
   if (mouse_position - last_position).length() > 3.0:
     hovering = false
-    visible = false
+    container.visible = false
     show_time = 0
     return
 
   show_time += delta
   if show_time >= idle_time:
-    visible = true
+    container.visible = true
 
 func _on_Tile_input_event(_vp, event, _idx):
   if !Game.scene.player_control:
@@ -38,4 +39,4 @@ func _on_Tile_input_event(_vp, event, _idx):
     elif event.button_index == BUTTON_LEFT and !event.pressed && hovering:
       hovering = false
       show_time = 0
-      visible = false
+      container.visible = false
