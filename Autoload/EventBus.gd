@@ -41,3 +41,5 @@ signal victory
 signal play_sound(category, sound)
 
 signal turns_spent(amount)
+
+signal highlight_tile(position)

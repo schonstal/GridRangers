@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PigWakeUp0005.png-d6ca30a9ebbe9df1fecc1b7512e182d4.stex"
+path="res://.import/TutorialWindow.png-18d1852d170f0ab347986d971adfc80d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FirstBatch/PigWakeUp0005.png"
-dest_files=[ "res://.import/PigWakeUp0005.png-d6ca30a9ebbe9df1fecc1b7512e182d4.stex" ]
+source_file="res://UI/Tutorial/TutorialWindow.png"
+dest_files=[ "res://.import/TutorialWindow.png-18d1852d170f0ab347986d971adfc80d.stex" ]
 
 [params]
 

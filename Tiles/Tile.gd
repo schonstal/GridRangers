@@ -22,6 +22,7 @@ var min_move = Vector2(128, 128)
 
 var matched = false
 var awake = false
+var highlighted = false
 
 var dead setget ,get_dead
 
@@ -41,6 +42,8 @@ onready var brain = $Brain
 func _ready():
   move_tween.connect("tween_completed", self, "_on_MoveTween_tween_completed")
   fade_tween.connect("tween_completed", self, "_on_FadeTween_tween_completed")
+  EventBus.connect("highlight_tile", self, "_on_highlight_tile")
+  EventBus.connect("player_acted", self, "_on_player_acted")
 
 func _process(delta):
   if dragging:
@@ -163,3 +166,12 @@ func _on_MoveTween_tween_completed(_a, _b):
 func _on_FadeTween_tween_completed(_a, _b):
   if !persistent:
     queue_free()
+
+func _on_highlight_tile(highlight_position):
+  if grid_position == highlight_position:
+    z_index = 91
+    highlighted = true
+
+func _on_player_acted():
+  z_index = 0
+  highlighted = false

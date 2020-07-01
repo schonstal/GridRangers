@@ -1,0 +1,250 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/Backdrop.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/Tutorial/TutorialWindow.png" type="Texture" id=3]
+[ext_resource path="res://UI/Tutorial/Finger.png" type="Texture" id=4]
+[ext_resource path="res://UI/Tutorial/Tutorial.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "swipe"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2, 2.2, 2.3, 2.5 ),
+"transitions": PoolRealArray( 0.0206173, 0.406126, 0.378929, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 526.507, 83.8884 ), Vector2( 526.507, 83.8884 ), Vector2( 654.507, 83.888 ), Vector2( 654.507, 83.888 ), Vector2( 654.507, 83.888 ), Vector2( 654.507, 83.888 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6, 1.9, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "swipe"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 0.535887, 0.378929, 0.378929 ),
+"update": 0,
+"values": [ Vector2( 990, -352.416 ), Vector2( 990, -352.416 ), Vector2( 990, -480.416 ), Vector2( 990, -480.416 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6, 1.9, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "swipe"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 0.535887, 0.378929, 0.378929 ),
+"update": 0,
+"values": [ Vector2( 900, 720 ), Vector2( 900, 720 ), Vector2( 900, 848 ), Vector2( 900, 848 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6, 1.9, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Tutorial" type="Node2D"]
+z_index = 90
+script = ExtResource( 5 )
+
+[node name="Backdrop" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0, 0, 0, 0.701961 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Swap" type="Node2D" parent="."]
+visible = false
+position = Vector2( 693.777, 187.562 )
+
+[node name="Finger" type="Sprite" parent="Swap"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 526.507, 83.8884 )
+scale = Vector2( 0.1, 0.1 )
+z_index = 92
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Swap/Finger"]
+autoplay = "swipe"
+playback_speed = 0.6
+anims/swipe = SubResource( 1 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Swap"]
+margin_right = 440.0
+margin_bottom = 250.0
+texture = ExtResource( 3 )
+patch_margin_left = 17
+patch_margin_top = 47
+patch_margin_right = 23
+patch_margin_bottom = 21
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Swap"]
+margin_left = 19.0
+margin_top = 54.0
+margin_right = 416.0
+margin_bottom = 278.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Drag a tile to swap it with another tile.
+
+If 3 or more alike tiles are lined up, it counts as a match."
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Moves" type="Node2D" parent="."]
+visible = false
+position = Vector2( 103.674, 608.354 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Moves"]
+margin_right = 440.0
+margin_bottom = 300.0
+texture = ExtResource( 3 )
+patch_margin_left = 17
+patch_margin_top = 47
+patch_margin_right = 23
+patch_margin_bottom = 21
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Moves"]
+margin_left = 19.0
+margin_top = 54.0
+margin_right = 416.0
+margin_bottom = 354.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Each tile has different effects. You can check the effects at any time by clicking and holding on a tile.
+
+That tile earned you 2 extra moves this turn.
+
+"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Finger" type="Sprite" parent="Moves"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 990, -352.416 )
+scale = Vector2( 0.1, 0.1 )
+z_index = 92
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Moves/Finger"]
+autoplay = "swipe"
+playback_speed = 0.6
+anims/swipe = SubResource( 2 )
+
+[node name="Pig" type="Node2D" parent="."]
+visible = false
+position = Vector2( 309.372, 60.7939 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Pig"]
+margin_right = 440.0
+margin_bottom = 250.0
+texture = ExtResource( 3 )
+patch_margin_left = 17
+patch_margin_top = 47
+patch_margin_right = 23
+patch_margin_bottom = 21
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pig"]
+margin_left = 19.0
+margin_top = 54.0
+margin_right = 416.0
+margin_bottom = 354.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "The stage is cleared as soon as you have destroyed enough pigs.
+
+Swap a ranger with a pig to attack that pig
+
+"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Finger" type="Sprite" parent="Pig"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 881.163, 690.133 )
+scale = Vector2( 0.1, 0.1 )
+z_index = 92
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pig/Finger"]
+autoplay = "swipe"
+playback_speed = 0.6
+anims/swipe = SubResource( 3 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://sfx/Pig_Shield_Death.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Levels/Level8.tres" type="Resource" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://UI/YouWin/Victory.tscn" type="PackedScene" id=35]
 [ext_resource path="res://UI/TurnCounter/TurnCounter.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Levels/Level7.tres" type="Resource" id=37]
+[ext_resource path="res://UI/Tutorial/Tutorial.tscn" type="PackedScene" id=38]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 5 )
@@ -62,6 +63,8 @@ script = ExtResource( 13 )
 [node name="Explosions" type="Node2D" parent="."]
 z_index = 101
 script = ExtResource( 11 )
+
+[node name="Tutorial" parent="." instance=ExtResource( 38 )]
 
 [node name="Shop" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -141,7 +144,7 @@ visible = false
 
 [node name="TurnCounter" parent="." instance=ExtResource( 36 )]
 position = Vector2( 196.29, 655.111 )
-z_index = 101
+z_index = 2
 
 [node name="Chromatic" parent="." instance=ExtResource( 18 )]
 

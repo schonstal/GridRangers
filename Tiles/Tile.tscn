@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Tiles/Tile.gd" type="Script" id=1]
-[ext_resource path="res://Tiles/Grid.png" type="Texture" id=2]
+[ext_resource path="res://Grid/Grid.png" type="Texture" id=2]
 [ext_resource path="res://UI/ToolTip/ToolTip.gd" type="Script" id=3]
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=4]
 [ext_resource path="res://UI/ToolTip/ToolTipWindow.png" type="Texture" id=5]
@@ -32,7 +32,6 @@ z_index = 99
 
 [node name="Background" type="Sprite" parent="ToolTip"]
 position = Vector2( 273.014, -5.41389 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="ToolTip"]
