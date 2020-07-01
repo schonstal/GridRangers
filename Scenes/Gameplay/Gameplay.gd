@@ -95,7 +95,10 @@ func _on_player_acted():
     EventBus.emit_signal("turns_spent", 1)
 
 func _on_level_completed():
-  level_index += 1
+  if Game.tutorial:
+    Game.tutorial = false
+  else:
+    level_index += 1
   if level_index >= levels.size():
     victory = true
 

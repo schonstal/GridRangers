@@ -18,8 +18,10 @@ func _ready():
 
 func show_state():
   if state >= states.size():
+    queue_free()
     return
-
+  
+  EventBus.emit_signal("begin_tutorial_state", state)
   backdrop.visible = true
   states[state].visible = true
 
@@ -40,6 +42,7 @@ func _on_turn_complete():
   show_state()
 
 func _on_player_acted():
+  EventBus.emit_signal("end_tutorial_state", state)
   if state < states.size():
     states[state].visible = false
     backdrop.visible = false

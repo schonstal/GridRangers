@@ -179,9 +179,9 @@ margin_right = 416.0
 margin_bottom = 354.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Each tile has different effects. You can check the effects at any time by clicking and holding on a tile.
+text = "That match earned you 2 extra moves this turn.
 
-That tile earned you 2 extra moves this turn.
+Each tile has different effects. You can check the effects at any time by clicking and holding on a tile.
 
 "
 autowrap = true
@@ -228,7 +228,7 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "The stage is cleared as soon as you have destroyed enough pigs.
 
-Swap a ranger with a pig to attack that pig
+Swap a ranger with a pig to attack that pig.
 
 "
 autowrap = true

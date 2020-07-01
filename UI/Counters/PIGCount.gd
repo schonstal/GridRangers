@@ -10,6 +10,9 @@ func _ready():
   EventBus.connect("start_level", self, "_on_start_level")
   EventBus.connect("level_completed", self, "_on_level_completed")
 
+  EventBus.connect("begin_tutorial_state", self, "_on_begin_tutorial_state")
+  EventBus.connect("end_tutorial_state", self, "_on_end_tutorial_state")
+
 func _on_start_level():
   animation.play("Appear")
 
@@ -25,3 +28,10 @@ func _process(delta):
     label.text = "%0d/%d" % [Game.scene.kills, Game.scene.kill_target]
   else:
     label.text = "%0d/%d" % [Game.scene.kill_target, Game.scene.kill_target]
+
+func _on_begin_tutorial_state(state):
+  if state == 2:
+    z_index = 91
+
+func _on_end_tutorial_state(state):
+  z_index = 0

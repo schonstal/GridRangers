@@ -43,3 +43,6 @@ signal play_sound(category, sound)
 signal turns_spent(amount)
 
 signal highlight_tile(position)
+
+signal begin_tutorial_state(state)
+signal end_tutorial_state(state)
