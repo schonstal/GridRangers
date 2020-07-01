@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/TitleScreen/Mall.png" type="Texture" id=1]
 [ext_resource path="res://Shaders/FilmGrain/FilmGrain.tscn" type="PackedScene" id=2]
@@ -13,13 +13,7 @@
 [ext_resource path="res://Shaders/GlitchSprite/GlitchSprite.gd" type="Script" id=11]
 [ext_resource path="res://Shaders/GlitchSprite/SpriteGlitch.shader" type="Shader" id=12]
 [ext_resource path="res://UI/Windows/WindowAppear.tscn" type="PackedScene" id=13]
-
-
-
-
-
-
-
+[ext_resource path="res://UI/MainMenuWindow/ TutorialButton.png" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -59,7 +53,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("RestartButton_2x1:frame")
 tracks/0/interp = 1
@@ -73,7 +67,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("RestartButton_2x1:frame")
 tracks/0/interp = 1
@@ -87,7 +81,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("QuitButton_2x1:frame")
 tracks/0/interp = 1
@@ -101,7 +95,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("RestartButton_2x1:frame")
 tracks/0/interp = 1
@@ -127,7 +121,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 105.113, 51.1167 )
 
 [node name="TitleScreen" type="Node2D"]
@@ -177,7 +171,7 @@ position = Vector2( 0, 25.176 )
 script = ExtResource( 6 )
 
 [node name="RestartButton_2x1" type="Sprite" parent="MainMenuWindow/TutorialButton"]
-texture = ExtResource( 7 )
+texture = ExtResource( 14 )
 hframes = 2
 __meta__ = {
 "_edit_lock_": true
@@ -188,16 +182,16 @@ visible = false
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/TutorialButton"]
-anims/Click = SubResource( 8 )
-anims/Idle = SubResource( 9 )
+anims/Click = SubResource( 5 )
+anims/Idle = SubResource( 6 )
 
 [node name="QuitButton" type="Area2D" parent="MainMenuWindow"]
 position = Vector2( 0, 134.484 )
 script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/QuitButton"]
-anims/Click = SubResource( 5 )
-anims/Idle = SubResource( 6 )
+anims/Click = SubResource( 7 )
+anims/Idle = SubResource( 8 )
 
 [node name="QuitButton_2x1" type="Sprite" parent="MainMenuWindow/QuitButton"]
 texture = ExtResource( 8 )
@@ -208,7 +202,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/QuitButton"]
 visible = false
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="WindowAppear" parent="MainMenuWindow" instance=ExtResource( 13 )]
 
