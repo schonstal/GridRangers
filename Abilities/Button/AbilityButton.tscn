@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Abilities/Button/AbilityButton.gd" type="Script" id=1]
-[ext_resource path="res://sfx/Activate_SFX.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sfx/XP_Error_SFX.ogg" type="AudioStream" id=2]
 [ext_resource path="res://sfx/Click_SFX.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sfx/Activate_but_with_more_Activate.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Active"
@@ -52,9 +53,13 @@ shape = SubResource( 6 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ActivateSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 4 )
 bus = "SFX"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="ErrorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 bus = "SFX"
