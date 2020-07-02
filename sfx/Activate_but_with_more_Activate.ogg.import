@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Activate_but_with_more_Activate.ogg-2bc42f30f4ad685c
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

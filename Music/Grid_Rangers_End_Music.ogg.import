@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Grid_Rangers_End_Music.ogg-2fd0ff5b350e2c0d38eb8d9ab86010ee.oggstr"
+
+[deps]
+
+source_file="res://Music/Grid_Rangers_End_Music.ogg"
+dest_files=[ "res://.import/Grid_Rangers_End_Music.ogg-2fd0ff5b350e2c0d38eb8d9ab86010ee.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

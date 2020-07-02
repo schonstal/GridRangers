@@ -5,11 +5,21 @@ var pitch_shift:AudioEffectPitchShift
 var bus_index = 0
 var pitch_shift_index = 0
 var music_volume = 0
-var current_file = ""
+var current_stream = "title"
 
-onready var ambient = $AudioStreamAmbient
-onready var big_band = $AudioStreamBigBand
-onready var title = $AudioStreamTitle
+onready var streams = {
+  "ambient": $Streams/Ambient,
+  "big_band": $Streams/BigBand,
+  "title": $Streams/Title,
+  "end": $Streams/End
+}
+
+onready var volumes = {
+  "ambient": 0,
+  "big_band": -6,
+  "title": 0,
+  "end": 0
+}
 
 onready var fade_tween = $FadeTween
 onready var filter_tween = $FilterTween
@@ -23,22 +33,17 @@ func _ready():
   pitch_shift.pitch_scale = 1
 
   AudioServer.add_bus_effect(bus_index, pitch_shift, pitch_shift_index)
+
   disable_filter()
 
 func _process(_delta):
   AudioServer.set_bus_volume_db(bus_index, music_volume)
 
-#func play_file(audio_file):
-#  if audio_file == current_file:
-#    return
-#
-#  current_file = audio_file
-#
-#  self.stream = load(audio_file)
-#  self.play()
-
 func _on_game_over():
-  ambient.volume_db = -80
+  for key in streams:
+    streams[key].volume_db = -80
+    streams[key].stop()
+  current_stream = null
 
 func disable_filter():
   filter_tween.stop(pitch_shift)
@@ -64,90 +69,34 @@ func fade_filter(duration):
   yield(filter_tween, "tween_completed")
   disable_filter()
 
-# Please forgive me, this is a game jam
 func fade(mode, duration):
-  if mode == "ambient":
-    ambient.play()
+  if mode != null:
+    streams[mode].play()
+    streams[mode].volume_db = -80
+
     fade_tween.interpolate_property(
-        ambient,
+        streams[mode],
         "volume_db",
         -80,
-        0,
+        volumes[mode],
         duration,
         Tween.TRANS_QUAD,
         Tween.EASE_IN)
 
+  if current_stream != null:
     fade_tween.interpolate_property(
-        big_band,
+        streams[current_stream],
         "volume_db",
-        -6,
-        -80,
-        duration,
-        Tween.TRANS_QUAD,
-        Tween.EASE_IN)
-
-    fade_tween.start()
-    yield(fade_tween, "tween_completed")
-    big_band.stop()
-    title.stop()
-  elif mode == "big_band":
-    big_band.play()
-
-    fade_tween.interpolate_property(
-        big_band,
-        "volume_db",
-        -80,
-        -6,
-        duration,
-        Tween.TRANS_QUAD,
-        Tween.EASE_IN)
-
-    fade_tween.interpolate_property(
-        ambient,
-        "volume_db",
-        0,
+        volumes[current_stream],
         -80,
         duration,
         Tween.TRANS_QUAD,
         Tween.EASE_IN)
 
-    fade_tween.start()
-    yield(fade_tween, "tween_completed")
-    ambient.stop()
-    title.stop()
-  if mode == "title":
-    title.play()
-    fade_tween.interpolate_property(
-        title,
-        "volume_db",
-        -80,
-        0,
-        duration,
-        Tween.TRANS_QUAD,
-        Tween.EASE_IN)
+  fade_tween.start()
+  yield(fade_tween, "tween_completed")
 
-    fade_tween.interpolate_property(
-        big_band,
-        "volume_db",
-        -6,
-        -80,
-        duration,
-        Tween.TRANS_QUAD,
-        Tween.EASE_IN)
+  if current_stream != null:
+    streams[current_stream].stop()
 
-    fade_tween.start()
-    yield(fade_tween, "tween_completed")
-    big_band.stop()
-    ambient.stop()
-  else:
-    fade_tween.interpolate_property(
-      title,
-      "volume_db",
-      0,
-      -80,
-      duration,
-      Tween.TRANS_QUAD,
-      Tween.EASE_IN)
-    fade_tween.start()
-    yield(fade_tween, "tween_completed")
-    title.stop()
+  current_stream = mode

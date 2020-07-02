@@ -19,12 +19,12 @@ func _on_AppearTimer_timeout():
 
 func _on_PlayButton_pressed():
   Game.tutorial = false
-  MusicPlayer.fade("none", 0.5)
+  MusicPlayer.fade(null, 0.5)
   EventBus.emit_signal("restart_game")
 
 func _on_TutorialButton_pressed():
   Game.tutorial = true
-  MusicPlayer.fade("none", 0.5)
+  MusicPlayer.fade(null, 0.5)
   EventBus.emit_signal("restart_game")
 
 func _on_QuitButton_pressed():
