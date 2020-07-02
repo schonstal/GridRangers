@@ -31,6 +31,7 @@ EventBus="*res://Autoload/EventBus.gd"
 ActionQueue="*res://Autoload/ActionQueue.gd"
 MusicPlayer="*res://Autoload/MusicPlayer.tscn"
 Overlay="*res://Autoload/Overlay.tscn"
+SaveManager="*res://Autoload/SaveManager.gd"
 
 [display]
 

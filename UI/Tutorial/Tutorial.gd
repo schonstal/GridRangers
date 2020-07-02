@@ -15,6 +15,7 @@ func _ready():
   EventBus.connect("player_acted", self, "_on_player_acted")
   EventBus.connect("turn_complete", self, "_on_turn_complete")
   EventBus.connect("phase_transition_complete", self, "_on_phase_transition_complete")
+  EventBus.connect("tutorial_complete", self, "_on_tutorial_complete")
 
 func show_state():
   if state >= states.size():
@@ -57,3 +58,8 @@ func _on_player_acted():
     states[state].visible = false
     backdrop.visible = false
     state += 1
+
+func _on_tutorial_complete():
+  Game.tutorial = false
+  SaveManager.set_value("tutorial_complete", true)
+  EventBus.emit_signal("start_level")
