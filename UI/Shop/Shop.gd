@@ -18,8 +18,9 @@ var greetings = [
 
 var tutorial = [
   "U the one takin care of those pigs?",
-  "If U got CDs, I can hook U up.",
-  "Drag a file to a RANGER window to buy it."
+  "If u got CDs, I can hook u up.",
+  "Just drag a file to a RANGER window",
+  "and I'll take the CDs from ur account."
 ]
 
 func _ready():

@@ -154,6 +154,7 @@ func _on_input_event(_viewport, event, _shape_id):
           click_sound.play()
         else:
           error_sound.play()
+          EventBus.emit_signal("coins_spent", 0)
           EventBus.emit_signal("keeper_message", "U need at least %d CDs for that." % ability.cd_cost)
       if !event.pressed:
         dragging = false

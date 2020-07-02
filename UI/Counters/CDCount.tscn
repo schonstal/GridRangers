@@ -5,7 +5,6 @@
 [ext_resource path="res://UI/Counters/CDUI.png" type="Texture" id=3]
 [ext_resource path="res://UI/Counters/Badge.tscn" type="PackedScene" id=4]
 
-
 [node name="CD" type="Node2D"]
 position = Vector2( 175, 373 )
 script = ExtResource( 2 )
@@ -20,3 +19,5 @@ texture = ExtResource( 3 )
 
 [node name="Badge" parent="." instance=ExtResource( 4 )]
 position = Vector2( 50.3064, -55.6646 )
+
+[node name="Tween" type="Tween" parent="."]
