@@ -87,6 +87,11 @@ func set_grid_position(new_position):
   previous_grid_position = grid_position
   grid_position = new_position
 
+  if Game.tutorial && !highlighted:
+    min_move = Vector2(0, 0)
+    max_move = Vector2(0, 0)
+    return
+
   if new_position.y == 0:
     min_move.y = 0
   else:
@@ -171,6 +176,7 @@ func _on_highlight_tile(highlight_position):
   if grid_position == highlight_position:
     z_index = 91
     highlighted = true
+    set_grid_position(grid_position)
 
 func _on_player_acted():
   z_index = 0
