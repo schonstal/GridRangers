@@ -27,8 +27,6 @@ func spawn_abilities():
     if abilities[i] == null:
       add_ability(ability_pool[i], i)
 
-  print_messages()
-
 func print_messages():
   EventBus.emit_signal("keeper_message", "=============== INVENTORY ===============")
   for a in abilities:

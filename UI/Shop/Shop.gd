@@ -47,7 +47,6 @@ func _on_spawn_shop():
 
   window_appear.call_deferred("appear")
 
-  EventBus.emit_signal("keeper_message", "Hey.")
   if first_time:
     for message in tutorial:
       EventBus.emit_signal("keeper_message", message)
