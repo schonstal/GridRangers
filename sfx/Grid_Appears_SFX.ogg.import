@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Grid_Appears_SFX.ogg-2ce45358680e22acab6aa57da0360027.oggstr"
+
+[deps]
+
+source_file="res://sfx/Grid_Appears_SFX.ogg"
+dest_files=[ "res://.import/Grid_Appears_SFX.ogg-2ce45358680e22acab6aa57da0360027.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
