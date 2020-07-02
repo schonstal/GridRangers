@@ -137,9 +137,11 @@ script = ExtResource( 11 )
 position = Vector2( 960, 288.107 )
 
 [node name="Chromatic" parent="." instance=ExtResource( 3 )]
+copy_mode = 2
 strength = 0.25
 
 [node name="FilmGrain" parent="." instance=ExtResource( 2 )]
+copy_mode = 2
 
 [node name="MainMenuWindow" type="Sprite" parent="."]
 visible = false

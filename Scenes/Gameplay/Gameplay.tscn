@@ -141,11 +141,17 @@ bus = "SFX"
 
 [node name="PhaseTransition" parent="." instance=ExtResource( 4 )]
 visible = false
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="TurnCounter" parent="." instance=ExtResource( 36 )]
 position = Vector2( 196.29, 655.111 )
 z_index = 2
 
 [node name="Chromatic" parent="." instance=ExtResource( 18 )]
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
 
 [node name="FilmGrain" parent="." instance=ExtResource( 25 )]
+copy_mode = 2
+rect = Rect2( 0, 0, 1920, 1080 )
