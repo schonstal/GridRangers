@@ -7,7 +7,7 @@
 [node name="Ability" instance=ExtResource( 2 )]
 cd_cost = 5
 energy_cost = 7
-description = [ "Attack tiles near the ranger" ]
+description = "Activate to attack all tiles the ranger can swap with."
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 3 )

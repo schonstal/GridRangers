@@ -7,7 +7,7 @@
 [node name="X" instance=ExtResource( 2 )]
 cd_cost = 6
 energy_cost = 8
-description = [ "Attack tiles diagonally from the ranger" ]
+description = "Activate to attack all tiles diagonally from the ranger."
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 1 )

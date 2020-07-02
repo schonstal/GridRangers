@@ -10,6 +10,7 @@ onready var tween = $Tween
 onready var cd_label = $CDCost/Label
 onready var click_sound = $ClickSound
 onready var error_sound = $ErrorSound
+onready var tool_tip = $ToolTip
 
 func _ready():
   connect("mouse_entered", self, "_on_mouse_entered")
@@ -19,6 +20,7 @@ func _ready():
 
   start_position = global_position
   cd_label.text = "%d" % ability.cd_cost
+  tool_tip.label.text = ability.description
 
   ability.scale = Vector2(0, 0)
 
@@ -49,6 +51,10 @@ func _process(delta):
     drag()
   else:
     global_position = lerp(global_position, start_position, 0.3)
+    if (global_position - start_position).length() > 1:
+      tool_tip.hide()
+    elif z_index == 13:
+      tool_tip.show()
 
 func drag():
   if !can_afford():
@@ -68,7 +74,12 @@ func _on_mouse_entered():
   hover()
 
 func hover():
-  if z_index == 13 || !can_afford():
+  if z_index == 13:
+    return
+  
+  tool_tip.show()
+  
+  if !can_afford():
     return
 
   z_index = 13
@@ -93,6 +104,7 @@ func _on_mouse_exited():
 func deselect():
   z_index = 12
 
+  tool_tip.hide()
   tween.stop_all()
   tween.interpolate_property(
       ability,
@@ -136,6 +148,7 @@ func _on_input_event(_viewport, event, _shape_id):
       if event.pressed:
         if can_afford():
           hover()
+          tool_tip.hide()
           drag_offset = global_position - get_viewport().get_mouse_position()
           dragging = true
           click_sound.play()

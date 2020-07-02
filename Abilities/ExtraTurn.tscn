@@ -7,7 +7,7 @@
 [node name="Ability" instance=ExtResource( 2 )]
 cd_cost = 9
 energy_cost = 12
-description = [ "Gain an extra turn" ]
+description = "Activate to gain an extra move this turn."
 
 [node name="Logo" parent="." index="1"]
 texture = ExtResource( 1 )
