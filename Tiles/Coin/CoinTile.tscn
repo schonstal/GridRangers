@@ -13,7 +13,7 @@ texture = ExtResource( 2 )
 [node name="Brain" type="Node" parent="." index="4"]
 script = ExtResource( 3 )
 
-[node name="Label" parent="ToolTip" index="0"]
+[node name="Label" parent="ToolTip" index="1"]
 text = "Trade these on the
 darknet to upgrade
 or recover rangers"

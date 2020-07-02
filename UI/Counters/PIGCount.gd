@@ -30,7 +30,7 @@ func _process(delta):
     label.text = "%0d/%d" % [Game.scene.kill_target, Game.scene.kill_target]
 
 func _on_begin_tutorial_state(state):
-  if state == 2:
+  if state == 3:
     z_index = 91
 
 func _on_end_tutorial_state(state):

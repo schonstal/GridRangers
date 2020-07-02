@@ -42,6 +42,9 @@ func _on_DoneButton_pressed():
   EventBus.emit_signal("start_level")
 
 func _on_spawn_shop():
+  if Game.tutorial:
+    return
+
   window_appear.call_deferred("appear")
 
   EventBus.emit_signal("keeper_message", "Hey.")

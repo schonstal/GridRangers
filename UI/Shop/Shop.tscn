@@ -22,19 +22,14 @@
 [ext_resource path="res://sfx/Equip_Power_Up.ogg" type="AudioStream" id=20]
 [ext_resource path="res://sfx/Reboot_Ranger_SFX.ogg" type="AudioStream" id=21]
 
-
-
-
-
-
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 1 )
 shader_param/time = 0.0
 shader_param/strength = 0.5
 shader_param/jitter_offset = 6.0
 shader_param/color_strength = 0.1
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 resource_name = "Click"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -49,7 +44,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
 resource_name = "Idle"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -64,7 +59,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 97.7272, 159.795 )
 
 [node name="Shop" type="Node2D"]
@@ -81,7 +76,7 @@ __meta__ = {
 }
 
 [node name="K33p3erProfilePic" type="Sprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 8 )
 position = Vector2( 523.637, 402.545 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
@@ -103,12 +98,12 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DoneButton"]
 autoplay = "Idle"
-anims/Click = SubResource( 2 )
-anims/Idle = SubResource( 3 )
+anims/Click = SubResource( 5 )
+anims/Idle = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoneButton"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }

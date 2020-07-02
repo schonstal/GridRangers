@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var states = [$Swap, $Moves, $Pig]
+onready var states = [$Swap, $Match, $Moves, $Pig]
 onready var backdrop = $Backdrop
 
 var state = 0
@@ -18,7 +18,6 @@ func _ready():
 
 func show_state():
   if state >= states.size():
-    queue_free()
     return
   
   EventBus.emit_signal("begin_tutorial_state", state)
@@ -26,22 +25,33 @@ func show_state():
   states[state].visible = true
 
   if state == 0:
+    EventBus.emit_signal("highlight_tile", Vector2(1, 1))
+    EventBus.emit_signal("highlight_tile", Vector2(2, 1))
+  elif state == 1:
     EventBus.emit_signal("highlight_tile", Vector2(5, 1))
     EventBus.emit_signal("highlight_tile", Vector2(6, 1))
-  elif state == 1:
+  elif state == 2:
     EventBus.emit_signal("highlight_tile", Vector2(4, 0))
     EventBus.emit_signal("highlight_tile", Vector2(4, 1))
-  elif state == 2:
+  elif state == 3:
     EventBus.emit_signal("highlight_tile", Vector2(5, 5))
     EventBus.emit_signal("highlight_tile", Vector2(5, 6))
 
 func _on_phase_transition_complete():
+  if Game.scene.phase != Game.PHASE_PLAYER:
+    return
+
   show_state()
 
 func _on_turn_complete():
-  show_state()
+  if state != 1:
+      show_state()
 
 func _on_player_acted():
+  if !Game.tutorial:
+    queue_free()
+    return
+
   EventBus.emit_signal("end_tutorial_state", state)
   if state < states.size():
     states[state].visible = false

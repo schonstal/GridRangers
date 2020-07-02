@@ -61,7 +61,7 @@ func update_label():
     visible = false
 
 func _on_begin_tutorial_state(state):
-  if state == 1:
+  if state == 2:
     moves.z_index = 91
     pips.z_index = 91
 

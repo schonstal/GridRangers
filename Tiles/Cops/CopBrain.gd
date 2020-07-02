@@ -34,7 +34,9 @@ func _ready():
     sleeping = rand_range(0, 100) > awake_chance
 
   if Game.tutorial:
-    sleeping = tile.grid_position != Vector2(5, 5)
+    sleeping = tile.grid_position != Vector2(5, 4) &&\
+               tile.grid_position != Vector2(1, 3) &&\
+               tile.grid_position != Vector2(3, 4)
 
   EventBus.emit_signal("enemy_spawned", self)
 
