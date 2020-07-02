@@ -29,6 +29,8 @@ onready var fade_tween = $FadeTween
 onready var sequence_timer = $SequenceTimer
 onready var match_sound = $MatchSound
 onready var swap_sound = $SwapSound
+onready var appear_sound = $AppearSound
+onready var fade_sound = $FadeSound
 
 signal sequence_completed
 
@@ -78,6 +80,8 @@ func fade_in():
     2.0
    )
   fade_tween.start()
+  yield(fade_tween, "tween_started")
+  appear_sound.play()
   yield(fade_tween, "tween_completed")
   emit_signal("sequence_completed")
   backdrop.modulate = Color(1, 1, 1, 1)
@@ -510,6 +514,7 @@ func _input(event):
           swap_intent = null
 
 func _on_level_completed():
+  fade_sound.play()
   spawn_count = 0
   enemy_spawn_count = 0
   for y in range(height - 1, -1, -1):

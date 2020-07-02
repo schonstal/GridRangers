@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Tiles/Cops/standard/StandardCop.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tiles/Cola/Cola.tscn" type="PackedScene" id=2]
@@ -17,9 +17,8 @@
 [ext_resource path="res://Grid/StageName.gd" type="Script" id=15]
 [ext_resource path="res://Grid/StageNumber.gd" type="Script" id=16]
 [ext_resource path="res://Fonts/OCRA.tres" type="DynamicFont" id=17]
-
-
-
+[ext_resource path="res://sfx/Grid_Explodes_SFX.ogg" type="AudioStream" id=18]
+[ext_resource path="res://sfx/Grid_Appears_SFX.ogg" type="AudioStream" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -120,3 +119,9 @@ bus = "SFX"
 
 [node name="SwapSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
+
+[node name="AppearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+
+[node name="FadeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Grid_Explodes_SFX.ogg-9b6f0576918115d314f54679a5a6e0
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
