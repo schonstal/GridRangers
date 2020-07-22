@@ -514,6 +514,9 @@ func _input(event):
           swap_intent = null
 
 func _on_level_completed():
+  if Game.scene.victory:
+    MusicPlayer.call_deferred("fade", null, 0.25)
+
   fade_sound.play()
   spawn_count = 0
   enemy_spawn_count = 0
@@ -525,12 +528,12 @@ func _on_level_completed():
     check_matches()
     yield(sequence_timer, "timeout")
 
-  MusicPlayer.call_deferred("fade", "big_band", 1.0)
   teleport_rangers()
   yield(self, "sequence_completed")
 
-  if Game.scene.level_index < Game.scene.levels.size():
+  if !Game.scene.victory:
     EventBus.emit_signal("spawn_shop")
+    MusicPlayer.call_deferred("fade", "big_band", 1.0)
   else:
     EventBus.emit_signal("victory")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://sfx/Pig_Shield_Death.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Levels/Level8.tres" type="Resource" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://UI/TurnCounter/TurnCounter.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Levels/Level7.tres" type="Resource" id=37]
 [ext_resource path="res://UI/Tutorial/Tutorial.tscn" type="PackedScene" id=38]
+[ext_resource path="res://UI/Ending/Ending.tscn" type="PackedScene" id=39]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource( 5 )
@@ -75,6 +76,10 @@ visible = false
 script = ExtResource( 32 )
 
 [node name="Victory" parent="." instance=ExtResource( 35 )]
+visible = false
+
+[node name="Ending" parent="." instance=ExtResource( 39 )]
+visible = false
 
 [node name="SFXLimiter" type="Node2D" parent="."]
 script = ExtResource( 14 )

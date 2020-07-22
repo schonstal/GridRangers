@@ -7,5 +7,7 @@ func _ready():
   visible = false
   
 func _on_victory():
+  return
   visible = true
   victory_sound.play()
+  MusicPlayer.call_deferred("fade", "end", 0.1)

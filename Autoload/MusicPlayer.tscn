@@ -4,7 +4,7 @@
 [ext_resource path="res://Music/ambient.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Music/bigband.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Music/Main_Menu_Loop.ogg" type="AudioStream" id=4]
-[ext_resource path="res://Music/Grid_Rangers_End_Music.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Music/gridrangersfinaleLoopSlowed.ogg" type="AudioStream" id=5]
 
 [node name="MusicPlayer" type="Node2D"]
 script = ExtResource( 1 )

@@ -26,7 +26,7 @@ var enemy_count = 6
 
 var phase = Game.PHASE_NONE
 var game_over = false
-var victory = false
+var victory = false setget ,get_victory
 
 var players = {}
 
@@ -99,8 +99,6 @@ func _on_level_completed():
     return
 
   level_index += 1
-  if level_index >= levels.size():
-    victory = true
 
 func _on_turn_complete():
   if game_over:
@@ -181,3 +179,6 @@ func _on_start_level():
 
 func get_current_level():
   return levels[level_index]
+
+func get_victory():
+  return level_index >= levels.size()
