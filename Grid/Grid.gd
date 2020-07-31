@@ -536,6 +536,7 @@ func _on_level_completed():
     MusicPlayer.call_deferred("fade", "big_band", 1.0)
   else:
     EventBus.emit_signal("victory")
+    MusicPlayer.call_deferred("fade", "end", 5.0)
 
   call_deferred("fade_out")
   yield(self, "sequence_completed")

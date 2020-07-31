@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Fonts/OCRABig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/Ending/Ending.gd" type="Script" id=2]
@@ -7,6 +7,16 @@
 [ext_resource path="res://UI/Ending/WinningSunset/WinningSunReflection.png" type="Texture" id=5]
 [ext_resource path="res://UI/Ending/WinningSunset/WinningSun.png" type="Texture" id=6]
 [ext_resource path="res://Shaders/SunReflection/SunReflection.shader" type="Shader" id=7]
+[ext_resource path="res://UI/Ending/WinningSunset/WinningTrees.png" type="Texture" id=8]
+[ext_resource path="res://UI/Ending/ParallaxBackground.gd" type="Script" id=9]
+[ext_resource path="res://UI/Ending/FinalScore.gd" type="Script" id=10]
+[ext_resource path="res://UI/MainMenuWindow/MainMenuWindow.png" type="Texture" id=11]
+[ext_resource path="res://UI/Ending/WinWindow.gd" type="Script" id=12]
+[ext_resource path="res://UI/Windows/WindowButton.gd" type="Script" id=13]
+[ext_resource path="res://UI/Windows/WindowAppear.gd" type="Script" id=14]
+[ext_resource path="res://UI/Windows/WindowAppear.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/ErrorWindow/QuitButton_2x1.png" type="Texture" id=16]
+[ext_resource path="res://UI/ErrorWindow/RestartButton_2x1.png" type="Texture" id=17]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
@@ -30,6 +40,80 @@ shader_param/sine_time_scale = 0.5
 shader_param/sine_offset_scale = Vector2( 0.4, 0.4 )
 shader_param/sine_wave_size = 0.025
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 105.113, 51.1167 )
+
+[sub_resource type="Animation" id=11]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("QuitButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=8]
+tracks/0/type = "value"
+tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("QuitButton_2x1:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 105.113, 51.1167 )
+
 [sub_resource type="Animation" id=1]
 resource_name = "Victory"
 length = 15.0
@@ -46,19 +130,19 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Backdrop:modulate")
+tracks/1/path = NodePath("CanvasLayer/Backdrop:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2, 7.2, 7.4 ),
+"times": PoolRealArray( 0, 1, 2, 4.2, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("YouWin:rect_position")
+tracks/2/path = NodePath("CanvasLayer/YouWin:rect_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -67,67 +151,99 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 2.5, 3.5 ),
 "transitions": PoolRealArray( 1, 0.659754, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 515 ), Vector2( 0, 515 ), Vector2( 0, 75 ) ]
+"values": [ Vector2( 0, 515 ), Vector2( 0, 515 ), Vector2( 0, 300 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Terminated:visible")
+tracks/3/path = NodePath("CanvasLayer/YouWin:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 4 ),
+"times": PoolRealArray( 0, 7.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("YouWin:visible")
+tracks/4/path = NodePath("CanvasLayer/YouWin:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"times": PoolRealArray( 0, 0.2, 7, 7.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Terminated:modulate")
+tracks/5/path = NodePath("ParallaxBackground/ParallaxLayer:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 4, 4.2, 7, 7.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"times": PoolRealArray( 0, 4.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("YouWin:modulate")
+tracks/6/path = NodePath("ParallaxBackground/ParallaxLayer2:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 7, 7.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"times": PoolRealArray( 0, 4.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("ParallaxBackground/ParallaxLayer:visible")
+tracks/7/path = NodePath("CanvasLayer/Terminated:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 7.2 ),
+"times": PoolRealArray( 0, 8.3, 13.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("CanvasLayer/Terminated:modulate:a")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 8.3, 8.7, 13, 13.4 )
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CanvasLayer/FinalScore:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 14.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("CanvasLayer/FinalScore:modulate:a")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 14.3, 14.7 )
 }
 
 [node name="Ending" type="Node2D"]
@@ -138,19 +254,14 @@ script = ExtResource( 2 )
 wait_time = 1.5
 one_shot = true
 
-[node name="Backdrop" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_right = 1920.0
-margin_bottom = 1080.0
-mouse_filter = 2
-color = Color( 0.101961, 0.0980392, 0.247059, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = 10
+scroll_ignore_camera_zoom = true
+script = ExtResource( 9 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0, 1 )
 
 [node name="WinningSky" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 3 )
@@ -170,11 +281,33 @@ material = SubResource( 2 )
 position = Vector2( 960, 836.262 )
 texture = ExtResource( 5 )
 
-[node name="YouWin" type="Label" parent="."]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_mirroring = Vector2( 1920, 0 )
+
+[node name="Trees" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 960, 750 )
+texture = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 75.0
+margin_right = 1924.5
+margin_bottom = 1082.25
+mouse_filter = 2
+color = Color( 0.101961, 0.0980392, 0.247059, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="YouWin" type="Label" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 515.0
 margin_right = 1920.0
-margin_bottom = 124.0
+margin_bottom = 564.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.94902, 0.960784, 1 )
 text = "CONGRATULATIONS"
@@ -185,11 +318,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Terminated" type="Label" parent="."]
+[node name="Terminated" type="Label" parent="CanvasLayer"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 466.0
+margin_top = 218.507
 margin_right = 1920.0
-margin_bottom = 619.0
+margin_bottom = 371.507
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.94902, 0.960784, 1 )
 text = "YOU HAVE
@@ -201,6 +335,75 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FinalScore" type="Label" parent="CanvasLayer"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 218.507
+margin_right = 1920.0
+margin_bottom = 371.507
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.87451, 0.94902, 0.960784, 1 )
+text = "FINAL SCORE
+66 CDs"
+align = 1
+valign = 1
+uppercase = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinWindow" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 960, 806.597 )
+texture = ExtResource( 11 )
+script = ExtResource( 12 )
+
+[node name="PlayButton" type="Area2D" parent="CanvasLayer/WinWindow"]
+position = Vector2( 0, -52.701 )
+script = ExtResource( 13 )
+
+[node name="RestartButton_2x1" type="Sprite" parent="CanvasLayer/WinWindow/PlayButton"]
+texture = ExtResource( 17 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/WinWindow/PlayButton"]
+visible = false
+shape = SubResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/WinWindow/PlayButton"]
+anims/Click = SubResource( 11 )
+anims/Idle = SubResource( 4 )
+
+[node name="QuitButton" type="Area2D" parent="CanvasLayer/WinWindow"]
+position = Vector2( 0, 90.722 )
+script = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/WinWindow/QuitButton"]
+anims/Click = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+
+[node name="QuitButton_2x1" type="Sprite" parent="CanvasLayer/WinWindow/QuitButton"]
+texture = ExtResource( 16 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/WinWindow/QuitButton"]
+visible = false
+shape = SubResource( 9 )
+
+[node name="WindowAppear" type="Node" parent="CanvasLayer/WinWindow" instance=ExtResource( 15 )]
+script = ExtResource( 14 )
+
+[node name="AppearTimer" type="Timer" parent="CanvasLayer/WinWindow"]
+wait_time = 25.0
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Victory = SubResource( 1 )

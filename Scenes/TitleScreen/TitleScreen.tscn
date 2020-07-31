@@ -22,10 +22,10 @@ shader_param/strength = 0.5
 shader_param/jitter_offset = 12.0
 shader_param/color_strength = 0.15
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 105.113, 51.1167 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("RestartButton_2x1:frame")
 tracks/0/interp = 1
@@ -162,10 +162,10 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/PlayButton"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/PlayButton"]
-anims/Click = SubResource( 3 )
+anims/Click = SubResource( 11 )
 anims/Idle = SubResource( 4 )
 
 [node name="TutorialButton" type="Area2D" parent="MainMenuWindow"]
@@ -181,7 +181,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenuWindow/TutorialButton"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuWindow/TutorialButton"]
 anims/Click = SubResource( 5 )

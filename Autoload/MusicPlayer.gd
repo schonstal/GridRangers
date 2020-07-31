@@ -18,7 +18,7 @@ onready var volumes = {
   "ambient": 0,
   "big_band": -6,
   "title": 0,
-  "end": 0
+  "end": -6
 }
 
 onready var fade_tween = $FadeTween
