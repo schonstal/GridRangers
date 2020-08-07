@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Fonts/OCRABig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/Ending/Ending.gd" type="Script" id=2]
@@ -10,13 +10,8 @@
 [ext_resource path="res://UI/Ending/WinningSunset/WinningTrees.png" type="Texture" id=8]
 [ext_resource path="res://UI/Ending/ParallaxBackground.gd" type="Script" id=9]
 [ext_resource path="res://UI/Ending/FinalScore.gd" type="Script" id=10]
-[ext_resource path="res://UI/MainMenuWindow/MainMenuWindow.png" type="Texture" id=11]
-[ext_resource path="res://UI/Ending/WinWindow.gd" type="Script" id=12]
-[ext_resource path="res://UI/Windows/WindowButton.gd" type="Script" id=13]
-[ext_resource path="res://UI/Windows/WindowAppear.gd" type="Script" id=14]
-[ext_resource path="res://UI/Windows/WindowAppear.tscn" type="PackedScene" id=15]
-[ext_resource path="res://UI/ErrorWindow/QuitButton_2x1.png" type="Texture" id=16]
-[ext_resource path="res://UI/ErrorWindow/RestartButton_2x1.png" type="Texture" id=17]
+[ext_resource path="res://UI/Ending/DoneButton.gd" type="Script" id=18]
+[ext_resource path="res://UI/Ending/VictoryButton/DoneButton.png" type="Texture" id=19]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
@@ -40,12 +35,10 @@ shader_param/sine_time_scale = 0.5
 shader_param/sine_offset_scale = Vector2( 0.4, 0.4 )
 shader_param/sine_wave_size = 0.025
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 105.113, 51.1167 )
-
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=15]
+resource_name = "Appear"
 tracks/0/type = "value"
-tracks/0/path = NodePath("RestartButton_2x1:frame")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -54,64 +47,50 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1 ]
+"values": [ true ]
 }
-
-[sub_resource type="Animation" id=4]
-tracks/0/type = "value"
-tracks/0/path = NodePath("RestartButton_2x1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=7]
-tracks/0/type = "value"
-tracks/0/path = NodePath("QuitButton_2x1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=8]
-tracks/0/type = "value"
-tracks/0/path = NodePath("RestartButton_2x1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("QuitButton_2x1:frame")
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Click"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 105.113, 51.1167 )
 
 [sub_resource type="Animation" id=1]
@@ -345,7 +324,7 @@ margin_bottom = 371.507
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.87451, 0.94902, 0.960784, 1 )
 text = "FINAL SCORE
-66 CDs"
+0 CDs"
 align = 1
 valign = 1
 uppercase = true
@@ -354,56 +333,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinWindow" type="Sprite" parent="CanvasLayer"]
-visible = false
-position = Vector2( 960, 806.597 )
-texture = ExtResource( 11 )
-script = ExtResource( 12 )
+[node name="DoneButton" type="Area2D" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 141.454, 1004.97 )
+script = ExtResource( 18 )
 
-[node name="PlayButton" type="Area2D" parent="CanvasLayer/WinWindow"]
-position = Vector2( 0, -52.701 )
-script = ExtResource( 13 )
-
-[node name="RestartButton_2x1" type="Sprite" parent="CanvasLayer/WinWindow/PlayButton"]
-texture = ExtResource( 17 )
-hframes = 2
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/WinWindow/PlayButton"]
-visible = false
-shape = SubResource( 10 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/WinWindow/PlayButton"]
-anims/Click = SubResource( 11 )
-anims/Idle = SubResource( 4 )
-
-[node name="QuitButton" type="Area2D" parent="CanvasLayer/WinWindow"]
-position = Vector2( 0, 90.722 )
-script = ExtResource( 13 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/WinWindow/QuitButton"]
-anims/Click = SubResource( 7 )
-anims/Idle = SubResource( 8 )
-
-[node name="QuitButton_2x1" type="Sprite" parent="CanvasLayer/WinWindow/QuitButton"]
-texture = ExtResource( 16 )
-hframes = 2
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/WinWindow/QuitButton"]
-visible = false
-shape = SubResource( 9 )
-
-[node name="WindowAppear" type="Node" parent="CanvasLayer/WinWindow" instance=ExtResource( 15 )]
-script = ExtResource( 14 )
-
-[node name="AppearTimer" type="Timer" parent="CanvasLayer/WinWindow"]
-wait_time = 25.0
+[node name="AppearTimer" type="Timer" parent="CanvasLayer/DoneButton"]
+wait_time = 20.0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/DoneButton"]
+anims/Appear = SubResource( 15 )
+anims/Click = SubResource( 12 )
+anims/Idle = SubResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/DoneButton"]
+texture = ExtResource( 19 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/DoneButton"]
+visible = false
+shape = SubResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Victory = SubResource( 1 )

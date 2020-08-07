@@ -13,7 +13,7 @@ var combo = 0
 var player_moves = 1
 var player_control = true setget ,get_player_control
 
-var kills = 5
+var kills = 0
 var kill_target = 8
 var coins = 0
 var energy = 0
@@ -181,5 +181,4 @@ func get_current_level():
   return levels[level_index]
 
 func get_victory():
-  return true
   return level_index >= levels.size()
